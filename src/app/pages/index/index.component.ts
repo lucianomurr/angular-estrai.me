@@ -23,7 +23,8 @@ import { RouterModule } from '@angular/router';
                     Is simple and give you the ability to give away gift randomly.
 
                 </p>
-                <p>Want to discover more? Play for free!</p>
+                <p class="text-sm text-gray-700 sm:text-base dark:text-white">
+                  Want to discover more? Play for free!</p>
                 <div class="flex mt-8">
                     <a href="#" class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
                         Get started
