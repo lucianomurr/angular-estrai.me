@@ -20,90 +20,87 @@ import { AuthService } from '../../services/auth.service';
     { provide: 'NavToggle', useClass: ToggleService }
   ],
   template: `
-  <div>
-    <nav class="bg-white dark:bg-gray-800  shadow py-4 ">
-      <div class="px-8 mx-auto max-w-7xl">
-        <div class="flex items-center justify-between h-16">
-          <div class=" flex items-center">
+    <header class="z-30 flex items-center w-full h-24 sm:h-32">
+      <div class="container flex items-center justify-between px-6 mx-auto">
+          <div class="text-3xl font-black text-gray-800 uppercase dark:text-white">
             <a class="flex-shrink-0" href="/">
-                <img class="h-38" src="/assets/estrai.me.svg" alt="Workflow"/>
+              <img class="h-38" src="/assets/estrai.me.svg" alt="Workflow"/>
             </a>
           </div>
-          <div class="block flex flex-row" >
-            <div class="flex" style="border:1px solid green;">
-              <div class="relative place-content-center" style="border:1px solid black;">
-                <div>
-                  <button type="button"
-                      class="flex items-right justify-right w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                      id="options-menu"
-                      (click)="userToggleService.updateData(!userMenuIsOpened())"
-                      >
-                      <svg width="20" fill="currentColor" height="20" class="text-gray-800" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1523 1339q-22-155-87.5-257.5t-184.5-118.5q-67 74-159.5 115.5t-195.5 41.5-195.5-41.5-159.5-115.5q-119 16-184.5 118.5t-87.5 257.5q106 150 271 237.5t356 87.5 356-87.5 271-237.5zm-243-699q0-159-112.5-271.5t-271.5-112.5-271.5 112.5-112.5 271.5 112.5 271.5 271.5 112.5 271.5-112.5 112.5-271.5zm512 256q0 182-71 347.5t-190.5 286-285.5 191.5-349 71q-182 0-348-71t-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
-                          </path>
-                      </svg>
-                  </button>
-                </div>
-                <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-20"
-                    [ngClass]="{ invisible: !(userToggleService.sidenav$ | async) }">
-                  <div class="py-1 " role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    <div *ngIf="authService.auth.user | async as user; else showLogin">
-                      <a href="#" class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
-                        <span class="flex flex-col">
-                            <span>Settings</span>
-                        </span>
-                      </a>
-                      <a (click)="logout()"
-                        class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
-                        <span class="flex flex-col">
-                          <span>Logout {{user.displayName}}</span>
-                        </span>
-                      </a>
-                    </div>
-                    <ng-template #showLogin>
-                      <a (click)="login()" class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem">
-                        <span class="flex flex-col">
-                          <span>Login</span>
-                        </span>
-                      </a>
-                    </ng-template>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="flex items-center">
+              <nav class="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
+                  <a href="#" class="flex px-6 py-2">
+                      Home
+                  </a>
+                  <a href="#" class="flex px-6 py-2">
+                      About
+                  </a>
+                  <a (click)="logout()"
+                      class="flex px-6 py-2"
+                      *ngIf="authService.auth.user | async as user; else showLogin">
+                      Logout
+                  </a>
+                  <ng-template #showLogin>
+                    <a (click)="login()" class="flex px-6 py-2">
+                      Login
+                    </a>
+                  </ng-template>
+              </nav>
+              <button class="flex flex-col ml-4 lg:hidden"
+                (click)="toggleService.updateData(!menuIsOpened())">
+                  <span class="w-6 h-1 mb-1 bg-gray-800 dark:bg-white">
+                  </span>
+                  <span class="w-6 h-1 mb-1 bg-gray-800 dark:bg-white">
+                  </span>
+                  <span class="w-6 h-1 mb-1 bg-gray-800 dark:bg-white">
+                  </span>
+              </button>
 
-              <div class="flex" style="border:1px solid green;">
-                <div class="relative" style="border:1px solid black;">
-                  <!-- hamburger -->
-                  <div>
-                    <button
-                      class="text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
-                      (click)="toggleService.updateData(!menuIsOpened())"
-                      >
-                        <svg width="20" height="20" fill="currentColor" class="w-8 h-8" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z">
-                            </path>
-                        </svg>
-                    </button>
-                  </div>
-                  <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-20"
-                        [ngClass]="{ invisible: !(toggleService.sidenav$ | async) }">
-                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                      <a class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600" role="menuitem"
-                          *ngFor="let route of Routes"
-                          [routerLink]="[route.link]"
-                          routerLinkActive="text-gray-800" [routerLinkActiveOptions]="{exact: true}" >
-                              {{route.title}}
-                      </a>
+
+
+          </div>
+      </div>
+
+  </header>
+  <!-- only mobile sidenav -->
+              <div class="absolute top-4.5 right-2 bg-white dark:bg-gray-800 z-20 border-t-4 border-l-4 " [ngClass]="{ invisible: !(toggleService.sidenav$ | async) }">
+                <div class="flex flex-col sm:flex-row sm:justify-around">
+                    <div class="h-screen w-72">
+                        <nav class="mt-10 px-6 ">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                                <span class="mx-4 text-lg font-normal">
+                                    Home
+                                </span>
+                                <span class="flex-grow text-right">
+                                </span>
+                            </a>
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-800 dark:text-gray-100 rounded-lg bg-gray-100 dark:bg-gray-600" href="#">
+                                <span class="mx-4 text-lg font-normal">
+                                    About
+                                </span>
+                                <span class="flex-grow text-right">
+                                </span>
+                            </a>
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                                <span class="mx-4 text-lg font-normal">
+                                    Logout
+                                </span>
+                                <span class="flex-grow text-right">
+                                </span>
+                            </a>
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                                <span class="mx-4 text-lg font-normal">
+                                    Login
+                                </span>
+                                <span class="flex-grow text-right">
+                                </span>
+                            </a>
+                        </nav>
                     </div>
-                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
+              <!-- /sidenav -->
+
 
   `,
   styles: [
