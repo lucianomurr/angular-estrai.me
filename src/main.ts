@@ -1,7 +1,31 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app/app.component';
 
-import { AppModule } from './app/app.module';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
+import { environment } from './environments/environment';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { APP_ROUTES } from './app/app.routes';
+import { AuthService } from './app/shared/services/auth.service';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication( AppComponent, {
+  providers: [
+    provideRouter(APP_ROUTES,
+      withPreloading(PreloadAllModules),
+      // withDebugTracing(),
+    ),
+    importProvidersFrom(HttpClientModule),
+    importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase))),
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    importProvidersFrom(provideFirestore(() => getFirestore())),
+    importProvidersFrom(provideAuth(() => getAuth())),
+    importProvidersFrom(provideAnalytics(() => getAnalytics())),
+    importProvidersFrom(AuthService)
+  ]
+})
