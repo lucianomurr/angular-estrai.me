@@ -11,8 +11,16 @@ import { PlayersService } from 'src/app/shared/services/players.service';
   template: `
     <div class="container max-w-3xl px-4 mx-auto sm:px-8">
       <div class="py-8">
+      <h1
+            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+            Start HERe
+          </h1>
+          <p class="text-sm text-gray-700 sm:text-base dark:text-white">
+            Here you can create your new online raffle game to give away your prizes.
+            To get started, choose a name for your new online game and proceed! Good luck!
+          </p>
         <div class="flex flex-row justify-between w-full mb-1 sm:mb-0">
-          <h2 class="text-2xl leading-tight">Users</h2>
+
           <div class="text-end">
             <form
               class="flex flex-col justify-center w-3/4 max-w-sm space-y-3 md:flex-row md:w-full md:space-x-3 md:space-y-0">
@@ -121,7 +129,7 @@ import { PlayersService } from 'src/app/shared/services/players.service';
   `,
   styles: [],
 })
-export class PlayersComponent implements OnInit {
+export class GameComponent implements OnInit {
   players$!: Observable<Player[]>;
   _playerService = inject(PlayersService);
 

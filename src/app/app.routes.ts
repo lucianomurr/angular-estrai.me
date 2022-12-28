@@ -17,6 +17,6 @@ export const APP_ROUTES: Routes = [
     },
     {
         path: 'players',
-        loadComponent: () => import('./pages/players/players.component').then(m => m.PlayersComponent)
+        loadComponent: () => import('./pages/game/game.component').then(m => m.GameComponent)
     },
 ];
