@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
         <div class="relative z-20 flex flex-col sm:w-2/3 lg:w-2/5">
           <span class="w-20 h-2 mb-12 bg-gray-800 dark:bg-white"> </span>
           <h1
-            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue pt-6 sm:text-8xl dark:text-white">
             Introduction
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
           </p>
 
           <h1
-            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue pt-6 sm:text-8xl dark:text-white">
             How It Works
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
@@ -32,7 +32,7 @@ import { CommonModule } from '@angular/common';
           </p>
 
           <h1
-            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue pt-6 sm:text-8xl dark:text-white">
             Benefits
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
@@ -43,13 +43,13 @@ import { CommonModule } from '@angular/common';
           </p>
 
           <h1
-            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue pt-6 sm:text-8xl dark:text-white">
             DISCLAIMER
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">This online raffle game is provided as a free service and without any warranty of any kind. The game is provided without any guarantee of results or accuracy. We assume no responsibility or liability for any loss or damage incurred as a result of participating in this game. All participants must comply with all applicable laws and regulations.</p>
 
           <h1
-            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+            class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue pt-6 sm:text-8xl dark:text-white">
             Conclusion
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
