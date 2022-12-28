@@ -12,7 +12,11 @@ export class AuthService {
 
   userData: firebase.User | undefined | null;
 
-  constructor(public auth: AngularFireAuth, public router: Router) { }
+  constructor(public auth: AngularFireAuth, public router: Router) {
+    auth.authState.subscribe(user => {
+      this.userData = user;
+    });
+  }
   login() {
     return this.GoogleAuth()
     //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -23,7 +27,7 @@ export class AuthService {
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['players']);
+      this.router.navigate(['new-game']);
     });
   }
   // Auth logic to run auth providers
@@ -32,14 +36,15 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user);
-        console.log(result.user)
-        this.router.navigate(['players']);
+        console.log('AuthLogin:',result.user)
+        this.router.navigate(['new-game']);
       })
       .catch((error) => {
         window.alert(error);
       });
   }
   SetUserData(user: firebase.User | null){
+    console.log('SetUserData:',user)
     this.userData = user;
   }
 }

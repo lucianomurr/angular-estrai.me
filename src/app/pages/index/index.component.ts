@@ -29,7 +29,7 @@ import { Router, RouterModule } from '@angular/router';
               Get started
             </a>
             <a
-              href="#"
+              [routerLink]="['/about']"
               class="px-4 py-2 text-red-600 uppercase bg-transparent border-2 border-red-600 rounded-lg dark:text-white hover:bg-red-600 hover:text-white text-md">
               Read more
             </a>
