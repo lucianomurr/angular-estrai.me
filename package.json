@@ -30,6 +30,8 @@
     "@types/jasmine": "~4.3.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "firebase": "^9.15.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
@@ -38,6 +40,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
+    "prettier-eslint": "^15.0.1",
     "tailwindcss": "^3.2.4",
     "typescript": "~4.8.2"
   }
