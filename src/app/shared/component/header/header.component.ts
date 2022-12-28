@@ -26,11 +26,11 @@ import { AuthService } from '../../services/auth.service';
           <nav class="items-center hidden text-lg text-gray-800 uppercase font-sen  lg:flex">
             <a href="#" class="flex px-6 py-2"> Home </a>
             <a routerLink="/about" class="flex px-6 py-2"> About </a>
-            <a (click)="logout()" class="flex px-6 py-2" *ngIf="authService.auth.user | async as user; else showLogin">
+            <a (click)="logout()" class="flex px-6 py-2 cursor-pointer" *ngIf="authService.auth.user | async as user; else showLogin">
               Logout
             </a>
             <ng-template #showLogin>
-              <a (click)="login()" class="flex px-6 py-2"> Login </a>
+              <a (click)="login()" class="flex px-6 py-2 cursor-pointer"> Login </a>
             </ng-template>
           </nav>
           <button class="flex flex-col ml-4 lg:hidden" (click)="toggleService.updateData(!menuIsOpened())">
