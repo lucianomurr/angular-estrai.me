@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -25,9 +26,17 @@ import { Router, RouterModule } from '@angular/router';
             <a
               [routerLink]="['/new-game']"
               routerLinkActive="router-link-active"
+              *ngIf="authService.auth.user | async as user; else showLoginHome"
               class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
               Get started
             </a>
+            <ng-template #showLoginHome>
+              <a
+                (click)="authService.login()"
+                class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
+                Login to start
+              </a>
+            </ng-template>
             <a
               [routerLink]="['/about']"
               class="px-4 py-2 text-red-600 uppercase bg-transparent border-2 border-red-600 rounded-lg dark:text-white hover:bg-red-600 hover:text-white text-md">
@@ -43,4 +52,8 @@ import { Router, RouterModule } from '@angular/router';
   `,
   styles: [],
 })
-export class IndexComponent {}
+export class IndexComponent {
+  constructor(public authService: AuthService){
+
+  }
+}

@@ -22,7 +22,9 @@ export class AuthService {
     //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   logout() {
-    return this.auth.signOut();
+    this.auth.signOut();
+    this.router.navigate(['/']);
+    return
   }
   // Sign in with Google
   GoogleAuth() {
