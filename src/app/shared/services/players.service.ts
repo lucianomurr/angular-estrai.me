@@ -20,7 +20,8 @@ import { AuthService } from './auth.service';
 
 export interface RaffleCollection {
   creationDate: Date,
-  gameID: string
+  gameID: string,
+  status: 'ready' | 'started' | 'closed'
 }
 
 @Injectable({
@@ -40,7 +41,8 @@ export class PlayersService {
       const playersRef = collection(this.firestore, userCollection);
       const collectionData: RaffleCollection = {
         creationDate: new Date(),
-        gameID: _newGameID
+        gameID: _newGameID,
+        status: 'ready'
       }
       addDoc(playersRef, collectionData).then( (res) => {
         //this will redirect host to the new game created

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
 
 <footer class="px-3 py-8 text-gray-500 transition-colors duration-200 bg-white dark:bg-gray-800 text-2 dark:text-gray-200">
@@ -13,13 +14,13 @@ import { CommonModule } from '@angular/common';
         </div>
         <div class="flex flex-col mt-4 md:mt-0 md:flex-row">
             <nav class="flex flex-col items-center justify-center flex-1 border-gray-100 md:items-end md:border-r md:pr-5">
-                <a aria-current="page" href="#" class="hover:text-gray-700 dark:hover:text-white">
+                <a aria-current="page" [routerLink]="['/about']" routerLinkActive="router-link-active"  class="hover:text-gray-700 dark:hover:text-white">
                     About
                 </a>
                 <a aria-current="page" href="#" class="hover:text-gray-700 dark:hover:text-white">
                     Privacy/Policy
                 </a>
-                <a aria-current="page" href="#" class="hover:text-gray-700 dark:hover:text-white">
+                <a aria-current="page" href="https://github.com/lucianomurr/angular-estrai.me/issues" target="_blank" class="hover:text-gray-700 dark:hover:text-white">
                     Contributors
                 </a>
             </nav>
@@ -44,7 +45,7 @@ import { CommonModule } from '@angular/common';
                 </span>
                 <span class="mt-7 md:mt-1">
                     Created by
-                    <a class="underline hover:text-primary-gray-20" href="https://www.linkedin.com/in/lucianomurruni/">
+                    <a class="underline hover:text-primary-gray-20" href="https://www.linkedin.com/in/lucianomurruni/" target="_blank">
                         Luciano Murruni
                     </a>
                 </span>
