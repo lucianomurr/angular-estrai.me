@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collectionData, Firestore, query, where } from '@angular/fire/firestore';
+import { addDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { collection } from '@firebase/firestore';
-import { Observable } from 'rxjs';
-import { Player } from '../model/player.interface';
 import { AuthService } from './auth.service';
 
 export interface RaffleCollection {
@@ -36,14 +34,14 @@ export class RaffleGameService {
     }
   }
 
-  getPlayers(filter = '') {
-    const playersRef = collection(this.firestore, 'players');
-    let q = query(playersRef);
-    if (filter) {
-      q = query(playersRef, where('name', '==', filter));
-    }
-    return collectionData(q) as unknown as Observable<Player[]>;
-  }
+  // getPlayers(filter = '') {
+  //   const playersRef = collection(this.firestore, 'players');
+  //   let q = query(playersRef);
+  //   if (filter) {
+  //     q = query(playersRef, where('name', '==', filter));
+  //   }
+  //   return collectionData(q) as unknown as Observable<Player[]>;
+  // }
 
   getNewGameID(size: number) {
     const result = [];
