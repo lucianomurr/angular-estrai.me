@@ -6,8 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div
-      class="px-6 py-6 mt-6 bg-red-700 dark:bg-gray-800 md:py-12 md:px-12 lg:py-16 lg:px-16 xl:flex xl:items-center">
+    <div class="px-6 py-6 mt-6 bg-red-700 dark:bg-gray-800 md:py-12 md:px-12 lg:py-16 lg:px-16 xl:flex xl:items-center">
       <div class="xl:w-0 xl:flex-1">
         <h2 class="text-2xl font-extrabold leading-8 tracking-tight text-white sm:text-3xl sm:leading-9">
           Receive alert about new commit or pull request on your github
