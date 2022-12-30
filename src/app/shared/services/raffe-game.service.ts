@@ -29,7 +29,7 @@ export class RaffleGameService {
       };
       addDoc(playersRef, collectionData).then(() => {
         //this will redirect host to the new game created
-        this.router.navigate([`/game/${_newGameID}`]);
+        this.router.navigate([`game/manage/${_newGameID}`]);
       });
     } else {
       throw new Error('Email is empty, no raffle could be created.');

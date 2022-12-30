@@ -18,12 +18,20 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'new-game',
-    loadComponent: () => import('./pages/new-game/new-game.component').then(m => m.NewGameComponent),
+    loadComponent: () => import('./pages/game/new-game/new-game.component').then(m => m.NewGameComponent),
     canActivate: [AngularFireAuthGuard],
   },
   {
-    path: 'game/:gameID',
-    loadComponent: () => import('./pages/play/play.component').then(m => m.PlayComponent),
+    path: 'game/manage/:gameID',
+    loadComponent: () => import('./pages/game/play-game/play.component').then(m => m.PlayGameComponent),
     canActivate: [AngularFireAuthGuard],
+  },
+  {
+    path: 'game/join/:gameID',
+    loadComponent: () => import('./pages/game/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent)
+  },
+  {
+    path: 'game/join',
+    loadComponent: () => import('./pages/game/join-game/join-game.component').then(m => m.JoinGameComponent)
   },
 ];
