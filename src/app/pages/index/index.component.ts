@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CardsComponent } from './cards/cards.component';
+import { NotifyMeComponent } from './notify-me/notify-me.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardsComponent],
+  imports: [CommonModule, RouterModule, CardsComponent, NotifyMeComponent],
   template: `
     <div class="relative z-10 flex items-center overflow-hidden bg-white dark:bg-gray-800">
       <div class="container relative flex px-6 py-16 mx-auto">
@@ -51,6 +52,7 @@ import { CardsComponent } from './cards/cards.component';
       </div>
     </div>
     <app-cards></app-cards>
+    <app-notify-me></app-notify-me>
   `,
   styles: [],
 })
