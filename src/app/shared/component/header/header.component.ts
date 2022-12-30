@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationI, NAVIGATION_URL } from '../../model/navigation';
 import { Router, RouterModule } from '@angular/router';
@@ -10,9 +10,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  providers: [
-    ToggleService
-  ],
+  providers: [ToggleService],
   template: `
     <header class="z-30 flex items-center w-full h-24 sm:h-32">
       <div class="container flex items-center justify-between px-6 mx-auto">
@@ -46,7 +44,7 @@ import { AuthService } from '../../services/auth.service';
     <!-- only mobile sidenav -->
     <div
       class="absolute top-4.5 right-2 bg-white dark:bg-gray-800 z-20 border-t-4 border-l-4 "
-      [ngClass]="{ invisible: !(toggleService.sidenav$ | async) }">
+      [ngClass]="{ invisible: (toggleService.sidenav$ | async) === false }">
       <div class="flex flex-col sm:flex-row sm:justify-around">
         <div class="h-screen w-72">
           <nav class="mt-10 px-6 ">
@@ -87,24 +85,18 @@ import { AuthService } from '../../services/auth.service';
   `,
   styles: [],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public Routes: NavigationI[];
 
-  constructor(
-    public toggleService: ToggleService,
-    public authService: AuthService,
-    private router: Router
-  ) {
+  constructor(public toggleService: ToggleService, public authService: AuthService, private router: Router) {
     this.Routes = NAVIGATION_URL;
-    router.events.subscribe(val => {
+    router.events.subscribe(() => {
       this.closeMenuIfOpened();
     });
   }
 
-  ngOnInit(): void {}
-
   menuIsOpened() {
-    let toReturn: Boolean = false;
+    let toReturn = false;
     this.toggleService.sidenav$.pipe(take(1)).subscribe(sideNavStatus => (toReturn = sideNavStatus));
     return toReturn;
   }
@@ -117,7 +109,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.closeMenuIfOpened();
   }
-  closeMenuIfOpened(){
+  closeMenuIfOpened() {
     if (this.menuIsOpened()) this.toggleService.updateData(!this.menuIsOpened());
   }
 }
