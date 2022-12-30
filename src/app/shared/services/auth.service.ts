@@ -4,12 +4,10 @@ import firebase from 'firebase/compat/app';
 import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   userData: firebase.User | undefined | null;
 
   constructor(public auth: AngularFireAuth, public router: Router) {
@@ -18,17 +16,17 @@ export class AuthService {
     });
   }
   login() {
-    return this.GoogleAuth()
+    return this.GoogleAuth();
     //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   logout() {
     this.auth.signOut();
     this.router.navigate(['/']);
-    return
+    return;
   }
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
       this.router.navigate(['new-game']);
     });
   }
@@ -36,17 +34,15 @@ export class AuthService {
   AuthLogin(provider: firebase.auth.AuthProvider | auth.GoogleAuthProvider) {
     return this.auth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then(result => {
         this.SetUserData(result.user);
-        console.log('AuthLogin:',result.user)
         this.router.navigate(['new-game']);
       })
-      .catch((error) => {
+      .catch(error => {
         window.alert(error);
       });
   }
-  SetUserData(user: firebase.User | null){
-    console.log('SetUserData:',user)
+  SetUserData(user: firebase.User | null) {
     this.userData = user;
   }
 }

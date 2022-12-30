@@ -13,11 +13,11 @@ import { APP_ROUTES } from './app/app.routes';
 import { AuthService } from './app/shared/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
-
-bootstrapApplication( AppComponent, {
+bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(APP_ROUTES,
-      withPreloading(PreloadAllModules),
+    provideRouter(
+      APP_ROUTES,
+      withPreloading(PreloadAllModules)
       // withDebugTracing(),
     ),
     importProvidersFrom(HttpClientModule),
@@ -26,6 +26,6 @@ bootstrapApplication( AppComponent, {
     importProvidersFrom(provideFirestore(() => getFirestore())),
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideAnalytics(() => getAnalytics())),
-    importProvidersFrom(AuthService)
-  ]
-})
+    importProvidersFrom(AuthService),
+  ],
+});

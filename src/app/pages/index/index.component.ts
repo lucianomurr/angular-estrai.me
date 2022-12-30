@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -53,7 +53,5 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styles: [],
 })
 export class IndexComponent {
-  constructor(public authService: AuthService){
-
-  }
+  constructor(public authService: AuthService) {}
 }

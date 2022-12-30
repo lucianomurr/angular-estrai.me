@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
-import { PlayersService, RaffleCollection } from 'src/app/shared/services/players.service';
+import { RaffleGameService, RaffleCollection } from 'src/app/shared/services/raffe-game.service';
 
 @Component({
   selector: 'app-new-game',
@@ -37,7 +37,6 @@ import { PlayersService, RaffleCollection } from 'src/app/shared/services/player
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -46,16 +45,11 @@ import { PlayersService, RaffleCollection } from 'src/app/shared/services/player
   `,
   styles: [],
 })
-export class NewGameComponent implements OnInit {
+export class NewGameComponent {
   currentGame$!: Observable<RaffleCollection[]> | undefined;
-  _playerService = inject(PlayersService);
-
-  ngOnInit(): void {
-
-  }
+  _playerService = inject(RaffleGameService);
 
   createNew() {
     this._playerService.createNewRaffle();
   }
-
 }

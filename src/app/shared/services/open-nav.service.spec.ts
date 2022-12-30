@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { OpenNavService } from './open-nav.service';
+import { ToggleService } from './open-nav.service';
 
 describe('OpenNavService', () => {
-  let service: OpenNavService;
+  let service: ToggleService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(OpenNavService);
+    service = TestBed.inject(ToggleService);
   });
 
   it('should be created', () => {
