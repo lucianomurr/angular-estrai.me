@@ -5,14 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-assign-ticket',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <p>
-      assign-ticket works!
-    </p>
-  `,
-  styles: [
-  ]
+  template: ` <p>assign-ticket works!</p> `,
+  styles: [],
 })
-export class AssignTicketComponent {
-
-}
+export class AssignTicketComponent {}

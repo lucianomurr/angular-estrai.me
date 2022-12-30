@@ -28,10 +28,11 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'game/join/:gameID',
-    loadComponent: () => import('./pages/game/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent)
+    loadComponent: () =>
+      import('./pages/game/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
   },
   {
     path: 'game/join',
-    loadComponent: () => import('./pages/game/join-game/join-game.component').then(m => m.JoinGameComponent)
+    loadComponent: () => import('./pages/game/join-game/join-game.component').then(m => m.JoinGameComponent),
   },
 ];
