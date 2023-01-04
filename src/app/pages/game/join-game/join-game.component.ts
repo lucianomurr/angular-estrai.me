@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RaffleGameService } from 'src/app/shared/services/raffe-game.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-join-game',
@@ -22,8 +24,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
                 id="game-id"
                 [formControl]="mygameid"
                 required
-                minlength="6"
-                maxlength="6"
+                minlength="7"
+                maxlength="7"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 placeholder="game id eg: xx22xx22" />
             </div>
@@ -93,9 +95,27 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export class JoinGameComponent {
   mygameid = new FormControl('');
 
-  constructor(private route: Router) {}
+  constructor(private router: Router, private raffleGameService: RaffleGameService) {}
 
   clickOnGoToAssignPage() {
-    //redirect to the next page
+    const gameID = this.mygameid.value as string;
+    //check game id
+    //if correct, generate new ID and go to assign ticket
+    this.raffleGameService
+      .getGameByID(gameID)
+      .pipe(take(1))
+      .subscribe(game => {
+        if (game[0].status === 'ready') {
+          this.GoToAssignPage(game[0].collectionID);
+        }
+        return true;
+      });
+  }
+
+  GoToAssignPage(gameID: string | undefined) {
+    const TicketNumber = this.raffleGameService.getNewGameID(10);
+    //TODO: here we have to store the ticket ID and GameID to local storage
+    this.raffleGameService.AddNewUserToGame(gameID, TicketNumber);
+    //this.router.navigate([`game/assign/${gameID}`]);
   }
 }

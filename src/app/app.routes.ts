@@ -35,4 +35,9 @@ export const APP_ROUTES: Routes = [
     path: 'game/join',
     loadComponent: () => import('./pages/game/join-game/join-game.component').then(m => m.JoinGameComponent),
   },
+  {
+    path: 'game/assign/:ticketNumber',
+    loadComponent: () =>
+      import('./pages/game/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
+  },
 ];

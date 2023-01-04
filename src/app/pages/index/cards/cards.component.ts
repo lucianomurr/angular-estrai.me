@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex-wrap items-center justify-center gap-8 text-center sm:flex">
+    <div class="flex-wrap items-center justify-center gap-8 text-center sm:flex bg-white dark:bg-gray-800">
       <div class="w-full px-4 py-4 mt-6 bg-white rounded-lg shadow-lg sm:w-1/2 md:w-1/2 lg:w-1/4 dark:bg-gray-800">
         <div class="flex-shrink-0">
           <div class="flex items-center justify-center w-12 h-12 mx-auto text-white bg-red-500 rounded-md">
