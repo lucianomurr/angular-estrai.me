@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collectionData, Firestore, query, where } from '@angular/fire/firestore';
+
 import { Router } from '@angular/router';
 import { collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
-import { Player } from '../model/player.interface';
 import { AuthService } from './auth.service';
 
-export interface RaffleCollection {
+export interface UserInGame {
+  joinDate: Date;
+  name: string;
+  ticketID: string;
+}
+export interface RaffleDocument {
+  collectionID?: string;
   creationDate: Date;
   gameID: string;
   status: 'ready' | 'started' | 'closed';
+  email: string;
+  users?: UserInGame[];
 }
 
 @Injectable({
@@ -17,32 +25,55 @@ export interface RaffleCollection {
 })
 export class RaffleGameService {
   constructor(private firestore: Firestore, private authService: AuthService, private router: Router) {}
+
+  /**
+   * create new raffle should add two different record to the firebase db
+   * 1: new collection record for games
+   */
   createNewRaffle() {
-    const userCollection = this.authService.userData?.email;
-    const _newGameID = this.getNewGameID(6);
-    if (userCollection) {
-      const playersRef = collection(this.firestore, userCollection);
-      const collectionData: RaffleCollection = {
+    const userEmail = this.authService.userData?.email;
+    const _newGameID = this.getNewGameID(7);
+    if (userEmail) {
+      const gameRef = collection(this.firestore, 'games');
+      const collectionData: RaffleDocument = {
         creationDate: new Date(),
         gameID: _newGameID,
         status: 'ready',
+        email: userEmail,
       };
-      addDoc(playersRef, collectionData).then(() => {
+      addDoc(gameRef, collectionData).then(() => {
         //this will redirect host to the new game created
-        this.router.navigate([`/game/${_newGameID}`]);
+        this.router.navigate([`game/manage/${_newGameID}`]);
       });
     } else {
       throw new Error('Email is empty, no raffle could be created.');
     }
   }
 
-  getPlayers(filter = '') {
-    const playersRef = collection(this.firestore, 'players');
-    let q = query(playersRef);
-    if (filter) {
-      q = query(playersRef, where('name', '==', filter));
+  async AddNewUserToGame(gameID: string | undefined, ticketNumber: string) {
+    if (gameID && ticketNumber) {
+      //const raffleDocRef = doc(this.firestore, `games/${ticketNumber}`);
+      const raffleCollection = collection(this.firestore, `games/${gameID}/users`);
+      const collectionData: UserInGame = {
+        joinDate: new Date(),
+        name: '',
+        ticketID: ticketNumber,
+      };
+      await addDoc(raffleCollection, collectionData).then(() => {
+        this.router.navigate([`game/assign/${ticketNumber}`]);
+      });
+    } else {
+      throw new Error('Incorrect game id or ticket number .');
     }
-    return collectionData(q) as unknown as Observable<Player[]>;
+  }
+
+  getGameByID(filter = '') {
+    const gameRef = collection(this.firestore, 'games');
+    let q = query(gameRef);
+    if (filter) {
+      q = query(gameRef, where('gameID', '==', filter));
+    }
+    return collectionData(q, { idField: 'collectionID' }) as Observable<RaffleDocument[]>;
   }
 
   getNewGameID(size: number) {

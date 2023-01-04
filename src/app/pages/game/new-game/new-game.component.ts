@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
-import { RaffleGameService, RaffleCollection } from 'src/app/shared/services/raffe-game.service';
+import { RaffleGameService, RaffleDocument } from 'src/app/shared/services/raffe-game.service';
 
 @Component({
   selector: 'app-new-game',
@@ -46,7 +46,7 @@ import { RaffleGameService, RaffleCollection } from 'src/app/shared/services/raf
   styles: [],
 })
 export class NewGameComponent {
-  currentGame$!: Observable<RaffleCollection[]> | undefined;
+  currentGame$!: Observable<RaffleDocument[]> | undefined;
   _playerService = inject(RaffleGameService);
 
   createNew() {

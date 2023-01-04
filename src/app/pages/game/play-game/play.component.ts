@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-play',
+  selector: 'app-play-game',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -32,7 +32,7 @@ import { ActivatedRoute } from '@angular/router';
   `,
   styles: [],
 })
-export class PlayComponent {
+export class PlayGameComponent {
   public gameID: string | null;
 
   public users = [
