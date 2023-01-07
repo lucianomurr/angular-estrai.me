@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collectionData, Firestore, query, where } from '@angular/fire/firestore';
+import { addDoc, collectionData, Firestore, query, where, collection, doc } from '@angular/fire/firestore';
 
 import { Router } from '@angular/router';
-import { collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -52,19 +51,29 @@ export class RaffleGameService {
 
   async AddNewUserToGame(gameID: string | undefined, ticketNumber: string) {
     if (gameID && ticketNumber) {
-      //const raffleDocRef = doc(this.firestore, `games/${ticketNumber}`);
+      const userTicketName = this.authService.userData?.displayName || '';
       const raffleCollection = collection(this.firestore, `games/${gameID}/users`);
       const collectionData: UserInGame = {
         joinDate: new Date(),
-        name: '',
+        name: userTicketName,
         ticketID: ticketNumber,
       };
       await addDoc(raffleCollection, collectionData).then(() => {
-        this.router.navigate([`game/assign/${ticketNumber}`]);
+        if (!userTicketName) {
+          this.router.navigate([`game/assign/${ticketNumber}`]);
+        } else {
+          this.router.navigate([`game/waiting/${ticketNumber}`]);
+        }
       });
     } else {
       throw new Error('Incorrect game id or ticket number .');
     }
+  }
+
+  async GetUsersByGameID(gameID: string | undefined) {
+    const gameRef = collection(this.firestore, `games/${gameID}/users`);
+    const q = query(gameRef);
+    return collectionData(q) as unknown as Observable<UserInGame[]>;
   }
 
   getGameByID(filter = '') {
@@ -73,7 +82,8 @@ export class RaffleGameService {
     if (filter) {
       q = query(gameRef, where('gameID', '==', filter));
     }
-    return collectionData(q, { idField: 'collectionID' }) as Observable<RaffleDocument[]>;
+
+    return collectionData(q, { idField: 'collectionID' }) as unknown as Observable<RaffleDocument[]>;
   }
 
   getNewGameID(size: number) {

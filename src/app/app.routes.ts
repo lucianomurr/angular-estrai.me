@@ -30,14 +30,22 @@ export const APP_ROUTES: Routes = [
     path: 'game/join/:gameID',
     loadComponent: () =>
       import('./pages/game/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
+    canActivate: [AngularFireAuthGuard],
   },
   {
     path: 'game/join',
     loadComponent: () => import('./pages/game/join-game/join-game.component').then(m => m.JoinGameComponent),
+    canActivate: [AngularFireAuthGuard],
   },
   {
     path: 'game/assign/:ticketNumber',
     loadComponent: () =>
       import('./pages/game/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
+    canActivate: [AngularFireAuthGuard],
+  },
+  {
+    path: 'game/waiting/:ticketNumber',
+    loadComponent: () => import('./pages/game/waiting/waiting.component').then(m => m.WaitingComponent),
+    canActivate: [AngularFireAuthGuard],
   },
 ];
