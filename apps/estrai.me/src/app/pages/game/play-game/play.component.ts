@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { RaffleDocument, RaffleGameService, UserInGame } from 'src/app/shared/services/raffe-game.service';
+import { RaffleDocument, RaffleGameService, UserInGame } from '../../../shared/services/raffe-game.service';
 import { Observable, take } from 'rxjs';
 import { User } from 'firebase/auth';
 
