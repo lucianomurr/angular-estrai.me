@@ -14,9 +14,7 @@
         "outputPath": "dist/apps/estrai.me",
         "index": "apps/estrai.me/src/index.html",
         "main": "apps/estrai.me/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
+        "polyfills": ["zone.js"],
         "tsConfig": "apps/estrai.me/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],
@@ -71,10 +69,7 @@
     "test": {
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "polyfills": [
-          "zone.js",
-          "zone.js/testing"
-        ],
+        "polyfills": ["zone.js", "zone.js/testing"],
         "tsConfig": "apps/estrai.me/tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],

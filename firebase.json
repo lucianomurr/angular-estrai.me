@@ -8,11 +8,7 @@
   },
   "hosting": {
     "public": "dist/apps/estrai.me",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
