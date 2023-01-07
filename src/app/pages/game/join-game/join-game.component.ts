@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RaffleGameService } from 'src/app/shared/services/raffe-game.service';
 import { take } from 'rxjs';
@@ -33,7 +32,7 @@ import { take } from 'rxjs';
               <button
                 type="button"
                 class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                (click)="clickOnGoToAssignPage()">
+                (click)="clickOnVerifyGameID()">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -95,12 +94,13 @@ import { take } from 'rxjs';
 export class JoinGameComponent {
   mygameid = new FormControl('');
 
-  constructor(private router: Router, private raffleGameService: RaffleGameService) {}
+  constructor(private raffleGameService: RaffleGameService) {}
 
-  clickOnGoToAssignPage() {
+  clickOnVerifyGameID() {
     const gameID = this.mygameid.value as string;
-    //check game id
-    //if correct, generate new ID and go to assign ticket
+    // check game id
+    // if correct, generate new ID and go to assign ticket
+    // TODO: check if the user already have a ticket for this game
     this.raffleGameService
       .getGameByID(gameID)
       .pipe(take(1))
