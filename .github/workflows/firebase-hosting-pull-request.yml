@@ -20,7 +20,7 @@ jobs:
       - run: npx nx workspace-lint
       - run: npx nx format:check --base=origin/main
       - run: npx nx affected --target=lint --parallel=3 --base=origin/main
-      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage --base=origin/main
+      - run: npx nx affected --target=test --parallel=3 --code-coverage --base=origin/main
       - run: npx nx affected --target=build --parallel=3 --base=origin/main
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
