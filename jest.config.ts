@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'new-standalone-angular',
+  displayName: 'estrai.me',
   preset: './jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/apps/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: './coverage/new-standalone-angular',
+  coverageDirectory: './coverage/estrai.me',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
