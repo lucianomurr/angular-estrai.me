@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RaffleGameService } from 'src/app/shared/services/raffe-game.service';
+
 import { take } from 'rxjs';
+import { RaffleGameService } from '../../../shared/services/raffe-game.service';
 
 @Component({
   selector: 'app-join-game',

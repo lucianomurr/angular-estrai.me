@@ -1,0 +1,87 @@
+{
+  "name": "estrai.me",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "sourceRoot": "apps/estrai.me/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/estrai.me",
+        "index": "apps/estrai.me/src/index.html",
+        "main": "apps/estrai.me/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/estrai.me/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],
+        "styles": ["apps/estrai.me/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "estrai.me:build:production"
+        },
+        "development": {
+          "browserTarget": "estrai.me:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "estrai.me:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "eslintConfig": "apps/estrai.me/.eslintrc.json",
+        "lintFilePatterns": ["apps/estrai.me/**/*.spec.ts", "apps/estrai.me/**/*.ts"],
+        "hasTypeAwareRules": true
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/estrai.me/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

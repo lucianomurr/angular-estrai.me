@@ -7,12 +7,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/estrai.me",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "public": "dist/apps/estrai.me",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",

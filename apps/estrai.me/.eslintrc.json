@@ -1,6 +1,11 @@
 {
-  "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:@typescript-eslint/recommended"],
-  "plugins": ["prettier", "@typescript-eslint", "@nrwl/nx"],
+  "extends": [
+    "../../.eslintrc.json",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["prettier", "@typescript-eslint"],
   "rules": {
     "eqeqeq": "error",
     "no-console": "warn",
@@ -23,11 +28,12 @@
     "es6": true,
     "jest": true
   },
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts"],
       "parserOptions": {
+        "project": ["apps/estrai.me/tsconfig.*?.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -76,24 +82,6 @@
           "error",
           {
             "parser": "angular"
-          }
-        ]
-      }
-    },
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
           }
         ]
       }
