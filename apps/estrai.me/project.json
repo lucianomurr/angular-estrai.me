@@ -67,14 +67,11 @@
       }
     },
     "test": {
-      "executor": "@angular-devkit/build-angular:karma",
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
       "options": {
-        "polyfills": ["zone.js", "zone.js/testing"],
-        "tsConfig": "apps/estrai.me/tsconfig.spec.json",
-        "inlineStyleLanguage": "scss",
-        "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],
-        "styles": ["apps/estrai.me/src/styles.scss"],
-        "scripts": []
+        "jestConfig": "jest.config.ts",
+        "passWithNoTests": true
       }
     },
     "lint": {
