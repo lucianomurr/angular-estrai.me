@@ -31,7 +31,7 @@ export class RaffleGameService {
    */
   createNewRaffle() {
     const userEmail = this.authService.userData?.email;
-    const _newGameID = this.getNewGameID(7);
+    const _newGameID = this.getNewGameID(5);
     if (userEmail) {
       const gameRef = collection(this.firestore, 'games');
       const collectionData: RaffleDocument = {
@@ -49,8 +49,9 @@ export class RaffleGameService {
     }
   }
 
-  async AddNewUserToGame(gameID: string | undefined, ticketNumber: string) {
-    if (gameID && ticketNumber) {
+  async AddNewUserToGame(gameID: string | undefined) {
+    if (gameID) {
+      const ticketNumber = this.getNewGameID(5);
       const userTicketName = this.authService.userData?.displayName || '';
       const raffleCollection = collection(this.firestore, `games/${gameID}/users`);
       const collectionData: UserInGame = {

@@ -114,9 +114,6 @@ export class JoinGameComponent {
   }
 
   GoToAssignPage(gameID: string | undefined) {
-    const TicketNumber = this.raffleGameService.getNewGameID(10);
-    //TODO: here we have to store the ticket ID and GameID to local storage
-    this.raffleGameService.AddNewUserToGame(gameID, TicketNumber);
-    //this.router.navigate([`game/assign/${gameID}`]);
+    this.raffleGameService.AddNewUserToGame(gameID);
   }
 }
