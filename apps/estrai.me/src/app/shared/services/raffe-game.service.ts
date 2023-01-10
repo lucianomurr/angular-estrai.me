@@ -25,12 +25,16 @@ export interface RaffleDocument {
 export class RaffleGameService {
   constructor(private firestore: Firestore, private authService: AuthService, private router: Router) {}
 
+  getUserEmail() {
+    const userEmail = this.authService.userData?.email || '';
+    return userEmail;
+  }
   /**
    * create new raffle should add two different record to the firebase db
    * 1: new collection record for games
    */
   createNewRaffle() {
-    const userEmail = this.authService.userData?.email;
+    const userEmail = this.getUserEmail();
     const _newGameID = this.getNewGameID(5);
     if (userEmail) {
       const gameRef = collection(this.firestore, 'games');
@@ -79,9 +83,10 @@ export class RaffleGameService {
 
   getGameByID(filter = '') {
     const gameRef = collection(this.firestore, 'games');
+    const userEmail = this.getUserEmail();
     let q = query(gameRef);
-    if (filter) {
-      q = query(gameRef, where('gameID', '==', filter));
+    if (filter && userEmail) {
+      q = query(gameRef, where('gameID', '==', filter), where('email', '==', userEmail));
     }
 
     return collectionData(q, { idField: 'collectionID' }) as unknown as Observable<RaffleDocument[]>;
