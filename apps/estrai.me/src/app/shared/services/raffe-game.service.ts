@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collectionData, Firestore, query, where, collection } from '@angular/fire/firestore';
+import { addDoc, collectionData, Firestore, query, where, collection, doc } from '@angular/fire/firestore';
 
 import { Router } from '@angular/router';
+import { updateDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 export interface UserInGame {
+  collectionID?: string;
   joinDate: Date;
   name: string;
   ticketID: string;
+  win?: boolean;
+  round?: number;
 }
 export interface RaffleDocument {
   collectionID?: string;
@@ -17,6 +21,7 @@ export interface RaffleDocument {
   status: 'ready' | 'started' | 'closed';
   email: string;
   users?: UserInGame[];
+  actualRound: number;
 }
 
 @Injectable({
@@ -38,11 +43,13 @@ export class RaffleGameService {
     const _newGameID = this.getNewGameID(5);
     if (userEmail) {
       const gameRef = collection(this.firestore, 'games');
+
       const collectionData: RaffleDocument = {
         creationDate: new Date(),
         gameID: _newGameID,
         status: 'ready',
         email: userEmail,
+        actualRound: 0,
       };
       addDoc(gameRef, collectionData).then(() => {
         //this will redirect host to the new game created
@@ -75,10 +82,34 @@ export class RaffleGameService {
     }
   }
 
+  async updateUserTicket(collectionID: string, ticket: UserInGame, round: number) {
+    const raffleCollection = doc(this.firestore, `games/${collectionID}`);
+    const collectionData = {
+      actualRound: round,
+      status: 'started',
+    };
+    await updateDoc(raffleCollection, collectionData).then(() => {
+      const userCollection = doc(this.firestore, `games/${collectionID}/users/${ticket.collectionID}`);
+      const userCollectionData = {
+        win: ticket.win,
+        round: ticket.round,
+      };
+      updateDoc(userCollection, userCollectionData);
+    });
+  }
+
+  async closeRaffleGame(collectionID: string) {
+    const raffleCollection = doc(this.firestore, `games/${collectionID}`);
+    const collectionData = {
+      status: 'closed',
+    };
+    updateDoc(raffleCollection, collectionData);
+  }
+
   async GetUsersByGameID(gameID: string | undefined) {
     const gameRef = collection(this.firestore, `games/${gameID}/users`);
     const q = query(gameRef);
-    return collectionData(q) as unknown as Observable<UserInGame[]>;
+    return collectionData(q, { idField: 'collectionID' }) as unknown as Observable<UserInGame[]>;
   }
 
   getGameByID(filter = '') {
@@ -92,6 +123,11 @@ export class RaffleGameService {
     return collectionData(q, { idField: 'collectionID' }) as unknown as Observable<RaffleDocument[]>;
   }
 
+  /**
+   * This function return a random string with fixed length
+   * @param size
+   * @returns
+   */
   getNewGameID(size: number) {
     const result = [];
     const hexRef = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];

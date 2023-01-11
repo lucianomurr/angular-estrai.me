@@ -1,8 +1,12 @@
 # EstraiMe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+## Working application
+
+check out live application here: https://raffle-1dd52.web.app/
 
 ## Development server
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
