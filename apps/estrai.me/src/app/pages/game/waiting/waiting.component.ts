@@ -13,30 +13,31 @@ import { ActivatedRoute } from '@angular/router';
           <span class="block"> Welcome! </span>
           <span class="block">This is your ticket details</span>
         </h2>
-
-        <div class="relative w-full px-4 py-6 bg-white shadow-lg dark:bg-gray-800">
-          <p class="text-sm font-semibold text-gray-700 border-b border-gray-200 w-max dark:text-white">
-            Ticket number
-          </p>
-          <div class="flex items-end my-6 space-x-2">
-            <p class="text-5xl font-bold text-black dark:text-white">
-              {{ ticketNumber }}
+        <div class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-120">
+          <div class="relative w-full px-4 py-6 bg-white shadow-lg dark:bg-gray-800">
+            <p class="text-sm font-semibold text-gray-700 border-b border-gray-200 w-max  dark:text-white">
+              Ticket number
             </p>
-          </div>
-          <div class="dark:text-white">
-            <div
-              class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-200 md:space-x-24">
-              <p>Created at</p>
-              <div class="flex items-end text-xs">10/10/2023</div>
+            <div class="flex my-6 space-x-2 justify-center">
+              <p class="text-8xl font-bold text-black dark:text-white ">
+                {{ ticketNumber }}
+              </p>
             </div>
-            <div
-              class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-200 md:space-x-24">
-              <p>Assigned to:</p>
-              <div class="flex items-end text-xs">Luciano Murruni</div>
-            </div>
-            <div class="flex items-center justify-between space-x-12 text-sm md:space-x-24">
-              <p>GameID</p>
-              <div class="flex items-end text-xs">AAFFCC6</div>
+            <div class="dark:text-white">
+              <div
+                class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-200 md:space-x-24">
+                <p>Created at</p>
+                <div class="flex items-end text-xs">10/10/2023</div>
+              </div>
+              <div
+                class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-200 md:space-x-24">
+                <p>Assigned to:</p>
+                <div class="flex items-end text-xs">Luciano Murruni</div>
+              </div>
+              <div class="flex items-center justify-between space-x-12 text-sm md:space-x-24">
+                <p>GameID</p>
+                <div class="flex items-end text-xs">AAFFCC6</div>
+              </div>
             </div>
           </div>
         </div>
@@ -49,5 +50,6 @@ export class WaitingComponent {
   public ticketNumber: string | null;
   constructor(private route: ActivatedRoute) {
     this.ticketNumber = this.route.snapshot.paramMap.get('ticketNumber');
+    //get ticket data by
   }
 }

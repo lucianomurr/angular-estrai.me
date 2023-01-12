@@ -24,27 +24,28 @@ import { NotifyMeComponent } from './notify-me/notify-me.component';
             ability to give away gift randomly.
           </p>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">Want to discover more? Play for free!</p>
-          <div class="flex mt-8">
+          <div class="flex mt-8" *ngIf="authService.auth.user | async as user; else showLoginHome">
             <a
               [routerLink]="['/new-game']"
               routerLinkActive="router-link-active"
-              *ngIf="authService.auth.user | async as user; else showLoginHome"
               class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
               Get started
             </a>
-            <ng-template #showLoginHome>
-              <a
-                (click)="authService.login()"
-                class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
-                Login to start
-              </a>
-            </ng-template>
             <a
               [routerLink]="['/game/join']"
               class="px-4 py-2 text-red-600 uppercase bg-transparent border-2 border-red-600 rounded-lg dark:text-white hover:bg-red-600 hover:text-white text-md">
               Join
             </a>
           </div>
+          <ng-template #showLoginHome>
+            <div class="flex mt-8">
+              <a
+                (click)="authService.login()"
+                class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
+                Login to start
+              </a>
+            </div>
+          </ng-template>
         </div>
         <div class="relative hidden sm:block sm:w-1/3 lg:w-3/5">
           <img src="./assets/undraw_winners.svg" class="max-w-xs m-auto md:max-w-sm" />
