@@ -31,8 +31,7 @@ export class RaffleGameService {
   constructor(private firestore: Firestore, private authService: AuthService, private router: Router) {}
 
   getUserEmail() {
-    const userEmail = this.authService.userData?.email || '';
-    return userEmail;
+    return this.authService.userData?.email || '';
   }
   /**
    * create new raffle should add two different record to the firebase db
