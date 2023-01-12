@@ -5,11 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
 import { take } from 'rxjs/internal/operators/take';
 import { AuthService } from '../../services/auth.service';
+import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MobileSidenavComponent],
   providers: [ToggleService],
   template: `
     <header class="z-30 flex items-center w-full h-24 sm:h-32">
@@ -34,53 +35,24 @@ import { AuthService } from '../../services/auth.service';
             </ng-template>
           </nav>
           <button class="flex flex-col ml-4 lg:hidden" (click)="toggleService.updateData(!menuIsOpened())">
-            <span class="w-6 h-1 mb-1 bg-gray-800"> </span>
-            <span class="w-6 h-1 mb-1 bg-gray-800"> </span>
-            <span class="w-6 h-1 mb-1 bg-gray-800"> </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
           </button>
         </div>
       </div>
     </header>
     <!-- only mobile sidenav -->
-    <div
-      class="absolute top-4.5 right-2 bg-white dark:bg-gray-800 z-20 border-t-4 border-l-4 "
-      [ngClass]="{ invisible: (toggleService.sidenav$ | async) === false }">
-      <div class="flex flex-col sm:flex-row sm:justify-around">
-        <div class="h-screen w-72">
-          <nav class="mt-10 px-6 ">
-            <a
-              class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg "
-              routerLink="/"
-              routerLinkActive="bg-gray-100 dark:bg-gray-600 text-gray-800">
-              <span class="mx-4 text-lg font-normal"> Home </span>
-              <span class="flex-grow text-right"> </span>
-            </a>
-            <a
-              class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg "
-              routerLink="/about"
-              routerLinkActive="bg-gray-100 dark:bg-gray-600 text-gray-800">
-              <span class="mx-4 text-lg font-normal"> About </span>
-              <span class="flex-grow text-right"> </span>
-            </a>
-            <a
-              (click)="logout()"
-              class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg "
-              *ngIf="authService.auth.user | async as user; else showLoginMobile">
-              <span class="mx-4 text-lg font-normal"> Logout </span>
-              <span class="flex-grow text-right"> </span>
-            </a>
-            <ng-template #showLoginMobile>
-              <a
-                class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg "
-                (click)="login()">
-                <span class="mx-4 text-lg font-normal"> Login </span>
-                <span class="flex-grow text-right"> </span>
-              </a>
-            </ng-template>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <app-mobile-sidenav
+      [showSidebar]="toggleService.sidenav$ | async"
+      (closeSidenav)="closeMenuIfOpened()"
+      (logOutUser)="logout()"></app-mobile-sidenav>
     <!-- /sidenav -->
   `,
   styles: [],

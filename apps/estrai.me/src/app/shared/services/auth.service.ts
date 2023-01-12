@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +11,16 @@ import { Router } from '@angular/router';
 export class AuthService {
   userData: firebase.User | undefined | null;
 
-  constructor(public auth: AngularFireAuth, public router: Router) {
-    auth.authState.subscribe(user => {
+  constructor(public auth: AngularFireAuth, private router: Router) {
+    this.getUserData();
+  }
+
+  async getUserData() {
+    return await this.auth.authState.pipe(take(1)).subscribe(user => {
       this.userData = user;
     });
   }
+
   login() {
     return this.GoogleAuth();
     //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
