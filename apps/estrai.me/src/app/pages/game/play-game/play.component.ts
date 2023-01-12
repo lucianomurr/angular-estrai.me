@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RaffleDocument, RaffleGameService, UserInGame } from '../../../shared/services/raffe-game.service';
-import { Observable, take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
 
@@ -112,15 +112,20 @@ export class PlayGameComponent implements OnInit {
     //define the winner with a specific order
     //increase the round game
     this.round++;
-    this.players$.pipe(take(1)).subscribe(data => {
-      //select randomly the winner user
-      this.winnerUser = data[Math.floor(Math.random() * data.length)];
-      //update the user data
-      this.winnerUser.round = this.round;
-      this.winnerUser.win = true;
-      //store to firebase
-      this.updateWinnerTicket(this.winnerUser);
-    });
+
+    //TODO: filter for non winner users to avoid double win
+    this.players$
+      .pipe(take(1))
+      .pipe(map((players: UserInGame[]) => players.filter((player: UserInGame) => player.win !== true)))
+      .subscribe(data => {
+        //select randomly the winner user
+        this.winnerUser = data[Math.floor(Math.random() * data.length)];
+        //update the game data
+        this.winnerUser.round = this.round;
+        this.winnerUser.win = true;
+        //store to firebase
+        this.updateWinnerTicket(this.winnerUser);
+      });
   }
 
   updateWinnerTicket(ticket: UserInGame) {

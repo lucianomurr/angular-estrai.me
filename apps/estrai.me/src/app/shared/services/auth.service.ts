@@ -26,9 +26,7 @@ export class AuthService {
   }
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
-      this.router.navigate(['new-game']);
-    });
+    this.AuthLogin(new auth.GoogleAuthProvider());
   }
   // Auth logic to run auth providers
   AuthLogin(provider: firebase.auth.AuthProvider | auth.GoogleAuthProvider) {
@@ -36,7 +34,6 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(result => {
         this.SetUserData(result.user);
-        this.router.navigate(['new-game']);
       })
       .catch(error => {
         window.alert(error);

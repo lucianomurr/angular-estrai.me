@@ -114,12 +114,10 @@ export class RaffleGameService {
 
   getGameByID(filter = '') {
     const gameRef = collection(this.firestore, 'games');
-    const userEmail = this.getUserEmail();
     let q = query(gameRef);
-    if (filter && userEmail) {
-      q = query(gameRef, where('gameID', '==', filter), where('email', '==', userEmail));
+    if (filter) {
+      q = query(gameRef, where('gameID', '==', filter));
     }
-
     return collectionData(q, { idField: 'collectionID' }) as unknown as Observable<RaffleDocument[]>;
   }
 

@@ -13,13 +13,13 @@ import { ActivatedRoute } from '@angular/router';
           <span class="block"> Welcome! </span>
           <span class="block">This is your ticket details</span>
         </h2>
-        <div class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
+        <div class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-120">
           <div class="relative w-full px-4 py-6 bg-white shadow-lg dark:bg-gray-800">
-            <p class="text-sm font-semibold text-gray-700 border-b border-gray-200 w-max dark:text-white">
+            <p class="text-sm font-semibold text-gray-700 border-b border-gray-200 w-max  dark:text-white">
               Ticket number
             </p>
-            <div class="flex items-end my-6 space-x-2">
-              <p class="text-8xl font-bold text-black dark:text-white">
+            <div class="flex my-6 space-x-2 justify-center">
+              <p class="text-8xl font-bold text-black dark:text-white ">
                 {{ ticketNumber }}
               </p>
             </div>
