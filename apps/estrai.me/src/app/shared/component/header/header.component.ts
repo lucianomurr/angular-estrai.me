@@ -52,7 +52,8 @@ import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.componen
     <app-mobile-sidenav
       [showSidebar]="toggleService.sidenav$ | async"
       (closeSidenav)="closeMenuIfOpened()"
-      (logOutUser)="logout()"></app-mobile-sidenav>
+      (logOutUser)="logout()"
+      (logInUser)="login()"></app-mobile-sidenav>
     <!-- /sidenav -->
   `,
   styles: [],
