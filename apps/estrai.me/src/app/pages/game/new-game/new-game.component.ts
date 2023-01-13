@@ -32,7 +32,7 @@ import { RaffleGameService, RaffleDocument } from '../../../shared/services/raff
                   <button
                     type="button"
                     (click)="createNew()"
-                    class="py-4 px-6 sm:mt-3  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
+                    class="py-4 px-6 sm:mt-3  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
                     Start Now
                   </button>
                 </div>

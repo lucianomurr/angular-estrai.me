@@ -1,18 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
-import firebase from 'firebase/compat/app';
-import { take } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-sidenav',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   providers: [AuthService],
   template: ` <div
-    class="absolute top-0 right-0 z-20 flex flex-col h-full p-3 w-60 bg-gray-300 dark:bg-gray-900 dark:text-gray-100 ease-in-out duration-300"
+    class="top-0 right-0 z-20 flex flex-col h-full p-3 w-60 fixed bg-gray-300 dark:bg-gray-900 dark:text-gray-100 ease-in-out duration-300"
     [ngClass]="{ 'translate-x-0': showSidebar === true, 'translate-x-full': showSidebar === false }">
     <div class="space-y-3">
       <div class="flex flex-row-reverse">
@@ -32,7 +30,7 @@ import { Router } from '@angular/router';
       <div class="flex-1">
         <ul class="pt-2 pb-4 space-y-1 text-sm">
           <li class="rounded-sm">
-            <a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+            <a rel="noopener noreferrer" routerLink="/" class="flex items-center p-2 space-x-3 rounded-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -44,23 +42,49 @@ import { Router } from '@angular/router';
             </a>
           </li>
           <li class="rounded-sm">
-            <a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+            <a rel="noopener noreferrer" routerLink="/about" class="flex items-center p-2 space-x-3 rounded-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-                class="w-5 h-5 fill-current dark:text-gray-400">
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5">
                 <path
-                  d="M203.247,386.414,208,381.185V355.4L130.125,191H93.875L16,355.4v27.042l4.234,4.595a124.347,124.347,0,0,0,91.224,39.982h.42A124.343,124.343,0,0,0,203.247,386.414ZM176,368.608a90.924,90.924,0,0,1-64.231,26.413h-.33A90.907,90.907,0,0,1,48,369.667V362.6l64-135.112L176,362.6Z"></path>
-                <path
-                  d="M418.125,191h-36.25L304,355.4v27.042l4.234,4.595a124.347,124.347,0,0,0,91.224,39.982h.42a124.343,124.343,0,0,0,91.369-40.607L496,381.185V355.4ZM464,368.608a90.924,90.924,0,0,1-64.231,26.413h-.33A90.907,90.907,0,0,1,336,369.667V362.6l64-135.112L464,362.6Z"></path>
-                <path
-                  d="M272,196.659A56.223,56.223,0,0,0,309.659,159H416V127H309.659a55.991,55.991,0,0,0-107.318,0H96v32H202.341A56.223,56.223,0,0,0,240,196.659V463H136v32H376V463H272ZM232,143a24,24,0,1,1,24,24A24,24,0,0,1,232,143Z"></path>
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
               </svg>
+
+              <span>About</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="pt-2 pb-4 space-y-1 text-sm" *ngIf="auth.authState | async as loggedUser; else showLoginAside">
+          <li class="rounded-sm">
+            <a
+              rel="noopener noreferrer"
+              class="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
+              [routerLink]="['/new-game']"
+              routerLinkActive="router-link-active">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+              </svg>
+
               <span>Dashboard</span>
             </a>
           </li>
 
-          <li class="rounded-sm">
+          <li class="rounded-sm" *ngIf="false">
             <a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,9 +116,29 @@ import { Router } from '@angular/router';
             </a>
           </li>
         </ul>
+        <ng-template #showLoginAside>
+          <ul class="pt-2 pb-4 space-y-1 text-sm">
+            <li class="rounded-sm">
+              <a
+                rel="noopener noreferrer"
+                class="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
+                (click)="onClickLogin()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  class="w-5 h-5 fill-current dark:text-gray-400">
+                  <path
+                    d="M440,424V88H352V13.005L88,58.522V424H16v32h86.9L352,490.358V120h56V456h88V424ZM320,453.642,120,426.056V85.478L320,51Z"></path>
+                  <rect width="32" height="64" x="256" y="232"></rect>
+                </svg>
+                <span>Login</span>
+              </a>
+            </li>
+          </ul>
+        </ng-template>
       </div>
     </div>
-    <div class="flex items-center p-2 mt-12 space-x-4 justify-self-end" *ngIf="loggedUser">
+    <div class="flex items-center p-2 mt-12 space-x-4 justify-self-end" *ngIf="auth.authState | async as loggedUser">
       <img src="{{ loggedUser.photoURL }}" alt="" class="w-12 h-12 rounded-lg dark:bg-gray-500" />
       <div>
         <h2 class="text-lg font-semibold">{{ loggedUser.displayName }}</h2>
@@ -107,17 +151,18 @@ import { Router } from '@angular/router';
   styles: [],
 })
 export class MobileSidenavComponent {
-  loggedUser: firebase.User | undefined | null;
+  // loggedUser: firebase.User | undefined | null;
 
   @Input() showSidebar: boolean | null = false;
   @Output() closeSidenav = new EventEmitter();
   @Output() logOutUser = new EventEmitter();
+  @Output() logInUser = new EventEmitter();
 
-  constructor(private auth: AngularFireAuth, private router: Router) {
-    this.auth.authState.pipe(take(1)).subscribe(user => {
-      console.log('service', user);
-      this.loggedUser = user;
-    });
+  constructor(public auth: AngularFireAuth, private router: Router) {
+    // this.auth.authState.pipe(take(1)).subscribe(user => {
+    //   console.log('service', user);
+    //   this.loggedUser = user;
+    // });
   }
 
   onClickCloseSidenav() {
@@ -125,5 +170,8 @@ export class MobileSidenavComponent {
   }
   onClickLogout() {
     this.logOutUser.emit();
+  }
+  onClickLogin() {
+    this.logInUser.emit();
   }
 }
