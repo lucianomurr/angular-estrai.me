@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalService } from '../../../../shared/services/modal.service';
+import { ModalService } from '../../modal.service';
+
 
 @Component({
   selector: 'app-winner-modal',

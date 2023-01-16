@@ -3,6 +3,7 @@
   "projects": {
     "auth": "libs/auth",
     "estrai.me": "apps/estrai.me",
+    "game": "libs/game",
     "profile": "libs/profile"
   },
   "defaultProject": "estrai.me"

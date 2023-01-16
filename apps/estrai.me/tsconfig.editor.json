@@ -1,6 +1,13 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts", "../../libs/auth/src/lib/auth.service.ts", "../../libs/profile/src/lib/profile.service.ts"],
+  "include": [
+    "**/*.ts",
+    "../../libs/auth/src/lib/auth.service.ts",
+    "../../libs/profile/src/lib/profile.service.ts",
+    "../../libs/game/src/lib/autofocus.directive.ts",
+    "../../libs/game/src/lib/raffe-game.service.ts",
+    "../../libs/game/src/lib/modal.service.ts"
+  ],
   "compilerOptions": {
     "types": ["jest", "node"]
   }
