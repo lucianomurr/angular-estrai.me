@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationI, NAVIGATION_URL } from '../../model/navigation';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
 import { take } from 'rxjs/internal/operators/take';
-import { AuthService } from '../../services/auth.service';
 import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.component';
 
 @Component({
@@ -21,20 +19,7 @@ import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.componen
           </a>
         </div>
         <div class="flex items-center">
-          <nav class="items-center hidden text-lg text-gray-800 uppercase font-sen  lg:flex">
-            <a routerLink="/" class="flex px-6 py-2"> Home </a>
-            <a routerLink="/about" class="flex px-6 py-2"> About </a>
-            <a
-              (click)="logout()"
-              class="flex px-6 py-2 cursor-pointer"
-              *ngIf="authService.auth.user | async as user; else showLogin">
-              Logout
-            </a>
-            <ng-template #showLogin>
-              <a (click)="login()" class="flex px-6 py-2 cursor-pointer"> Login </a>
-            </ng-template>
-          </nav>
-          <button class="flex flex-col ml-4 lg:hidden" (click)="toggleService.updateData(!menuIsOpened())">
+          <button class="flex flex-col ml-4" (click)="toggleService.updateData(!menuIsOpened())">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -51,18 +36,13 @@ import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.componen
     <!-- only mobile sidenav -->
     <app-mobile-sidenav
       [showSidebar]="toggleService.sidenav$ | async"
-      (closeSidenav)="closeMenuIfOpened()"
-      (logOutUser)="logout()"
-      (logInUser)="login()"></app-mobile-sidenav>
+      (closeSidenav)="closeMenuIfOpened()"></app-mobile-sidenav>
     <!-- /sidenav -->
   `,
   styles: [],
 })
 export class HeaderComponent {
-  public Routes: NavigationI[];
-
-  constructor(public toggleService: ToggleService, public authService: AuthService, private router: Router) {
-    this.Routes = NAVIGATION_URL;
+  constructor(public toggleService: ToggleService, private router: Router) {
     router.events.subscribe(() => {
       this.closeMenuIfOpened();
     });
@@ -74,14 +54,6 @@ export class HeaderComponent {
     return toReturn;
   }
 
-  login() {
-    this.authService.login();
-    this.closeMenuIfOpened();
-  }
-  logout() {
-    this.authService.logout();
-    this.closeMenuIfOpened();
-  }
   closeMenuIfOpened() {
     if (this.menuIsOpened()) this.toggleService.updateData(!this.menuIsOpened());
   }

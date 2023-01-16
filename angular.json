@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "auth": "libs/auth",
     "estrai.me": "apps/estrai.me"
-  }
+  },
+  "defaultProject": "estrai.me"
 }
