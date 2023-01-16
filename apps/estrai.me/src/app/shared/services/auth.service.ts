@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { take } from 'rxjs';
 export class AuthService {
   userData: firebase.User | undefined | null;
 
-  constructor(public auth: AngularFireAuth, private router: Router) {
+  constructor(public auth: AngularFireAuth, private router: Router, private profileService: ProfileService) {
     this.getUserData();
   }
 
@@ -21,15 +22,44 @@ export class AuthService {
     });
   }
 
-  login() {
-    return this.GoogleAuth();
-    //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  Login() {
+    //implement the login method
+    return false;
   }
   logout() {
     this.auth.signOut();
     this.router.navigate(['/']);
     return;
   }
+
+  // Sign up with email/password
+  SignUp(email: string, password: string) {
+    return this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(result => {
+        /* Call the SendVerificaitonMail() function when new user sign
+        up and returns promise */
+        this.SendVerificationMail();
+        this.SetUserData(result.user);
+      })
+      .catch(error => {
+        window.alert(error.message);
+      });
+  }
+
+  // Send email verfificaiton when new user sign up
+  async SendVerificationMail() {
+    ((await this.auth.currentUser) as firebase.User).sendEmailVerification().then(() => {
+      console.log('email sent');
+    });
+
+    // return this.auth.currentUser
+    //   .then((u:firebase.User) => u.sendEmailVerification())
+    //   .then(() => {
+    //     this.router.navigate(['auth/log-in']);
+    //   });
+  }
+
   // Sign in with Google
   GoogleAuth() {
     this.AuthLogin(new auth.GoogleAuthProvider());
@@ -44,6 +74,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(result => {
         this.SetUserData(result.user);
+        this.profileService.SaveProfile(result.user);
       })
       .catch(error => {
         window.alert(error);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../../shared/services/auth.service';
 
 interface RegisterForm {
   email: string;
@@ -25,17 +26,17 @@ interface RegisterFormGroup extends FormGroup {
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   template: `
-    <div class="bg-gray-100 rounded-b-lg py-12 px-4 lg:px-24" [formGroup]="registerForm">
+    <div class="bg-gray-100 rounded-b-lg py-12 px-4 lg:px-24">
       <p class="text-center text-sm text-gray-500 font-light">Or sign up with credentials</p>
-      <form class="mt-6" (ngSubmit)="onSubmit()">
+      <form class="mt-6" (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
         <div class="relative">
           <input
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
             id="inputEmail"
             required
             type="email"
-            [formControlName]="registerForm.controls.email"
-            [ngClass]="{ 'text-red-700 border border-red-600': submitted && form['email'].errors }"
+            formControlName="email"
+            [ngClass]="{ 'text-red-700 border border-red-600 placeholder-red-700': submitted && form.email.errors }"
             placeholder="Email: your_email@domain.com" />
           <div class="absolute left-0 inset-y-0 flex items-center">
             <svg
@@ -48,11 +49,14 @@ interface RegisterFormGroup extends FormGroup {
             </svg>
           </div>
         </div>
+        <span *ngIf="submitted && form.email.errors" class="inline-flex text-sm text-red-600"
+          >Insert a valid email!</span
+        >
         <div class="relative mt-3">
           <input
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
             id="inputConfirmEmail"
-            [formControlName]="registerForm.controls.confirmEmail"
+            formControlName="confirmEmail"
             type="email"
             required
             placeholder="Confirm email" />
@@ -67,12 +71,15 @@ interface RegisterFormGroup extends FormGroup {
             </svg>
           </div>
         </div>
+        <span *ngIf="submitted && form.confirmEmail.errors" class="inline-flex text-sm text-red-600"
+          >Email and Confirm email should be equal!</span
+        >
         <div class="relative mt-3">
           <input
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
             id="inputPassword"
             formControlName="password"
-            type="text"
+            type="password"
             placeholder="Password" />
           <div class="absolute left-0 inset-y-0 flex items-center">
             <svg
@@ -85,7 +92,9 @@ interface RegisterFormGroup extends FormGroup {
             </svg>
           </div>
         </div>
-
+        <span *ngIf="submitted && form.password.errors" class="inline-flex text-sm text-red-600"
+          >Password length should be at least 6 characters!</span
+        >
         <p class="mt-4 italic text-gray-500 font-light text-xs">
           Password strength: <span class="font-bold text-yellow-500">weak</span>
         </p>
@@ -118,17 +127,11 @@ interface RegisterFormGroup extends FormGroup {
   styles: [],
 })
 export class SignUpComponent {
-  registerForm: RegisterFormGroup;
+  signUpForm: RegisterFormGroup;
   submitted = false;
 
-  constructor() {
-    // this.registerForm = formBuilder.group({
-    //   email: ['', [Validators.required, Validators.email]],
-    //   confirmEmail: ['', Validators.required, Validators.email],
-    //   password: ['',[Validators.required, Validators.minLength(6)]],
-    //   acceptTerms: [false, Validators.requiredTrue]
-    // }) as RegisterFormGroup;
-    this.registerForm = new FormGroup({
+  constructor(private authService: AuthService) {
+    this.signUpForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       confirmEmail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -138,11 +141,16 @@ export class SignUpComponent {
 
   // convenience getter for easy access to form fields
   get form() {
-    return this.registerForm.controls;
+    return this.signUpForm.controls;
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
+    this.submitted = true;
+    if (this.signUpForm.status === 'INVALID') {
+      return;
+    } else {
+      this.authService.SignUp(this.signUpForm.value.email, this.signUpForm.value.password);
+    }
   }
 }
 
