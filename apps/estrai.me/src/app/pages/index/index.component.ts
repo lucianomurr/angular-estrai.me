@@ -26,7 +26,7 @@ import { AuthService } from '@auth';
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">Want to discover more? Play for free!</p>
           <div class="flex mt-8" *ngIf="authService.auth.user | async as user; else showLoginHome">
             <a
-              [routerLink]="['/new-game']"
+              [routerLink]="['/game']"
               routerLinkActive="router-link-active"
               class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
               Get started

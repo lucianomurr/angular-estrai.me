@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { take } from 'rxjs';
-import { RaffleGameService } from '../../../shared/services/raffe-game.service';
-import { AutofocusDirective } from '../../../shared/directives/autofocus.directive';
+import { RaffleGameService } from '../raffe-game.service';
+import { AutofocusDirective } from '../autofocus.directive';
 
 @Component({
   selector: 'app-join-game',

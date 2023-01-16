@@ -99,7 +99,10 @@ import { AuthService } from '@auth';
             </a>
           </li>
           <li class="rounded-sm">
-            <a rel="noopener noreferrer" class="flex items-center p-2 space-x-3 rounded-md" (click)="onClickLogout()">
+            <a
+              rel="noopener noreferrer"
+              class="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
+              (click)="onClickLogout()">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"

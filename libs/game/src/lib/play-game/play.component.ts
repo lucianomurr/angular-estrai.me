@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { RaffleDocument, RaffleGameService, UserInGame } from '../../../shared/services/raffe-game.service';
+import { RaffleDocument, RaffleGameService, UserInGame } from '../raffe-game.service';
 import { map, Observable, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
