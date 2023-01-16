@@ -22,7 +22,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./pages/auth/auth.routes').then(m => m.AUTH_ROUTES),
+    loadChildren: () => import('@auth').then(m => m.AUTH_ROUTES),
   },
   {
     path: 'profile',

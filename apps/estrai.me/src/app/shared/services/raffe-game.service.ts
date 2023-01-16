@@ -3,8 +3,8 @@ import { addDoc, collectionData, Firestore, query, where, collection, doc } from
 
 import { Router } from '@angular/router';
 import { updateDoc } from 'firebase/firestore';
+import { AuthService } from '@auth';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 
 export interface UserInGame {
   collectionID?: string;

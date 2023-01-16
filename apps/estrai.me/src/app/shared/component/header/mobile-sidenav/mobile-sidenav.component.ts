@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '@auth';
 
 @Component({
   selector: 'app-mobile-sidenav',

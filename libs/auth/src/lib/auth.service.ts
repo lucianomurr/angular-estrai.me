@@ -4,7 +4,7 @@ import firebase from 'firebase/compat/app';
 import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
-import { ProfileService } from './profile.service';
+import { ProfileService } from '@profile';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +50,7 @@ export class AuthService {
   // Send email verfificaiton when new user sign up
   async SendVerificationMail() {
     ((await this.auth.currentUser) as firebase.User).sendEmailVerification().then(() => {
-      console.log('email sent');
+      return true;
     });
 
     // return this.auth.currentUser
@@ -62,11 +62,15 @@ export class AuthService {
 
   // Sign in with Google
   GoogleAuth() {
-    this.AuthLogin(new auth.GoogleAuthProvider());
+    this.AuthLogin(new auth.GoogleAuthProvider()).then(()=>{
+      this.router.navigate(['/']);
+    });
   }
   // Sign in with Google
   GithubAuth() {
-    this.AuthLogin(new auth.GithubAuthProvider());
+    this.AuthLogin(new auth.GithubAuthProvider()).then(()=>{
+      this.router.navigate(['/']);
+    });
   }
   // Auth logic to run auth providers
   AuthLogin(provider: firebase.auth.AuthProvider | auth.GoogleAuthProvider) {
@@ -75,9 +79,6 @@ export class AuthService {
       .then(result => {
         this.SetUserData(result.user);
         this.profileService.SaveProfile(result.user);
-      })
-      .catch(error => {
-        window.alert(error);
       });
   }
   SetUserData(user: firebase.User | null) {

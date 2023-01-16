@@ -31,7 +31,7 @@ export class ProfileService {
         lastSignInTime: userData?.metadata.lastSignInTime,
       };
       const docReference = doc(profileRef, _customId);
-      setDoc(docReference, collectionData);
+      return setDoc(docReference, collectionData);
     } else {
       throw new Error('Auth user data was empty...');
     }

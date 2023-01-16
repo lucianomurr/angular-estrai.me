@@ -10,8 +10,8 @@ import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { environment } from './environments/environment';
 import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { APP_ROUTES } from './app/app.routes';
-import { AuthService } from './app/shared/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { AuthService } from '@auth';
 
 bootstrapApplication(AppComponent, {
   providers: [
