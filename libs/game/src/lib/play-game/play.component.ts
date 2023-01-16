@@ -28,7 +28,7 @@ import { CtaGameComponent } from './cta-game/cta-game.component';
         (startGameEvent)="OnClickStartGame()"
         (closeGameEvent)="OnClickCloseGame()"
         [round]="game[0].actualRound"
-        [status]="game[0].status"></app-cta-game>
+        [status]="game[0].status" />
 
       <p class="mb-12 text-xl font-normal text-center text-gray-500 dark:text-gray-300">
         All the users appears below...
@@ -58,7 +58,7 @@ import { CtaGameComponent } from './cta-game/cta-game.component';
         </div>
       </div>
     </div>
-    <app-winner-modal></app-winner-modal>
+    <app-winner-modal />
   `,
   styles: [],
   imports: [CommonModule, WinnerModalComponent, CtaGameComponent],

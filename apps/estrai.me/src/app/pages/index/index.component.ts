@@ -52,8 +52,8 @@ import { AuthService } from '@auth';
         </div>
       </div>
     </div>
-    <app-cards></app-cards>
-    <app-notify-me></app-notify-me>
+    <app-cards />
+    <app-notify-me />
   `,
   styles: [],
 })

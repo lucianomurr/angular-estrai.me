@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-game',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  template: ` <router-outlet></router-outlet> `,
+  template: ` <router-outlet /> `,
   styles: [],
 })
 export class GameComponent {}

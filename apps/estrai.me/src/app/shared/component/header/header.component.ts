@@ -36,7 +36,7 @@ import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.componen
     <!-- only mobile sidenav -->
     <app-mobile-sidenav
       [showSidebar]="toggleService.sidenav$ | async"
-      (closeSidenav)="closeMenuIfOpened()"></app-mobile-sidenav>
+      (closeSidenav)="closeMenuIfOpened()" />
     <!-- /sidenav -->
   `,
   styles: [],
