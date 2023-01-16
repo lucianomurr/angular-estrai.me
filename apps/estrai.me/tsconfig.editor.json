@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../../libs/auth/src/lib/auth.service.ts", "../../libs/profile/src/lib/profile.service.ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }

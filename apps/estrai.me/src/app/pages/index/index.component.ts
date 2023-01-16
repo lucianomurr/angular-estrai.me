@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
 import { CardsComponent } from './cards/cards.component';
 import { NotifyMeComponent } from './notify-me/notify-me.component';
+import { AuthService } from '@auth';
 
 @Component({
   selector: 'app-index',
@@ -40,7 +40,7 @@ import { NotifyMeComponent } from './notify-me/notify-me.component';
           <ng-template #showLoginHome>
             <div class="flex mt-8">
               <a
-                (click)="authService.login()"
+                routerLink="/auth"
                 class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800">
                 Login to start
               </a>

@@ -17,6 +17,19 @@ export const APP_ROUTES: Routes = [
     loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),
   },
   {
+    path: 'privacy',
+    loadComponent: () => import('./pages/privacy/privacy.component').then(m => m.PrivacyComponent),
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('@auth').then(m => m.AUTH_ROUTES),
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+    canActivate: [AngularFireAuthGuard],
+  },
+  {
     path: 'new-game',
     loadComponent: () => import('./pages/game/new-game/new-game.component').then(m => m.NewGameComponent),
     canActivate: [AngularFireAuthGuard],

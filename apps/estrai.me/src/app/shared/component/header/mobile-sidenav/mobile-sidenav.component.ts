@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { AuthService } from '@auth';
 
 @Component({
   selector: 'app-mobile-sidenav',
@@ -99,11 +99,7 @@ import { Router, RouterModule } from '@angular/router';
             </a>
           </li>
           <li class="rounded-sm">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              class="flex items-center p-2 space-x-3 rounded-md"
-              (click)="onClickLogout()">
+            <a rel="noopener noreferrer" class="flex items-center p-2 space-x-3 rounded-md" (click)="onClickLogout()">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -122,7 +118,7 @@ import { Router, RouterModule } from '@angular/router';
               <a
                 rel="noopener noreferrer"
                 class="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
-                (click)="onClickLogin()">
+                routerLink="/auth/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -143,7 +139,9 @@ import { Router, RouterModule } from '@angular/router';
       <div>
         <h2 class="text-lg font-semibold">{{ loggedUser.displayName }}</h2>
         <span class="flex items-center space-x-1">
-          <a rel="noopener noreferrer" href="#" class="text-xs hover:underline dark:text-gray-400">View profile</a>
+          <a rel="noopener noreferrer" routerLink="/profile" class="text-xs hover:underline dark:text-gray-400"
+            >View profile</a
+          >
         </span>
       </div>
     </div>
@@ -155,23 +153,15 @@ export class MobileSidenavComponent {
 
   @Input() showSidebar: boolean | null = false;
   @Output() closeSidenav = new EventEmitter();
-  @Output() logOutUser = new EventEmitter();
-  @Output() logInUser = new EventEmitter();
 
-  constructor(public auth: AngularFireAuth, private router: Router) {
-    // this.auth.authState.pipe(take(1)).subscribe(user => {
-    //   console.log('service', user);
-    //   this.loggedUser = user;
-    // });
-  }
+  constructor(public auth: AngularFireAuth, private authService: AuthService) {}
 
   onClickCloseSidenav() {
     this.closeSidenav.emit();
   }
+
   onClickLogout() {
-    this.logOutUser.emit();
-  }
-  onClickLogin() {
-    this.logInUser.emit();
+    this.authService.logout();
+    this.closeSidenav.emit();
   }
 }
