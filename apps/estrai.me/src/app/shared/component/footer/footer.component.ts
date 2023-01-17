@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   template: `
     <footer
-      class="px-3 py-8 text-gray-500 transition-colors duration-200 bg-white dark:bg-gray-800 text-2 dark:text-gray-200">
+      class="px-3 py-8 text-gray-500 transition-colors duration-200 bg-white dark:bg-gray-800 text-2 dark:text-gray-200 pt-20 pb-24">
       <div class="flex flex-col">
         <div class="h-px mx-auto rounded-full md:hidden mt-7 w-11"></div>
         <div class="flex flex-col mt-4 md:mt-0 md:flex-row">
