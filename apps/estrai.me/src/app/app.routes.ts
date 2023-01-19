@@ -21,6 +21,10 @@ export const APP_ROUTES: Routes = [
     loadComponent: () => import('./pages/privacy/privacy.component').then(m => m.PrivacyComponent),
   },
   {
+    path: 'unauthorized',
+    loadComponent: () => import('./pages/unauthorized/unauthorized.component').then(m => m.UnauthorizedComponent),
+  },
+  {
     path: 'profile',
     loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [AngularFireAuthGuard],
