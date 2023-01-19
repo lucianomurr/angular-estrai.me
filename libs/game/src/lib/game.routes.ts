@@ -42,7 +42,7 @@ export const GAME_ROUTES: Routes = [
         canActivate: [AngularFireAuthGuard],
       },
       {
-        path: 'waiting/:ticketNumber',
+        path: 'waiting/:gameID/ticket/:ticketID',
         loadComponent: () => import('./waiting/waiting.component').then(m => m.WaitingComponent),
         canActivate: [AngularFireAuthGuard],
       },

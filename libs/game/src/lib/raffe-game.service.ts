@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import { addDoc, collectionData, Firestore, query, where, collection, doc } from '@angular/fire/firestore';
+import { Time } from '@angular/common';
+import { ErrorHandler, Injectable } from '@angular/core';
+import { addDoc, collectionData, Firestore, query, where, collection, doc, orderBy, getDoc, updateDoc, Timestamp, serverTimestamp } from '@angular/fire/firestore';
 
 import { Router } from '@angular/router';
-import { updateDoc } from 'firebase/firestore';
+
 import { AuthService } from '@auth';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 export interface UserInGame {
   collectionID?: string;
-  joinDate: Date;
+  joinDate: Timestamp | Date;
   name: string;
   ticketID: string;
   win?: boolean;
@@ -16,7 +17,7 @@ export interface UserInGame {
 }
 export interface RaffleDocument {
   collectionID?: string;
-  creationDate: Date;
+  creationDate: Timestamp | Date;
   gameID: string;
   status: 'ready' | 'started' | 'closed';
   email: string;
@@ -69,17 +70,23 @@ export class RaffleGameService {
         name: userTicketName,
         ticketID: ticketNumber,
       };
-      await addDoc(raffleCollection, collectionData).then(() => {
+      await addDoc(raffleCollection, collectionData).then((res) => {
+        console.log(res.path);
         if (!userTicketName) {
           this.router.navigate([`game/assign/${ticketNumber}`]);
         } else {
-          this.router.navigate([`game/waiting/${ticketNumber}`]);
+          const gameDocID = this.getDocID(res.path);
+          const ticketDocID = this.getTicketID(res.path);
+          this.router.navigate([`game/waiting/${gameDocID}/ticket/${ticketNumber}`]);
         }
       });
     } else {
       throw new Error('Incorrect game id or ticket number .');
     }
   }
+
+
+
 
   async updateUserTicket(collectionID: string, ticket: UserInGame, round: number) {
     const raffleCollection = doc(this.firestore, `games/${collectionID}`);
@@ -105,10 +112,19 @@ export class RaffleGameService {
     updateDoc(raffleCollection, collectionData);
   }
 
-  async GetUsersByGameID(gameID: string | undefined) {
+  async GetUsersByGameID(gameID: string | undefined, ticketID: string | undefined = undefined) {
     const gameRef = collection(this.firestore, `games/${gameID}/users`);
-    const q = query(gameRef);
-    return collectionData(q, { idField: 'collectionID' }) as unknown as Observable<UserInGame[]>;
+    let q = query(gameRef, orderBy('joinDate', 'desc'));
+    if (ticketID){
+      q = query(gameRef, where('ticketID','==', ticketID));
+    }
+    return from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
+  }
+
+  async getUserTicketDetail(gameDocID:string, ticketID:string){
+
+    return await this.GetUsersByGameID(gameDocID,ticketID);
+
   }
 
   getGameByID(filter = '') {
@@ -133,5 +149,12 @@ export class RaffleGameService {
       result.push(hexRef[Math.floor(Math.random() * 16)]);
     }
     return result.join('');
+  }
+
+  getDocID(path:string){
+    return path.split('/')[1];
+  }
+  getTicketID(path:string){
+    return path.split('/')[3];
   }
 }

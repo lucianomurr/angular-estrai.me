@@ -22,8 +22,8 @@ import { CommonModule } from '@angular/common';
             stroke-linejoin="round"
             d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
         </svg>
-        <span *ngIf="round === 0; else showContinue">Start Now!</span>
-        <ng-template #showContinue>Extract another one</ng-template>
+        <span *ngIf="round === 0; else showContinue">Start</span>
+        <ng-template #showContinue>Continue</ng-template>
       </button>
       <button
         class="flex items-center px-6 py-2  transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 dark:border-gray-300 focus:outline-none dark:text-gray-300"
@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
             d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
         </svg>
 
-        Close the game!
+        Finish!
       </button>
     </div>
     <ng-template #showClosedMessage>
