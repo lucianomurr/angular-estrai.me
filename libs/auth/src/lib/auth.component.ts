@@ -45,7 +45,7 @@ import { AuthService } from './auth.service';
           </div>
         </div>
       </div>
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   `,
   styles: [],
