@@ -141,6 +141,11 @@ export class PlayGameComponent implements OnInit {
 
   ngOnInit() {
     //get players for the game
+    this.gameData$.pipe(take(1)).subscribe(game=>{
+      if (!game[0]){
+        this.router.navigate(['/unauthorized']);
+      }
+    })
     this.getPlayers();
   }
 
