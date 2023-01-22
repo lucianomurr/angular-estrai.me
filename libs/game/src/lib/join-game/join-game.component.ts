@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { take } from 'rxjs';
-import { RaffleGameService } from '../raffe-game.service';
+import { RaffleDocument, RaffleGameService } from '../raffe-game.service';
 import { AutofocusDirective } from '../autofocus.directive';
 
 @Component({
@@ -59,14 +59,14 @@ import { AutofocusDirective } from '../autofocus.directive';
           <div class="mt-12 inline-flex rounded-md shadow">
             <div class=" relative ">
               <input
-                type="text"
+                type="number"
                 id="game-id"
                 [formControl]="mygameid"
                 required
-                minlength="7"
-                maxlength="7"
+                minlength="6"
+                maxlength="6"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                placeholder="game id eg: xx22xx22"
+                placeholder="game id eg: 001122"
                 [autofocus]="true" />
             </div>
             <div class="relative">
@@ -124,7 +124,7 @@ import { AutofocusDirective } from '../autofocus.directive';
           <div class="flex items-center justify-center ml-2">
             <span class="mr-2 text-lg font-semibold text-red-600"> Luciano </span>
             <span class="text-xl font-light text-gray-400"> / </span>
-            <span class="ml-2 text-gray-400 text-md"> Estrai.me Creator </span>
+            <span class="ml-2 text-gray-400 text-md">  </span>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@ import { AutofocusDirective } from '../autofocus.directive';
   styles: [],
 })
 export class JoinGameComponent {
-  mygameid = new FormControl('');
+  mygameid = new FormControl();
   gameStatus = 'ready';
   showError = false;
   showWarning = false;
@@ -141,21 +141,22 @@ export class JoinGameComponent {
   constructor(private raffleGameService: RaffleGameService) {}
 
   clickOnVerifyGameID() {
-    const gameID = this.mygameid.value as string;
+    const gameID = this.mygameid.value as number;
     // check game id
     // if correct, generate new ID and go to assign ticket
     // TODO: check if the user already have a ticket for this game
     this.raffleGameService
       .getGameByID(gameID)
       .pipe(take(1))
-      .subscribe(game => {
-        if (game[0]) {
-          if (game[0].status === 'ready') {
-            this.GoToAssignPage(game[0].collectionID);
+      .subscribe(gameDoc => {
+        const game = gameDoc[0];
+        if (game){
+          if (game.status === 'ready') {
+            this.GoToAssignPage(gameID);
             return true;
           } else {
             this.showWarning = true;
-            this.gameStatus = game[0].status;
+            this.gameStatus = game.status;
             throw new Error('Game ID already started');
           }
         } else {
@@ -165,7 +166,7 @@ export class JoinGameComponent {
       });
   }
 
-  GoToAssignPage(gameID: string | undefined) {
+  GoToAssignPage(gameID: number) {
     this.raffleGameService.AddNewUserToGame(gameID);
   }
 }

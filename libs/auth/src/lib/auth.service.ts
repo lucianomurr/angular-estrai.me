@@ -16,10 +16,13 @@ export class AuthService {
     this.getUserData();
   }
 
-  async getUserData() {
-    return await this.auth.authState.pipe(take(1)).subscribe(user => {
+  getUserData() {
+    const auth$ = this.auth.authState.pipe(take(1));
+    auth$.subscribe(user => {
       this.userData = user;
+      console.log('getUserData: ',this.userData);
     });
+    return auth$;
   }
 
   Login() {

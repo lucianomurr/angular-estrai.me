@@ -1,5 +1,6 @@
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { Routes } from '@angular/router';
+
 import { GameComponent } from './game.component';
 
 

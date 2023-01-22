@@ -26,7 +26,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+    loadComponent: () => import('@profile').then(m => m.ProfileComponent),
     canActivate: [AngularFireAuthGuard],
   },
   {
