@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RaffleDocument, RaffleGameService, UserInGame } from '../raffe-game.service';
-import { map, Observable, take, takeUntil } from 'rxjs';
+
+import { isObservable, map, Observable, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
+import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-play-game',
@@ -33,7 +35,7 @@ import { CtaGameComponent } from './cta-game/cta-game.component';
             <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
             <path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
           </svg>
-          Open
+          Started
         </span>
 
         <span
@@ -79,13 +81,13 @@ import { CtaGameComponent } from './cta-game/cta-game.component';
                 <img
 
                   alt="profil"
-                  src="https://ui-avatars.com/api/?name={{ item.name }}&size=150&background={{item.ticketID}}"
+                  src="https://ui-avatars.com/api/?name={{ item.name }}&size=150&"
                   class="mx-auto object-cover rounded-full h-20 w-20 " />
               </a>
             </div>
             <div class="mt-2 text-center flex flex-col">
               <span class="text-lg font-medium text-gray-600 dark:text-white"> {{ item.name }} </span>
-              <span class="bg-gray-800 rounded-full text-white px-3 py-1 text-xs uppercase font-medium">{{ item.ticketID }}</span>
+              <span class="rounded-full text-white px-3 py-1 text-xs uppercase font-medium" style="background-color:{{item.ticketID}}">{{ item.ticketID }}</span>
             </div>
           </div>
         </div>
@@ -114,24 +116,26 @@ import { CtaGameComponent } from './cta-game/cta-game.component';
 })
 export class PlayGameComponent implements OnInit {
   // game ID coming from the url
-  gameID: number | null;
+  gameID: string | null;
+  //collectionID
+  collectionID: string | undefined;
   //object coming from firebase, this contains all the Game Information <RaffleDocument>
   gameData$: Observable<RaffleDocument[]>;
   //gameCollectionID contains the doc reference on firebase of this game
   gameStatus: string;
   //list of players inside the game
-  players$!: Observable<UserInGame[]> | undefined;
+  players$!: Observable<UserInGame[]>;
   //the last user that win the round
   winnerUser: UserInGame;
   //numbers of round of the raffle
   round = 0;
 
-  constructor(private route: ActivatedRoute, private raffleGameService: RaffleGameService, private router: Router) {
+  constructor(private route: ActivatedRoute,  private router: Router, private raffleGameService: RaffleGameService, private adminService:AdminService) {
     //set game id from router
     const gameID = this.route.snapshot.paramMap.get('gameID');
 
     if (gameID) {
-      this.gameID = parseInt(gameID) as number;
+      this.gameID = gameID;
       //set gameData$ from service
       this.gameData$ = raffleGameService.getAdminGameByID(this.gameID);
     } else {
@@ -145,8 +149,10 @@ export class PlayGameComponent implements OnInit {
       if (!game[0]){
         this.router.navigate(['/unauthorized']);
       }
+      console.log(game[0])
+      this.collectionID = game[0].collectionID;
+      this.getPlayers();
     })
-    this.getPlayers();
   }
 
   updateGame(game: RaffleDocument) {
@@ -156,40 +162,28 @@ export class PlayGameComponent implements OnInit {
 
   getPlayers() {
     if (this.gameID) {
-      try {
-        this.players$ = this.raffleGameService.GetUsersByGameID(this.gameID);
-      } catch (err) {
-        console.log('catch', err);
-        this.router.navigate(['/unauthorized']);
-      }
+      this.players$ = this.raffleGameService.GetUsersByGameID(this.gameID);
     }
   }
 
   OnClickStartGame() {
-    //update game status from waiting to started
-    //define the winner with a specific order
-    //increase the round game
-    this.round++;
+    if (isObservable(this.players$), this.collectionID){
+      //increase the round game
+      this.round++;
+      //define the winner with a specific order
 
-    if (this.players$) {
-      this.players$
-        .pipe(take(1))
-        .pipe(map((players: UserInGame[]) => players.filter((player: UserInGame) => player.win !== true)))
-        .subscribe(data => {
-          //select randomly the winner user
-          this.winnerUser = data[Math.floor(Math.random() * data.length)];
-          //update the game data
-          this.winnerUser.round = this.round;
-          this.winnerUser.win = true;
-          //store to firebase
-          this.updateWinnerTicket(this.winnerUser);
-        });
+      this.adminService.defineNewWinner(this.players$, this.round).then((result)=> {
+        if (result && this.collectionID && this.gameID){
+          this.raffleGameService.updateUserTicket(this.collectionID, result as UserInGame, this.round, this.gameID);
+        } else {
+          throw new Error('Something went wrong...')
+        }
+      });
+
     }
+
   }
 
-  updateWinnerTicket(ticket: UserInGame) {
-    if (this.gameID) this.raffleGameService.updateUserTicket(this.gameID, ticket, this.round);
-  }
 
   OnClickCloseGame() {
     //update the firebase game with winner and change status to closed

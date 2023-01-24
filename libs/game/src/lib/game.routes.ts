@@ -17,34 +17,34 @@ export const GAME_ROUTES: Routes = [
       },
       {
         path: 'new',
-        loadComponent: () => import('./new-game/new-game.component').then(m => m.NewGameComponent),
+        loadComponent: () => import('./admin/new-game/new-game.component').then(m => m.NewGameComponent),
         canActivate: [AngularFireAuthGuard],
       },
       {
         path: 'manage/:gameID',
-        loadComponent: () => import('./play-game/play.component').then(m => m.PlayGameComponent),
+        loadComponent: () => import('./admin/play-game/play.component').then(m => m.PlayGameComponent),
         canActivate: [AngularFireAuthGuard],
       },
       {
         path: 'join/:gameID',
         loadComponent: () =>
-          import('./assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
+          import('./player/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
         canActivate: [AngularFireAuthGuard],
       },
       {
         path: 'join',
-        loadComponent: () => import('./join-game/join-game.component').then(m => m.JoinGameComponent),
+        loadComponent: () => import('./player/join-game/join-game.component').then(m => m.JoinGameComponent),
         canActivate: [AngularFireAuthGuard],
       },
       {
         path: 'assign/:ticketNumber',
         loadComponent: () =>
-          import('./assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
+          import('./player/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
         canActivate: [AngularFireAuthGuard],
       },
       {
         path: 'waiting/:gameID/ticket/:ticketID',
-        loadComponent: () => import('./waiting/waiting.component').then(m => m.WaitingComponent),
+        loadComponent: () => import('./player/waiting/waiting.component').then(m => m.WaitingComponent),
         canActivate: [AngularFireAuthGuard],
       },
 

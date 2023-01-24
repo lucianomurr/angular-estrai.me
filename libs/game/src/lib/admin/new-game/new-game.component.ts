@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
-import { RaffleGameService, RaffleDocument } from '../raffe-game.service';
+import { RaffleDocument, RaffleGameService } from '@game';
 
 @Component({
   selector: 'app-new-game',

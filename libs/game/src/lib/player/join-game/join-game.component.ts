@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { take } from 'rxjs';
-import { RaffleDocument, RaffleGameService } from '../raffe-game.service';
-import { AutofocusDirective } from '../autofocus.directive';
+import { AutofocusDirective } from '../../directives/autofocus.directive';
+import { RaffleGameService } from '@game';
 
 @Component({
   selector: 'app-join-game',
@@ -151,8 +151,8 @@ export class JoinGameComponent {
       .subscribe(gameDoc => {
         const game = gameDoc[0];
         if (game){
-          if (game.status === 'ready') {
-            this.GoToAssignPage(gameID);
+          if (game.status === 'ready' && gameDoc[0].collectionID) {
+            this.raffleGameService.AddNewUserToGame(gameDoc[0].collectionID);
             return true;
           } else {
             this.showWarning = true;
@@ -166,7 +166,4 @@ export class JoinGameComponent {
       });
   }
 
-  GoToAssignPage(gameID: number) {
-    this.raffleGameService.AddNewUserToGame(gameID);
-  }
 }

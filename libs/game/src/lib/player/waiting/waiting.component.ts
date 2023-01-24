@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { RaffleGameService, UserInGame } from '../raffe-game.service';
 import { Observable, take } from 'rxjs';
 
 import { Timestamp } from '@angular/fire/firestore';
+import { RaffleGameService, UserInGame } from '@game';
 
 @Component({
   selector: 'app-waiting',

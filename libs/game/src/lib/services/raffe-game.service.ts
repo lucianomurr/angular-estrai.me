@@ -7,37 +7,16 @@ import {
   collection,
   doc,
   orderBy,
-  getDoc,
   updateDoc,
-  Timestamp,
   setDoc,
-  DocumentSnapshot,
-  collectionChanges,
-  collectionSnapshots,
+  where
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@auth';
-import { onSnapshot, where } from '@firebase/firestore';
 import { from, Observable, switchMap, take } from 'rxjs';
+import { AdminService, RaffleDocument, UserInGame } from '@game';
 
-export interface UserInGame {
-  collectionID?: string;
-  joinDate: Timestamp | Date;
-  name: string;
-  ticketID: string;
-  win?: boolean;
-  round?: number;
-}
-export interface RaffleDocument {
-  collectionID?: string;
-  creationDate: Timestamp | Date;
-  gameID: string;
-  status: 'ready' | 'started' | 'closed';
-  email: string;
-  users?: UserInGame[];
-  actualRound: number;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +25,7 @@ export class RaffleGameService {
   private _userEmail = '';
   private _userUID: string | undefined;
 
-  constructor(private firestore: Firestore, private authService: AuthService, private router: Router) {
+  constructor(private firestore: Firestore, private authService: AuthService, private router: Router, private adminService: AdminService) {
     this.authService.getUserData();
   }
 
@@ -70,17 +49,17 @@ export class RaffleGameService {
     const _newGameID = this.getNewGameID(6);
 
     if (this._userEmail && this._userUID) {
-
       const collectionData: RaffleDocument = {
         creationDate: new Date(),
         gameID: _newGameID,
         status: 'ready',
         email: this._userEmail,
+        userUID: this._userUID,
         actualRound: 0,
       };
-      console.log('createNewRaffle: path:', `admin/${this._userUID}/games`)
+      console.log('createNewRaffle: path:', `admin/${this._userUID}/games`);
       const gameRef = collection(this.firestore, `admin/${this._userUID}/games`);
-      const docReference = doc(gameRef);
+      const docReference = doc(gameRef, );
       const adminGame$ = setDoc(docReference, collectionData);
 
       const playersGameRef = collection(this.firestore, `players`);
@@ -99,13 +78,13 @@ export class RaffleGameService {
    * @description Used to create a new ticket for the user
    * Ticket will be generated using a string
    *
-   * @param gameID
+   * @param collectionID
    */
-  async AddNewUserToGame(gameID: number | undefined) {
-    if (gameID) {
+  async AddNewUserToGame(collectionID: string) {
+    if (collectionID) {
       const ticketNumber = this.getNewTicketID(6);
       const userTicketName = this.authService.userData?.displayName || '';
-      const raffleCollection = collection(this.firestore, `players/${gameID}/users`);
+      const raffleCollection = collection(this.firestore, `players/${collectionID}/users`);
       const collectionData: UserInGame = {
         joinDate: new Date(),
         name: userTicketName,
@@ -129,24 +108,48 @@ export class RaffleGameService {
   /**
    * @description Used to update game and ticket to set a winner
    *
-   * @param collectionID
+   * @param collectionID gameCollectionID
    * @param ticket
    * @param round
    */
-  async updateUserTicket(collectionID: number, ticket: UserInGame, round: number) {
+  updateUserTicket(collectionID: string, ticket: UserInGame, round: number, gameID:string) {
     const raffleCollection = doc(this.firestore, `admin/${this._userUID}/games/${collectionID}`);
     const collectionData = {
       actualRound: round,
       status: 'started',
     };
-    await updateDoc(raffleCollection, collectionData).then(() => {
-      const userCollection = doc(this.firestore, `players/${collectionID}/users/${ticket.collectionID}`);
-      const userCollectionData = {
-        win: ticket.win,
-        round: ticket.round,
-      };
-      updateDoc(userCollection, userCollectionData);
+    updateDoc(raffleCollection, collectionData).then( () => {
+      this.adminService.getGameCollectionID(gameID).pipe(take(1)).subscribe( game => {
+
+          console.log('updateUserTicket: path',`players/${game[0].collectionID}/users/${ticket.collectionID}`);
+
+          const userCollection = doc(this.firestore, `players/${game[0].collectionID}/users/${ticket.collectionID}`);
+          const userCollectionData = {
+            win: ticket.win,
+            round: ticket.round,
+          };
+
+          return updateDoc(userCollection, userCollectionData);
+
+        })
+
     });
+
+
+    // this.adminService.getGameCollectionID(gameID)
+    //   .pipe(switchMap( (game) => {
+    //     console.log('updateUserTicket', game);
+    //     console.log('updateUserTicket: path: ', `players/${game[0].collectionID}/users/${ticket.collectionID}`);
+    //     const userCollection = doc(this.firestore, `players/${game[0].collectionID}/users/${ticket.collectionID}`);
+    //     const userCollectionData = {
+    //       win: ticket.win,
+    //       round: ticket.round,
+    //     };
+    //     return updateDoc(userCollection, userCollectionData);
+    //   })
+    // );
+
+
   }
 
   /**
@@ -154,7 +157,7 @@ export class RaffleGameService {
    *
    * @param collectionID
    */
-  async closeRaffleGame(collectionID: number) {
+  async closeRaffleGame(collectionID: string) {
     const raffleCollection = doc(this.firestore, `games/${collectionID}`);
     const collectionData = {
       status: 'closed',
@@ -169,10 +172,25 @@ export class RaffleGameService {
    * @param ticketID
    * @returns
    */
-  GetUsersByGameID(gameID: number) {
-    const gameRef = collection(this.firestore, `players/${gameID}/users`);
-    let q = query(gameRef, orderBy('joinDate', 'desc'));
-    return from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
+  GetUsersByGameID(gameID: string) {
+
+    //get players firebase id
+    return this.adminService.getGameCollectionID(gameID).pipe(
+      switchMap( game => {
+
+        const gameRef = collection(this.firestore, `players/${game[0].collectionID}/users`);
+        let q = query(gameRef, orderBy('joinDate', 'desc'));
+        const observable$ = from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
+
+        observable$.subscribe(users => {
+          console.log('GetUsersByGameID', users);
+        })
+
+        return observable$;
+
+      })
+    );
+
   }
 
   /**
@@ -197,15 +215,15 @@ export class RaffleGameService {
    * @param gameID
    * @returns
    */
-  getAdminGameByID(gameID: number) {
+  getAdminGameByID(gameID: string) {
     return this.authService.getUserData().pipe(
       switchMap(user => {
         this._userEmail = user?.email || '';
         this._userUID = user?.uid;
-        console.log('getAdminGameByID: path: ', `admin/${user?.uid}/games/${gameID}`)
+        console.log('getAdminGameByID: path: ', `admin/${user?.uid}/games/${gameID}`);
         const gameRef = collection(this.firestore, `admin/${user?.uid}/games`);
-        const docRef = query(gameRef, where('gameID', '==', `${gameID}`),  orderBy('creationDate', 'desc'));
-        return from(collectionData(docRef)) as unknown as Observable<RaffleDocument[]>;
+        const docRef = query(gameRef, where('gameID', '==', `${gameID}`), orderBy('creationDate', 'desc'));
+        return from(collectionData(docRef, { idField: 'collectionID' })) as unknown as Observable<RaffleDocument[]>;
       })
     );
   }
@@ -213,8 +231,8 @@ export class RaffleGameService {
   getGameByID(gameID: number) {
     if (gameID && gameID.toString().length === 6) {
       const gameRef = collection(this.firestore, 'players');
-      const docRef = query(gameRef, where('gameID','==',`${gameID}`));
-      return from(collectionData(docRef)) as unknown as Observable<RaffleDocument[]>;
+      const docRef = query(gameRef, where('gameID', '==', `${gameID}`));
+      return from(collectionData(docRef, { idField: 'collectionID' })) as unknown as Observable<RaffleDocument[]>;
     } else {
       throw new Error('Insert a valid gameID');
     }
