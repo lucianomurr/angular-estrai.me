@@ -187,7 +187,9 @@ export class PlayGameComponent implements OnInit {
 
   OnClickCloseGame() {
     //update the firebase game with winner and change status to closed
-    if (this.gameID) this.raffleGameService.closeRaffleGame(this.gameID);
+    if (this.gameID && this.collectionID) {
+      this.raffleGameService.closeRaffleGame(this.gameID, this.collectionID);
+    }
   }
 
   getDate(time: Date) {

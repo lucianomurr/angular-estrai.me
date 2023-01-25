@@ -9,14 +9,13 @@ import {
   orderBy,
   updateDoc,
   setDoc,
-  where
+  where,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@auth';
 import { from, Observable, switchMap, take } from 'rxjs';
 import { AdminService, RaffleDocument, UserInGame } from '@game';
-
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +24,12 @@ export class RaffleGameService {
   private _userEmail = '';
   private _userUID: string | undefined;
 
-  constructor(private firestore: Firestore, private authService: AuthService, private router: Router, private adminService: AdminService) {
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService,
+    private router: Router,
+    private adminService: AdminService
+  ) {
     this.authService.getUserData();
   }
 
@@ -59,7 +63,7 @@ export class RaffleGameService {
       };
       console.log('createNewRaffle: path:', `admin/${this._userUID}/games`);
       const gameRef = collection(this.firestore, `admin/${this._userUID}/games`);
-      const docReference = doc(gameRef, );
+      const docReference = doc(gameRef);
       const adminGame$ = setDoc(docReference, collectionData);
 
       const playersGameRef = collection(this.firestore, `players`);
@@ -112,57 +116,61 @@ export class RaffleGameService {
    * @param ticket
    * @param round
    */
-  updateUserTicket(collectionID: string, ticket: UserInGame, round: number, gameID:string) {
+  updateUserTicket(collectionID: string, ticket: UserInGame, round: number, gameID: string) {
+    //update admin game
     const raffleCollection = doc(this.firestore, `admin/${this._userUID}/games/${collectionID}`);
-    const collectionData = {
+    const gameCollectionData = {
       actualRound: round,
       status: 'started',
     };
-    updateDoc(raffleCollection, collectionData).then( () => {
-      this.adminService.getGameCollectionID(gameID).pipe(take(1)).subscribe( game => {
+    let promises = [updateDoc(raffleCollection, gameCollectionData)];
 
-          console.log('updateUserTicket: path',`players/${game[0].collectionID}/users/${ticket.collectionID}`);
+    this.adminService
+      .getGameCollectionID(gameID)
+      .pipe(take(1))
+      .subscribe(game => {
+        console.log('updateUserTicket: path', `players/${game[0].collectionID}/users/${ticket.collectionID}`);
 
-          const userCollection = doc(this.firestore, `players/${game[0].collectionID}/users/${ticket.collectionID}`);
-          const userCollectionData = {
-            win: ticket.win,
-            round: ticket.round,
-          };
+        const userCollection = doc(this.firestore, `players/${game[0].collectionID}/users/${ticket.collectionID}`);
+        const userCollectionData = {
+          win: ticket.win,
+          round: ticket.round,
+        };
 
-          return updateDoc(userCollection, userCollectionData);
+        promises.push(updateDoc(userCollection, userCollectionData));
+        const userGameCollection = doc(this.firestore, `players/${game[0].collectionID}`);
 
-        })
+        promises.push(updateDoc(userGameCollection, gameCollectionData));
 
-    });
-
-
-    // this.adminService.getGameCollectionID(gameID)
-    //   .pipe(switchMap( (game) => {
-    //     console.log('updateUserTicket', game);
-    //     console.log('updateUserTicket: path: ', `players/${game[0].collectionID}/users/${ticket.collectionID}`);
-    //     const userCollection = doc(this.firestore, `players/${game[0].collectionID}/users/${ticket.collectionID}`);
-    //     const userCollectionData = {
-    //       win: ticket.win,
-    //       round: ticket.round,
-    //     };
-    //     return updateDoc(userCollection, userCollectionData);
-    //   })
-    // );
-
-
+        return Promise.all(promises);
+      });
   }
 
   /**
    * Update the game when it wil be closed
    *
-   * @param collectionID
+   * @param gameID
    */
-  async closeRaffleGame(collectionID: string) {
-    const raffleCollection = doc(this.firestore, `games/${collectionID}`);
+  closeRaffleGame(gameID: string, collectionID: string) {
+
+    const raffleCollection = doc(this.firestore, `admin/${this._userUID}/games/${collectionID}`);
     const collectionData = {
       status: 'closed',
     };
-    updateDoc(raffleCollection, collectionData);
+    let promises = [updateDoc(raffleCollection, collectionData)];
+
+    this.adminService
+      .getGameCollectionID(gameID)
+      .pipe(take(1))
+      .subscribe(game => {
+        const raffleCollection = doc(this.firestore, `players/${game[0].collectionID}`);
+        const collectionData = {
+          status: 'closed',
+        };
+        promises.push(updateDoc(raffleCollection, collectionData));
+      });
+
+    return Promise.all(promises);
   }
 
   /**
@@ -173,24 +181,20 @@ export class RaffleGameService {
    * @returns
    */
   GetUsersByGameID(gameID: string) {
-
     //get players firebase id
     return this.adminService.getGameCollectionID(gameID).pipe(
-      switchMap( game => {
-
+      switchMap(game => {
         const gameRef = collection(this.firestore, `players/${game[0].collectionID}/users`);
         let q = query(gameRef, orderBy('joinDate', 'desc'));
         const observable$ = from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
 
         observable$.subscribe(users => {
           console.log('GetUsersByGameID', users);
-        })
+        });
 
         return observable$;
-
       })
     );
-
   }
 
   /**

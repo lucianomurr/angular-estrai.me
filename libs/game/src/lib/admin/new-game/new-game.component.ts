@@ -27,12 +27,12 @@ import { RaffleDocument, RaffleGameService } from '@game';
                 <span class="block"> Your raffle game is about to start... </span>
                 <span class="block text-red-500"> Ready? </span>
               </h2>
-              <div class="lg:mt-0 lg:flex-shrink-0">
-                <div class=" inline-flex rounded-md shadow">
+              <div class=" lg:mt-0 lg:flex-shrink-0">
+                <div class=" md:inline-flex rounded-md shadow pt-6">
                   <button
                     type="button"
                     (click)="createNew()"
-                    class="py-4 px-6 sm:mt-3  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                    class="py-4 px-6 sm:mt-3 sm:pt-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
                     Start Now
                   </button>
                 </div>
