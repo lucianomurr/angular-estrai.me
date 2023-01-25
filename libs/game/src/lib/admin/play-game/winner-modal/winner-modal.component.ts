@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalService } from '../../../services/modal.service';
 
-
 @Component({
   selector: 'app-winner-modal',
   standalone: true,

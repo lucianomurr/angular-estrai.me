@@ -15,19 +15,20 @@ import { RaffleGameService, UserInGame } from '@game';
       <div
         class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20"
         *ngIf="ticketData$ | async as ticketData">
-
         <h2 class="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
           <span class="block"> Welcome! </span>
           <span class="block">This is your ticket details</span>
         </h2>
-        <div class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-6/12 xl:3/12 pt-6 pb-6">
+        <div
+          class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-6/12 xl:3/12 pt-6 pb-6">
           <div class="relative w-full px-4 py-6 bg-white shadow-lg dark:bg-gray-800 border border-white">
             <p class="text-sm font-semibold text-gray-700 border-b border-gray-200 w-max  dark:text-white">
               Ticket number
             </p>
             <div class="flex my-6 space-x-2 justify-center">
-              <p class="text-8xl font-bold text-black dark:text-white "
-              [ngClass]="{'text-green-500': ticketData[0].win}">
+              <p
+                class="text-8xl font-bold text-black dark:text-white "
+                [ngClass]="{ 'text-green-500': ticketData[0].win }">
                 {{ ticketData[0].ticketID }}
               </p>
             </div>
@@ -44,10 +45,10 @@ import { RaffleGameService, UserInGame } from '@game';
                 <p>Assigned to:</p>
                 <div class="flex items-end text-xs">{{ ticketData[0].name }}</div>
               </div>
-              <div
-                *ngIf="ticketData[0].win"
-                class="flex my-6 space-x-2 justify-center">
-                <span class="text-xl font-bold text-green-500 dark:text-white ">You win round {{ ticketData[0].round }}</span>
+              <div *ngIf="ticketData[0].win" class="flex my-6 space-x-2 justify-center">
+                <span class="text-xl font-bold text-green-500 dark:text-white "
+                  >You win round {{ ticketData[0].round }}</span
+                >
               </div>
             </div>
           </div>
@@ -69,10 +70,10 @@ export class WaitingComponent {
     this.ticketData$ = raffleGameService.getUserTicketDetail(this.gameID, this.ticketID);
 
     this.ticketData$.pipe(take(1)).subscribe(ticket => {
-      if (ticket[0].win){
-        navigator.vibrate([100,200,100,200]);
+      if (ticket[0].win) {
+        navigator.vibrate([100, 200, 100, 200]);
       }
-    })
+    });
   }
 
   timestampToDate(timestamp: Timestamp | Date): Date {

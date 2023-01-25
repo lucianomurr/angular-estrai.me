@@ -20,7 +20,7 @@ export class AuthService {
     const auth$ = this.auth.authState.pipe(take(1));
     auth$.subscribe(user => {
       this.userData = user;
-      console.log('getUserData: ',this.userData);
+      console.log('getUserData: ', this.userData);
     });
     return auth$;
   }
@@ -65,24 +65,22 @@ export class AuthService {
 
   // Sign in with Google
   GoogleAuth() {
-    this.AuthLogin(new auth.GoogleAuthProvider()).then(()=>{
+    this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
       this.router.navigate(['/']);
     });
   }
   // Sign in with Google
   GithubAuth() {
-    this.AuthLogin(new auth.GithubAuthProvider()).then(()=>{
+    this.AuthLogin(new auth.GithubAuthProvider()).then(() => {
       this.router.navigate(['/']);
     });
   }
   // Auth logic to run auth providers
   AuthLogin(provider: firebase.auth.AuthProvider | auth.GoogleAuthProvider) {
-    return this.auth
-      .signInWithPopup(provider)
-      .then(result => {
-        this.SetUserData(result.user);
-        this.profileService.SaveProfile(result.user);
-      });
+    return this.auth.signInWithPopup(provider).then(result => {
+      this.SetUserData(result.user);
+      this.profileService.SaveProfile(result.user);
+    });
   }
   SetUserData(user: firebase.User | null) {
     this.userData = user;

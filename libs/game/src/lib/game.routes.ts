@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 
 import { GameComponent } from './game.component';
 
-
 export const GAME_ROUTES: Routes = [
   {
     path: '',
@@ -47,7 +46,6 @@ export const GAME_ROUTES: Routes = [
         loadComponent: () => import('./player/waiting/waiting.component').then(m => m.WaitingComponent),
         canActivate: [AngularFireAuthGuard],
       },
-
     ],
   },
 ];

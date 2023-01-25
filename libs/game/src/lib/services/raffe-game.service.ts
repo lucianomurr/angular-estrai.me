@@ -152,7 +152,6 @@ export class RaffleGameService {
    * @param gameID
    */
   closeRaffleGame(gameID: string, collectionID: string) {
-
     const raffleCollection = doc(this.firestore, `admin/${this._userUID}/games/${collectionID}`);
     const collectionData = {
       status: 'closed',
