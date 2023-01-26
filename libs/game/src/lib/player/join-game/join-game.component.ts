@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { take } from 'rxjs';
-import { RaffleGameService } from '../raffe-game.service';
-import { AutofocusDirective } from '../autofocus.directive';
+import { AutofocusDirective } from '../../directives/autofocus.directive';
+import { RaffleGameService } from '@game';
 
 @Component({
   selector: 'app-join-game',
@@ -56,38 +56,26 @@ import { AutofocusDirective } from '../autofocus.directive';
           The game ID is not valid!
         </div>
         <div class="lg:mt-0 lg:flex-shrink-0">
-          <div class="mt-12 inline-flex rounded-md shadow">
-            <div class=" relative ">
+          <div class="mt-12 md:inline-flex rounded-md shadow">
+            <div class=" relative mt-6">
               <input
-                type="text"
+                type="number"
                 id="game-id"
                 [formControl]="mygameid"
                 required
-                minlength="7"
-                maxlength="7"
-                class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                placeholder="game id eg: xx22xx22"
+                minlength="6"
+                maxlength="6"
+                autocomplete="off"
+                class=" rounded-lg border-transparent flex-1 appearance-none text-center border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                placeholder="game id eg: 001122"
                 [autofocus]="true" />
             </div>
-            <div class="relative">
+            <div class="relative mt-6">
               <button
                 type="button"
                 class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 (click)="clickOnVerifyGameID()">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-                </svg>
-
-                Enter
+                Enter now!
               </button>
             </div>
           </div>
@@ -124,7 +112,7 @@ import { AutofocusDirective } from '../autofocus.directive';
           <div class="flex items-center justify-center ml-2">
             <span class="mr-2 text-lg font-semibold text-red-600"> Luciano </span>
             <span class="text-xl font-light text-gray-400"> / </span>
-            <span class="ml-2 text-gray-400 text-md"> Estrai.me Creator </span>
+            <span class="ml-2 text-gray-400 text-md"> </span>
           </div>
         </div>
       </div>
@@ -133,7 +121,7 @@ import { AutofocusDirective } from '../autofocus.directive';
   styles: [],
 })
 export class JoinGameComponent {
-  mygameid = new FormControl('');
+  mygameid = new FormControl();
   gameStatus = 'ready';
   showError = false;
   showWarning = false;
@@ -141,21 +129,22 @@ export class JoinGameComponent {
   constructor(private raffleGameService: RaffleGameService) {}
 
   clickOnVerifyGameID() {
-    const gameID = this.mygameid.value as string;
+    const gameID = this.mygameid.value as number;
     // check game id
     // if correct, generate new ID and go to assign ticket
     // TODO: check if the user already have a ticket for this game
     this.raffleGameService
       .getGameByID(gameID)
       .pipe(take(1))
-      .subscribe(game => {
-        if (game[0]) {
-          if (game[0].status === 'ready') {
-            this.GoToAssignPage(game[0].collectionID);
+      .subscribe(gameDoc => {
+        const game = gameDoc[0];
+        if (game) {
+          if (game.status === 'ready' && gameDoc[0].collectionID) {
+            this.raffleGameService.AddNewUserToGame(gameDoc[0].collectionID);
             return true;
           } else {
             this.showWarning = true;
-            this.gameStatus = game[0].status;
+            this.gameStatus = game.status;
             throw new Error('Game ID already started');
           }
         } else {
@@ -163,9 +152,5 @@ export class JoinGameComponent {
           throw new Error('Game ID not valid');
         }
       });
-  }
-
-  GoToAssignPage(gameID: string | undefined) {
-    this.raffleGameService.AddNewUserToGame(gameID);
   }
 }

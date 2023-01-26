@@ -19,9 +19,7 @@ export class ProfileService {
 
   SaveProfile(userData: firebase.User | null) {
     if (userData) {
-      const profileRef = collection(this.firestore, `profiles`);
-
-      const _customId = userData.uid;
+      const profileRef = collection(this.firestore, `admin/${userData.uid}/profile`);
 
       const collectionData: Profile = {
         displayName: userData?.displayName,
@@ -30,7 +28,7 @@ export class ProfileService {
         creationTime: userData?.metadata.creationTime,
         lastSignInTime: userData?.metadata.lastSignInTime,
       };
-      const docReference = doc(profileRef, _customId);
+      const docReference = doc(profileRef);
       return setDoc(docReference, collectionData);
     } else {
       throw new Error('Auth user data was empty...');
