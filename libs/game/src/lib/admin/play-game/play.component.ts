@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { isObservable, map, Observable, take } from 'rxjs';
+import { isObservable, Observable, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
 import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
@@ -85,32 +85,32 @@ import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@ga
       <p class="mb-12 text-xl font-normal text-center text-gray-500 dark:text-gray-300">
         All the users appears below...
       </p>
-      <div class=" grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-5" *ngIf="players$ | async as players">
+      <div
+        class=" grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-8"
+        *ngIf="players$ | async as players">
         <div
           class="relative p-4"
           *ngFor="let item of players; let first = first"
           [ngClass]="{ 'new-box': first && gameDetails[0].status === 'ready', 'animate-bounce': item.win }">
           <div
-            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-green-600 text-white p-2 opacity-80 text-center rotate-12"
+            class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-green-600 text-white p-2 opacity-80 text-center rotate-12"
             *ngIf="item.win">
-            <span>Round {{ item.round }}</span> Winner!
+            <span>Winner! Round {{ item.round }}</span>
           </div>
           <div class="flex-col flex justify-center items-center" data-itemprop="item.ticketID">
             <div class="flex-shrink-0">
               <a href="#" class="relative block">
                 <img
                   alt="profil"
-                  src="https://ui-avatars.com/api/?name={{ item.name }}&size=150&"
+                  src="https://ui-avatars.com/api/?name={{ item.name }}&size=150&background={{ item.ticketID }}"
                   class="mx-auto object-cover rounded-full h-20 w-20 " />
               </a>
             </div>
             <div class="mt-2 text-center flex flex-col">
               <span class="text-lg font-medium text-gray-600 dark:text-white"> {{ item.name }} </span>
-              <span
-                class="rounded-full text-white px-3 py-1 text-xs uppercase font-medium"
-                style="background-color:{{ item.ticketID }}"
-                >{{ item.ticketID }}</span
-              >
+              <span class="rounded-full text-white px-3 py-1 text-xs uppercase font-medium bg-slate-400">{{
+                item.ticketID
+              }}</span>
             </div>
           </div>
         </div>

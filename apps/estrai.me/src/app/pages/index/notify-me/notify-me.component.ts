@@ -27,7 +27,8 @@ import { CommonModule } from '@angular/common';
 
           <div class="mt-6 sm:-mx-2">
             <a
-              href="#"
+              href="https://github.com/lucianomurr/angular-estrai.me"
+              target="_blank"
               class="inline-flex items-center justify-center w-full px-5 py-3 overflow-hidden text-white transition-colors duration-300 bg-gray-900 rounded-lg shadow sm:w-auto sm:mx-2 hover:bg-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
