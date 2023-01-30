@@ -20,10 +20,12 @@ import { AuthService } from '@auth';
             <span class="text-5xl sm:text-7xl"> together with fun </span>
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
-            This game is for people who organize a simple raffle game in a meeting or meetup! Is simple and give you the
-            ability to give away gift randomly.
+            Want to organize a simple raffle game in your meeting or meetup?
           </p>
-          <p class="text-sm text-gray-700 sm:text-base dark:text-white">Want to discover more? Play for free!</p>
+          <p class="text-sm text-gray-700 sm:text-base dark:text-white">
+            Is simple and give you the ability to give away gift randomly.
+          </p>
+          <p class="text-sm text-gray-700 sm:text-base dark:text-white">Play for free!</p>
           <div class="flex mt-8" *ngIf="authService.auth.user | async as user; else showLoginHome">
             <a
               [routerLink]="['/game']"
