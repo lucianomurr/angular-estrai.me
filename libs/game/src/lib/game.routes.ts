@@ -33,7 +33,7 @@ export const GAME_ROUTES: Routes = [
       {
         path: 'join',
         loadComponent: () => import('./player/join-game/join-game.component').then(m => m.JoinGameComponent),
-        canActivate: [AngularFireAuthGuard],
+        canActivate: [],
       },
       {
         path: 'assign/:ticketNumber',

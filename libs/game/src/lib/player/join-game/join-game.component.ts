@@ -5,6 +5,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { take } from 'rxjs';
 import { AutofocusDirective } from '../../directives/autofocus.directive';
 import { RaffleGameService } from '@game';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-join-game',
@@ -126,7 +127,11 @@ export class JoinGameComponent {
   showError = false;
   showWarning = false;
 
-  constructor(private raffleGameService: RaffleGameService) {}
+  constructor(private raffleGameService: RaffleGameService, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.mygameid.setValue(params['game']);
+    });
+  }
 
   clickOnVerifyGameID() {
     const gameID = this.mygameid.value as number;
