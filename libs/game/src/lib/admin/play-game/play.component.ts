@@ -6,6 +6,7 @@ import { isObservable, Observable, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
 import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-play-game',
@@ -22,6 +23,18 @@ import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@ga
         }">
         {{ gameDetails[0].gameID }}
       </p>
+
+      <div class="flex justify-center mb-8">
+        <qrcode
+          [qrdata]="gameQRUrl"
+          [imageSrc]="
+            'https://firebasestorage.googleapis.com/v0/b/raffle-1dd52.appspot.com/o/android-chrome-512x512.png?alt=media&token=fbfcf649-7a9a-479f-9339-1cf2d10c6877'
+          "
+          [imageHeight]="60"
+          [imageWidth]="60"
+          [width]="256"
+          [errorCorrectionLevel]="'M'"></qrcode>
+      </div>
 
       <div class="flex justify-center mb-8">
         <span
@@ -135,11 +148,13 @@ import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@ga
       }
     `,
   ],
-  imports: [CommonModule, WinnerModalComponent, CtaGameComponent],
+  imports: [CommonModule, WinnerModalComponent, CtaGameComponent, QRCodeModule],
 })
 export class PlayGameComponent implements OnInit {
   // game ID coming from the url
   gameID: string | null;
+  //qr url
+  gameQRUrl: string = 'https://estrai.me/game/join?game=';
   //collectionID
   collectionID: string | undefined;
   //object coming from firebase, this contains all the Game Information <RaffleDocument>
@@ -165,6 +180,7 @@ export class PlayGameComponent implements OnInit {
     if (gameID) {
       this.gameID = gameID;
       //set gameData$ from service
+      this.gameQRUrl += this.gameID;
       this.gameData$ = raffleGameService.getAdminGameByID(this.gameID);
     } else {
       router.navigate(['/']);
