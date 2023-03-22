@@ -36,15 +36,15 @@ export const GAME_ROUTES: Routes = [
         canActivate: [],
       },
       {
-        path: 'assign/:ticketNumber',
+        path: 'assign/:gameID/ticket/:ticketNumber',
         loadComponent: () =>
           import('./player/assign-ticket/assign-ticket.component').then(m => m.AssignTicketComponent),
-        canActivate: [AngularFireAuthGuard],
+        canActivate: [],
       },
       {
         path: 'waiting/:gameID/ticket/:ticketID',
         loadComponent: () => import('./player/waiting/waiting.component').then(m => m.WaitingComponent),
-        canActivate: [AngularFireAuthGuard],
+        canActivate: [],
       },
     ],
   },

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RaffleGameService } from '../../services';
+import { of, take } from 'rxjs';
 @Component({
   selector: 'app-assign-ticket',
   standalone: true,
@@ -22,7 +24,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
                 id="user-ticket-name"
                 [formControl]="userTicketName"
                 required
-                minlength="7"
+                minlength="2"
                 maxlength="7"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 placeholder="Your Name" />
@@ -79,11 +81,22 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class AssignTicketComponent {
   userTicketName = new FormControl('');
-  public ticketNumber: string | null;
-  constructor(private route: ActivatedRoute) {
-    this.ticketNumber = this.route.snapshot.paramMap.get('ticketNumber');
+  public ticketNumber: string;
+  public gameDocID: string;
+  constructor(private route: ActivatedRoute, private router: Router, private raffleGameService: RaffleGameService) {
+    this.ticketNumber = this.route.snapshot.paramMap.get('ticketNumber') as string;
+    this.gameDocID = this.route.snapshot.paramMap.get('gameID') as string;
   }
   clickOnAssignTicket() {
     //todo: set the user email to the ticket (only for unauthenticated user)
+    console.log(this.userTicketName.value);
+
+    if (this.userTicketName.value && this.userTicketName.valid) {
+      of(this.raffleGameService.updateTicketName(this.gameDocID, this.ticketNumber, this.userTicketName.value))
+        .pipe(take(1))
+        .subscribe(() => {
+          this.router.navigate([`game/waiting/${this.gameDocID}/ticket/${this.ticketNumber}`]);
+        });
+    }
   }
 }
