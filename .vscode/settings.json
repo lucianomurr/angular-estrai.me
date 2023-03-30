@@ -24,5 +24,7 @@
       "source.fixAll.eslint": true
     },
     "editor.formatOnSave": false
-  }
+  },
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "'Fira Code', monospace"
 }
