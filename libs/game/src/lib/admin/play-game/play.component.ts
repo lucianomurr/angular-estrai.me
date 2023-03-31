@@ -27,9 +27,6 @@ import { QRCodeModule } from 'angularx-qrcode';
       <div class="flex justify-center mb-8">
         <qrcode
           [qrdata]="gameQRUrl"
-          [imageSrc]="
-            'https://firebasestorage.googleapis.com/v0/b/raffle-1dd52.appspot.com/o/android-chrome-512x512.png?alt=media&token=fbfcf649-7a9a-479f-9339-1cf2d10c6877'
-          "
           [imageHeight]="60"
           [imageWidth]="60"
           [width]="256"
