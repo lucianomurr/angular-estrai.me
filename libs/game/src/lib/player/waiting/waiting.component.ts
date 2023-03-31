@@ -21,7 +21,7 @@ import { RaffleGameService, UserInGame } from '@game';
         </h2>
         <div
           class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-6/12 xl:3/12 pt-6 pb-6">
-          <div class="relative w-full px-4 py-6 bg-white shadow-lg dark:bg-gray-800 border border-white">
+          <div class="relative w-full px-4 py-6 bg-white dark:bg-gray-800 border border-white">
             <p class="text-sm font-semibold text-gray-700 border-b border-gray-200 w-max  dark:text-white">
               Ticket number
             </p>
