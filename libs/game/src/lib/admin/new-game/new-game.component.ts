@@ -28,7 +28,7 @@ import { RaffleDocument, RaffleGameService } from '@game';
                 <span class="block text-red-500"> Ready? </span>
               </h2>
               <div class=" lg:mt-0 lg:flex-shrink-0">
-                <div class=" md:inline-flex rounded-md shadow pt-6">
+                <div class=" md:inline-flex rounded-md pt-6">
                   <button
                     type="button"
                     (click)="createNew()"
