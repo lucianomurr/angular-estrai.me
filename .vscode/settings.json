@@ -25,6 +25,5 @@
     },
     "editor.formatOnSave": false
   },
-  "editor.fontLigatures": true,
-  "editor.fontFamily": "'Fira Code', monospace"
+  "editor.fontLigatures": true
 }
