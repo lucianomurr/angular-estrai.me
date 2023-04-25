@@ -21,10 +21,10 @@ import { RouterModule } from '@angular/router';
               class="hover:text-gray-700 dark:hover:text-white">
               About
             </a>
-            <a aria-current="page" href="#" class="hover:text-gray-700 dark:hover:text-white"> Privacy/Policy </a>
+            <!-- <a aria-current="page" href="#" class="hover:text-gray-700 dark:hover:text-white"> Privacy/Policy </a> -->
             <a
               aria-current="page"
-              href="https://github.com/lucianomurr/angular-estrai.me/issues"
+              href="https://github.com/lucianomurr/angular-estrai.me/graphs/contributors"
               target="_blank"
               class="hover:text-gray-700 dark:hover:text-white">
               Contributors
