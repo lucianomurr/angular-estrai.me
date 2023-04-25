@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@auth';
+import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [CommonModule, RouterModule],
+  providers: [ProfileService],
   template: `
     <div
       class="w-full relative z-10 flex items-center overflow-hidden bg-white dark:bg-gray-800"
@@ -24,15 +26,14 @@ import { AuthService } from '@auth';
               <h1 class="text-4xl font-medium text-gray-700">
                 {{ user.displayName }}
               </h1>
+              <small class="text-neutral-500" *ngIf="user.providerData[0]?.providerId">
+                Registered with <u>{{ user.providerData[0]?.providerId }}</u>
+              </small>
             </div>
             <div class="text-center flex flex-row mb-20 gap-4 justify-around">
               <div>
-                <p class="font-bold text-gray-700 text-xl">22</p>
-                <p class="text-gray-400">Games</p>
-              </div>
-              <div>
-                <p class="font-bold text-gray-700 text-xl">10</p>
-                <p class="text-gray-400">Creation date</p>
+                <p class="font-bold text-gray-700 text-xl">{{ games }}</p>
+                <p class="text-gray-400">Created Games</p>
               </div>
             </div>
             <div class="flex flex-col items-center">
@@ -57,11 +58,17 @@ import { AuthService } from '@auth';
   `,
   styles: [],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   disabledLogoutBtn: boolean;
+  games: number = 0;
 
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(private profileService: ProfileService, public authService: AuthService, private router: Router) {}
+
+  async ngOnInit(): Promise<void> {
     this.disabledLogoutBtn = false;
+    if (this.authService.userData) {
+      this.games = await this.profileService.GetUserCreatedGames(this.authService.userData);
+    }
   }
 
   async onClickLogout() {
