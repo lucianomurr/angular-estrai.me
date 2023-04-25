@@ -16,7 +16,7 @@ import { RaffleDocument, RaffleGameService } from '@game';
             Start HERE
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
-            Here you can create your new online raffle game to give away your prizes. To get ed, choose a name for your
+            Here you can create your new online raffle game to give away your prizes. To get started, choose a name for your
             new online game and proceed! Good luck!
           </p>
 
