@@ -57,7 +57,7 @@ import { ActivatedRoute } from '@angular/router';
           The game ID is not valid!
         </div>
         <div class="lg:mt-0 lg:flex-shrink-0">
-          <div class="mt-12 md:inline-flex rounded-md shadow">
+          <div class="mt-12 md:inline-flex md:gap-2 rounded-md shadow">
             <div class=" relative mt-6">
               <input
                 type="number"
@@ -76,7 +76,7 @@ import { ActivatedRoute } from '@angular/router';
                 type="button"
                 class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 (click)="clickOnVerifyGameID()">
-                Enter now!
+                Join now!
               </button>
             </div>
           </div>
@@ -91,7 +91,7 @@ import { ActivatedRoute } from '@angular/router';
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6">
+            class="w-6 h-6 dark:stroke-white">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -103,19 +103,6 @@ import { ActivatedRoute } from '@angular/router';
           Explain how the extraction works...
           <span class="font-bold text-red-800"> ” </span>
         </p>
-        <div class="flex items-center justify-center mt-8">
-          <a href="#" class="relative block">
-            <img
-              alt="profil"
-              src="https://ui-avatars.com/api/?name=Luciano"
-              class="mx-auto object-cover rounded-full h-10 w-10 " />
-          </a>
-          <div class="flex items-center justify-center ml-2">
-            <span class="mr-2 text-lg font-semibold text-red-600"> Luciano </span>
-            <span class="text-xl font-light text-gray-400"> / </span>
-            <span class="ml-2 text-gray-400 text-md"> </span>
-          </div>
-        </div>
       </div>
     </div>
   `,
