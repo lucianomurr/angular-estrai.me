@@ -17,7 +17,7 @@ import { AuthService } from '@auth';
             <img class="h-38" src="/assets/estrai.me.svg" alt="Workflow" />
           </a>
         </div>
-        <div class="flex items-center" *ngIf="this.router.url !== '/profile'">
+        <div class="flex items-center">
           <div *ngIf="authService.auth.user | async as user">
             <a routerLink="/profile">
               <img src="{{ user.photoURL }}" alt="profile image" class="w-12 rounded-full" />
