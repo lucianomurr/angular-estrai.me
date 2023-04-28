@@ -13,9 +13,12 @@ import { ProfileService } from './profile.service';
     <div
       class="w-full relative z-10 flex items-center overflow-hidden bg-white dark:bg-gray-800"
       *ngIf="authService.auth.user | async as user">
-      <div class="container relative flex px-2 py-16 mx-auto items-center flex-col">
+      <div class="container relative flex px-2 py-6 mx-auto items-center flex-col">
+        <h1 class="text-6xl font-black leading-none m-10 md:m-6 text-gray-800 font-bebas-neue dark:text-white">
+          My Profile
+        </h1>
         <div class="p-5">
-          <div class="p-16 bg-white shadow mt-24 rounded-xl">
+          <div class="p-16 bg-white shadow  rounded-xl">
             <div class="relative mb-10">
               <div
                 class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2x flex items-center justify-center text-indigo-500">
