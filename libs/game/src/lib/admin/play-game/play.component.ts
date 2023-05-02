@@ -93,7 +93,7 @@ import { QRCodeModule } from 'angularx-qrcode';
         [status]="gameDetails[0].status" />
 
       <p class="mb-12 text-xl font-normal text-center text-gray-500 dark:text-gray-300">
-        All the users appears below...
+        All users will appear below...
       </p>
       <div
         class=" grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-8"

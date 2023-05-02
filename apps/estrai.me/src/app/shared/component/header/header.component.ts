@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
-import { take } from 'rxjs/internal/operators/take';
-import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.component';
+import { AuthService } from '@auth';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, MobileSidenavComponent],
+  imports: [CommonModule, RouterModule],
   providers: [ToggleService],
   template: `
     <header class="z-30 flex items-center w-full h-24 sm:h-32">
@@ -19,40 +18,17 @@ import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.componen
           </a>
         </div>
         <div class="flex items-center">
-          <button class="flex flex-col ml-4" (click)="toggleService.updateData(!menuIsOpened())">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
+          <div *ngIf="authService.auth.user | async as user">
+            <a routerLink="/profile">
+              <img src="{{ user.photoURL }}" alt="profile image" class="w-12 rounded-full" />
+            </a>
+          </div>
         </div>
       </div>
     </header>
-    <!-- only mobile sidenav -->
-    <app-mobile-sidenav [showSidebar]="toggleService.sidenav$ | async" (closeSidenav)="closeMenuIfOpened()" />
-    <!-- /sidenav -->
   `,
   styles: [],
 })
 export class HeaderComponent {
-  constructor(public toggleService: ToggleService, private router: Router) {
-    router.events.subscribe(() => {
-      this.closeMenuIfOpened();
-    });
-  }
-
-  menuIsOpened() {
-    let toReturn = false;
-    this.toggleService.sidenav$.pipe(take(1)).subscribe(sideNavStatus => (toReturn = sideNavStatus));
-    return toReturn;
-  }
-
-  closeMenuIfOpened() {
-    if (this.menuIsOpened()) this.toggleService.updateData(!this.menuIsOpened());
-  }
+  constructor(public toggleService: ToggleService, public router: Router, public authService: AuthService) {}
 }

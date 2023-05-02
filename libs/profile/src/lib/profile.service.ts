@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
-import { collection } from 'firebase/firestore';
+import { collection, getCountFromServer, query, where } from 'firebase/firestore';
 
 interface Profile {
   displayName: string | null;
@@ -33,5 +33,12 @@ export class ProfileService {
     } else {
       throw new Error('Auth user data was empty...');
     }
+  }
+
+    async GetUserCreatedGames(userData: firebase.User): Promise<number> {
+        const coll = collection(this.firestore, 'players');
+        const q = query(coll, where('userUID', '==', userData.uid));
+        const res = await getCountFromServer(q);
+        return res.data().count;
   }
 }
