@@ -8,13 +8,19 @@ import { AuthService } from './auth.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <div class="p-8 lg:w-1/2 mx-auto">
-      <div class="bg-white rounded-t-lg p-8">
-        <p class="text-center text-sm text-gray-400 font-light">Sign up with</p>
-        <div>
-          <div class="flex items-center justify-center space-x-4 mt-3">
+    <div class="flex flex-col items-center bg-white dark:bg-gray-900 py-6 mx-auto flex flex-col justify-center">
+      <div class="p-8 w-2/3">
+        <h1
+          class="text-center text-6xl font-black leading-none m-10 my-10 mx-0 text-gray-800 font-bebas-neue dark:text-white">
+          Sign In
+        </h1>
+        <p class="text-red-600 dark:text-red-400 text-3xl text-center font-black pb-10">
+          Your game up and running in no time, for free!
+        </p>
+        <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center justify-center mt-3 gap-5">
             <button
-              class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-gray-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+              class="w-full flex items-center justify-center py-4 px-14 text-xl uppercase rounded-xl bg-white hover:bg-gray-100 text-gray-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
               (click)="loginWithGithub()">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6 mr-3">
                 <path
@@ -24,7 +30,7 @@ import { AuthService } from './auth.service';
               Github
             </button>
             <button
-              class="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-gray-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+              class="w-full flex items-center justify-center py-4 px-14 text-xl uppercase rounded-xl bg-white hover:bg-gray-100 text-gray-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
               (click)="loginWithGoogle()">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3" viewBox="0 0 48 48">
                 <path
@@ -42,10 +48,11 @@ import { AuthService } from './auth.service';
               </svg>
               Google
             </button>
+            <span class="mt-20 w-20 h-2 mb-12 bg-gray-800 dark:bg-white"> </span>
           </div>
         </div>
       </div>
-      <router-outlet />
+      <!-- keep it for future implementations <router-outlet /> -->
     </div>
   `,
   styles: [],
