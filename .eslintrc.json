@@ -1,6 +1,6 @@
 {
   "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:@typescript-eslint/recommended"],
-  "plugins": ["prettier", "@typescript-eslint", "@nrwl/nx"],
+  "plugins": ["prettier", "@typescript-eslint", "@nx"],
   "rules": {
     "eqeqeq": "error",
     "no-console": "warn",
@@ -83,7 +83,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,

@@ -7,15 +7,16 @@ export default {
   extensionsToTreatAsEsm: ['.ts'],
   resolver: 'jest-preset-angular/build/resolvers/ng-jest-resolver.js',
   setupFilesAfterEnv: ['./jest.setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-      useESM: true,
-    },
-  },
+  globals: {},
   transform: {
-    '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
+    '^.+\\.(ts|js|mjs|html|svg)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+        useESM: true,
+      },
+    ],
   },
 
   snapshotSerializers: [
