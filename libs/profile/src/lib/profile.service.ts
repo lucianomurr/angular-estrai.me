@@ -35,10 +35,10 @@ export class ProfileService {
     }
   }
 
-    async GetUserCreatedGames(userData: firebase.User): Promise<number> {
-        const coll = collection(this.firestore, 'players');
-        const q = query(coll, where('userUID', '==', userData.uid));
-        const res = await getCountFromServer(q);
-        return res.data().count;
+  async GetUserCreatedGames(userData: firebase.User): Promise<number> {
+    const coll = collection(this.firestore, 'players');
+    const q = query(coll, where('userUID', '==', userData.uid));
+    const res = await getCountFromServer(q);
+    return res.data().count;
   }
 }

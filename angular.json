@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "auth": "libs/auth",
-    "estrai.me": "apps/estrai.me",
-    "game": "libs/game",
-    "profile": "libs/profile"
-  }
-}
