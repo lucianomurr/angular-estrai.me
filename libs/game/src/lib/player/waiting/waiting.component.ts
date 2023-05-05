@@ -7,10 +7,10 @@ import { Timestamp } from '@angular/fire/firestore';
 import { RaffleGameService, UserInGame } from '@game';
 
 @Component({
-    selector: 'app-waiting',
-    standalone: true,
-    imports: [CommonModule],
-    template: `
+  selector: 'app-waiting',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
     <div class="bg-white dark:bg-gray-800">
       <div
         class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20"
@@ -21,11 +21,12 @@ import { RaffleGameService, UserInGame } from '@game';
         </h2>
         <div
           class="m-auto mt-3 overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-6/12 xl:3/12 pt-6 pb-6"
-          [ngClass]="{ 'bg-green-100 dark:bg-green-700': ticketData[0].win }"
-          >
-          <div class="relative w-full px-4 py-6 bg-white"
+          [ngClass]="{ 'bg-green-100 dark:bg-green-700': ticketData[0].win }">
+          <div
+            class="relative w-full px-4 py-6 bg-white"
             [ngClass]="{ 'bg-green-100 dark:bg-green-700': ticketData[0].win }">
-            <p class="text-sm font-semibold text-gray-700 border-b border-gray-600 dark:border-gray-200 w-max dark:text-gray-100">
+            <p
+              class="text-sm font-semibold text-gray-700 border-b border-gray-600 dark:border-gray-200 w-max dark:text-gray-100">
               Ticket number
             </p>
             <div class="flex my-6 space-x-2 justify-center">
@@ -59,31 +60,31 @@ import { RaffleGameService, UserInGame } from '@game';
       </div>
     </div>
   `,
-    styles: [],
+  styles: [],
 })
 export class WaitingComponent {
-    public gameID: string;
-    public ticketID: string;
-    public ticketData$: Observable<UserInGame[]> | undefined;
+  public gameID: string;
+  public ticketID: string;
+  public ticketData$: Observable<UserInGame[]> | undefined;
 
-    constructor(private route: ActivatedRoute, public raffleGameService: RaffleGameService) {
-        this.gameID = this.route.snapshot.paramMap.get('gameID') || '';
-        this.ticketID = this.route.snapshot.paramMap.get('ticketID') || '';
+  constructor(private route: ActivatedRoute, public raffleGameService: RaffleGameService) {
+    this.gameID = this.route.snapshot.paramMap.get('gameID') || '';
+    this.ticketID = this.route.snapshot.paramMap.get('ticketID') || '';
 
-        this.ticketData$ = raffleGameService.getUserTicketDetail(this.gameID, this.ticketID);
+    this.ticketData$ = raffleGameService.getUserTicketDetail(this.gameID, this.ticketID);
 
-        this.ticketData$.pipe(take(1)).subscribe(ticket => {
-            if (ticket[0].win) {
-                navigator.vibrate([100, 200, 100, 200]);
-            }
-        });
+    this.ticketData$.pipe(take(1)).subscribe(ticket => {
+      if (ticket[0].win) {
+        navigator.vibrate([100, 200, 100, 200]);
+      }
+    });
+  }
+
+  timestampToDate(timestamp: Timestamp | Date): Date {
+    if (timestamp instanceof Timestamp) {
+      return new Date(+timestamp.seconds * 1000);
+    } else {
+      return timestamp;
     }
-
-    timestampToDate(timestamp: Timestamp | Date): Date {
-        if (timestamp instanceof Timestamp) {
-            return new Date(+timestamp.seconds * 1000);
-        } else {
-            return timestamp;
-        }
-    }
+  }
 }
