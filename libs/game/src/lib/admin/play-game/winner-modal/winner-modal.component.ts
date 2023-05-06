@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { UserInGame } from '../../../interface/player-user.interface';
 import { ModalService } from '@game';
 
 @Component({
   selector: 'app-winner-modal',
   standalone: true,
-  imports: [CommonModule],
-  providers: [ModalService],
+  imports: [CommonModule, NgOptimizedImage],
+  providers: [],
   template: `
     <section [class.open]="display" class="fixed z-10 inset-0 overflow-y-auto" (click)="close()">
       <div
@@ -19,16 +19,14 @@ import { ModalService } from '@game';
           aria-modal="true"
           aria-labelledby="modal-headline">
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <!--
-            collectionID: "H5WuRJ48f78OJhT78MUA"
-            joinDate: nt {seconds: 1683318106, nanoseconds: 928000000}
-            name: "massimo"
-            round: 1
-            ticketID: "ddb461"
-            win: true
-          -->
-            {{ user?.name }}
-            {{ user?.ticketID }}
+            <!--body-->
+            <div class="text-center p-5 flex-auto justify-center">
+              <img ngSrc="/assets/congratulations-icon.svg" width="600" height="120" />
+              <h2 class="text-8xl font-bold py-4 text-green-500">{{ user?.ticketID }}</h2>
+              <p class="text-xl text-gray-500 px-8">
+                <b>{{ user?.name | uppercase }}</b> you win round: {{ user?.round }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
