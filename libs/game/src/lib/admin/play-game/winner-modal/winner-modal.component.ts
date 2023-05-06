@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { UserInGame } from '../../../interface/player-user.interface';
-import { ModalService } from '@game';
 
 @Component({
   selector: 'app-winner-modal',
@@ -9,7 +8,7 @@ import { ModalService } from '@game';
   imports: [CommonModule, NgOptimizedImage],
   providers: [],
   template: `
-    <section [class.open]="display" class="fixed z-10 inset-0 overflow-y-auto" (click)="close()">
+    <section class="fixed z-10 inset-0 overflow-y-auto" (click)="close()">
       <div
         class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0 bg-gray-900 bg-opacity-40">
         <div
@@ -35,14 +34,6 @@ import { ModalService } from '@game';
   styles: [
     `
       section {
-        visibility: hidden;
-        opacity: 0;
-
-        &.open {
-          visibility: inherit;
-          opacity: 1;
-        }
-
         transition: opacity 250ms ease-in;
       }
     `,
@@ -56,10 +47,16 @@ export class WinnerModalComponent implements OnInit, OnDestroy {
 
   constructor() {}
 
-  constructor(private modalService: ModalService<T>) {}
+  ngOnInit(): void {
+    console.log('Modal init');
+  }
 
-  async close(): Promise<void> {
-    this.display = false;
+  close() {
+    this.closeMeEvent.emit();
+  }
+  confirm() {
+    this.confirmEvent.emit();
+  }
 
   ngOnDestroy(): void {
     console.log(' Modal destroyed');

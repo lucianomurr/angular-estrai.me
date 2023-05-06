@@ -127,7 +127,7 @@ import { ConfettiService } from '../../services/confetti.service';
         </div>
       </div>
     </div>
-    <app-winner-modal />
+    <div #modal></div>
   `,
   styles: [
     `
