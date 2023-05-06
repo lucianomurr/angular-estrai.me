@@ -101,7 +101,7 @@ import { QRCodeModule } from 'angularx-qrcode';
         <div
           class="relative p-4"
           *ngFor="let item of players; let first = first"
-          [ngClass]="{ 'new-box': first && gameDetails[0].status === 'ready', 'animate-bounce': item.win }">
+          [ngClass]="{ 'new-box': first && gameDetails[0].status === 'ready' }">
           <div
             class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-green-600 text-white p-2 opacity-80 text-center rotate-12"
             *ngIf="item.win">
