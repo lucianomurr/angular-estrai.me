@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { isObservable, Observable, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
-import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
+import { AdminService, ModalService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
 import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
@@ -146,6 +146,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     `,
   ],
   imports: [CommonModule, WinnerModalComponent, CtaGameComponent, QRCodeModule],
+  providers: [ModalService],
 })
 export class PlayGameComponent implements OnInit {
   // game ID coming from the url
@@ -169,7 +170,8 @@ export class PlayGameComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private raffleGameService: RaffleGameService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private modalSerice: ModalService
   ) {
     //set game id from router
     const gameID = this.route.snapshot.paramMap.get('gameID');
@@ -232,5 +234,9 @@ export class PlayGameComponent implements OnInit {
 
   getDate(time: Date) {
     console.log(time);
+  }
+
+  createModal(user: UserInGame) {
+
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalService } from '../../../services/modal.service';
+import { UserInGame } from '../../../interface/player-user.interface';
+import { ModalService } from '@game';
 
 @Component({
   selector: 'app-winner-modal',
@@ -18,7 +19,16 @@ import { ModalService } from '../../../services/modal.service';
           aria-modal="true"
           aria-labelledby="modal-headline">
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <ng-content></ng-content>
+            <!--
+            collectionID: "H5WuRJ48f78OJhT78MUA"
+            joinDate: nt {seconds: 1683318106, nanoseconds: 928000000}
+            name: "massimo"
+            round: 1
+            ticketID: "ddb461"
+            win: true
+          -->
+            {{ user?.name }}
+            {{ user?.ticketID }}
           </div>
         </div>
       </div>
@@ -40,16 +50,20 @@ import { ModalService } from '../../../services/modal.service';
     `,
   ],
 })
-export class WinnerModalComponent<T> {
-  display = false;
+export class WinnerModalComponent implements OnInit, OnDestroy {
+  @Input() user: UserInGame | null;
+  @Input() round: number | null;
+  @Output() closeMeEvent = new EventEmitter();
+  @Output() confirmEvent = new EventEmitter();
+
+  constructor() {}
 
   constructor(private modalService: ModalService<T>) {}
 
   async close(): Promise<void> {
     this.display = false;
 
-    setTimeout(async () => {
-      await this.modalService.close();
-    }, 300);
+  ngOnDestroy(): void {
+    console.log(' Modal destroyed');
   }
 }
