@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { isObservable, Observable, take } from 'rxjs';
+import { isObservable, Observable, Subscription, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
 import { AdminService, ModalService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ConfettiService } from '../../services/confetti.service';
 
 @Component({
   selector: 'app-play-game',
@@ -146,7 +147,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     `,
   ],
   imports: [CommonModule, WinnerModalComponent, CtaGameComponent, QRCodeModule],
-  providers: [ModalService],
+  providers: [ModalService, ConfettiService],
 })
 export class PlayGameComponent implements OnInit {
   // game ID coming from the url
@@ -166,12 +167,17 @@ export class PlayGameComponent implements OnInit {
   //numbers of round of the raffle
   round = 0;
 
+  @ViewChild('modal', { read: ViewContainerRef })
+  entry!: ViewContainerRef;
+  sub!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private raffleGameService: RaffleGameService,
     private adminService: AdminService,
-    private modalSerice: ModalService
+    private modalService: ModalService,
+    private confettiService: ConfettiService
   ) {
     //set game id from router
     const gameID = this.route.snapshot.paramMap.get('gameID');
@@ -217,6 +223,8 @@ export class PlayGameComponent implements OnInit {
 
       this.adminService.defineNewWinner(this.players$, this.round).then(result => {
         if (result && this.collectionID && this.gameID) {
+          this.createModal(result as UserInGame);
+          this.confettiService.fireworks();
           this.raffleGameService.updateUserTicket(this.collectionID, result as UserInGame, this.round, this.gameID);
         } else {
           throw new Error('Something went wrong...');
@@ -237,6 +245,8 @@ export class PlayGameComponent implements OnInit {
   }
 
   createModal(user: UserInGame) {
-
+    this.sub = this.modalService.openModal(this.entry, user).subscribe(v => {
+      //your logic
+    });
   }
 }

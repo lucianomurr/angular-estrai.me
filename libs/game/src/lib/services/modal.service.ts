@@ -1,45 +1,33 @@
-import {
-  ApplicationRef,
-  ComponentFactoryResolver,
-  ComponentRef,
-  EmbeddedViewRef,
-  Injectable,
-  Injector,
-  Type,
-} from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
+import { WinnerModalComponent } from '../admin/play-game/winner-modal/winner-modal.component';
+import { Subject } from 'rxjs';
+import { UserInGame } from '../interface/player-user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ModalService<T> {
-  private componentRef: ComponentRef<T> | undefined;
+export class ModalService {
+  private componentRef!: ComponentRef<WinnerModalComponent>;
+  private componentSubscriber!: Subject<string>;
+  constructor(private resolver: ComponentFactoryResolver) {}
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private appRef: ApplicationRef,
-    private injector: Injector
-  ) {}
-
-  async open(component: Type<T>): Promise<void> {
-    if (this.componentRef) {
-      return;
-    }
-
-    this.componentRef = this.componentFactoryResolver.resolveComponentFactory<T>(component).create(this.injector);
-    this.appRef.attachView(this.componentRef.hostView);
-
-    const domElem = (this.componentRef.hostView as EmbeddedViewRef<HTMLHtmlElement>).rootNodes[0] as HTMLElement;
-    document.body.appendChild(domElem);
+  openModal(entry: ViewContainerRef, user: UserInGame) {
+    let factory = this.resolver.resolveComponentFactory(WinnerModalComponent);
+    this.componentRef = entry.createComponent(factory);
+    this.componentRef.instance.user = user;
+    this.componentRef.instance.closeMeEvent.subscribe(() => this.closeModal());
+    this.componentRef.instance.confirmEvent.subscribe(() => this.confirm());
+    this.componentSubscriber = new Subject<string>();
+    return this.componentSubscriber.asObservable();
   }
 
-  async close(): Promise<void> {
-    if (!this.componentRef) {
-      return;
-    }
-
-    this.appRef.detachView(this.componentRef.hostView);
+  closeModal() {
+    this.componentSubscriber.complete();
     this.componentRef.destroy();
+  }
 
-    this.componentRef = undefined;
+  confirm() {
+    this.componentSubscriber.next('confirm');
+    this.closeModal();
   }
 }
