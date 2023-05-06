@@ -5,6 +5,7 @@ import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { ProfileService } from '@profile';
+import { FirebaseError } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
@@ -29,51 +30,62 @@ export class AuthService {
     //implement the login method
     return false;
   }
+
   logout() {
     this.auth.signOut();
     this.router.navigate(['/']);
     return;
   }
 
+  // WIP
+
   // Sign up with email/password
-  SignUp(email: string, password: string) {
-    return this.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(result => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
-      })
-      .catch(error => {
-        window.alert(error.message);
-      });
-  }
+  // SignUp(email: string, password: string) {
+  //   return this.auth
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then(result => {
+  //       /* Call the SendVerificaitonMail() function when new user sign
+  //       up and returns promise */
+  //       this.SendVerificationMail();
+  //       this.SetUserData(result.user);
+  //     })
+  //     .catch(error => {
+  //       window.alert(error.message);
+  //     });
+  // }
 
-  // Send email verfificaiton when new user sign up
-  async SendVerificationMail() {
-    ((await this.auth.currentUser) as firebase.User).sendEmailVerification().then(() => {
-      return true;
-    });
+  // // Send email verfificaiton when new user sign up
+  // async SendVerificationMail() {
+  //   ((await this.auth.currentUser) as firebase.User).sendEmailVerification().then(() => {
+  //     return true;
+  //   });
 
-    // return this.auth.currentUser
-    //   .then((u:firebase.User) => u.sendEmailVerification())
-    //   .then(() => {
-    //     this.router.navigate(['auth/log-in']);
-    //   });
-  }
+  //   // return this.auth.currentUser
+  //   //   .then((u:firebase.User) => u.sendEmailVerification())
+  //   //   .then(() => {
+  //   //     this.router.navigate(['auth/log-in']);
+  //   //   });
+  // }
 
   // Sign in with Google
   GoogleAuth() {
-    this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
-      this.router.navigate(['/']);
-    });
+    this.AuthLogin(new auth.GoogleAuthProvider())
+      .then(() => {
+        this.router.navigate(['/']);
+      })
+      .catch(err => {
+        this.AuthError(err);
+      });
   }
   // Sign in with Google
   GithubAuth() {
-    this.AuthLogin(new auth.GithubAuthProvider()).then(() => {
-      this.router.navigate(['/']);
-    });
+    this.AuthLogin(new auth.GithubAuthProvider())
+      .then(() => {
+        this.router.navigate(['/']);
+      })
+      .catch(err => {
+        this.AuthError(err);
+      });
   }
   // Auth logic to run auth providers
   AuthLogin(provider: firebase.auth.AuthProvider | auth.GoogleAuthProvider) {
@@ -82,7 +94,16 @@ export class AuthService {
       this.profileService.SaveProfile(result.user);
     });
   }
+
   SetUserData(user: firebase.User | null) {
     this.userData = user;
+  }
+  // Handle login error
+  AuthError(err: FirebaseError) {
+    if (err?.code === 'auth/account-exists-with-different-credential') {
+      return alert('This email is already registered with a different provider!');
+    }
+
+    return alert('Something went wrong, please again later!');
   }
 }

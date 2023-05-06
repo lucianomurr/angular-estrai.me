@@ -13,13 +13,13 @@ export const AUTH_ROUTES: Routes = [
         redirectTo: 'log-in',
       },
       {
-        path: 'sign-up',
-        loadComponent: () => import('./sign-up/sign-up.component').then(m => m.SignUpComponent),
-      },
-      {
         path: 'log-in',
         loadComponent: () => import('./log-in/log-in.component').then(m => m.LogInComponent),
       },
+      // {
+      //   path: 'sign-up',
+      //   loadComponent: () => import('./sign-up/sign-up.component').then(m => m.SignUpComponent),
+      // },
     ],
   },
 ];
