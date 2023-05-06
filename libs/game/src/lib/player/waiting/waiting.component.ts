@@ -23,20 +23,20 @@ import { RaffleGameService, UserInGame } from '@game';
           class="m-auto mt-3 overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-6/12 xl:3/12 pt-6 pb-6"
           [ngClass]="{ 'bg-green-100 dark:bg-green-700': ticketData[0].win }">
           <div
-            class="relative w-full px-4 py-6 bg-white"
-            [ngClass]="{ 'bg-green-100 dark:bg-green-700': ticketData[0].win }">
-            <p
-              class="text-sm font-semibold text-gray-700 border-b border-gray-600 dark:border-gray-200 w-max dark:text-gray-100">
+            class="relative w-full px-4 py-6 rounded"
+            [ngClass]="{
+              'bg-green-100 dark:bg-green-700': ticketData[0].win,
+              'bg-white': !ticketData[0].win
+            }">
+            <p class="{{ ticketTextClass }} text-sm font-semibold border-b border-gray-600 dark:border-gray-200 w-max">
               Ticket number
             </p>
             <div class="flex my-6 space-x-2 justify-center">
-              <p
-                class="text-8xl font-bold text-black dark:text-white "
-                [ngClass]="{ 'text-green-600': ticketData[0].win }">
+              <p class="text-8xl font-bold {{ ticketTextClass }}" [ngClass]="{ 'text-green-600': ticketData[0].win }">
                 {{ ticketData[0].ticketID }}
               </p>
             </div>
-            <div class="dark:text-gray-100">
+            <div class="{{ ticketTextClass }}">
               <div
                 class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-600 dark:border-gray-200 md:space-x-24">
                 <p>Created at</p>
@@ -65,16 +65,19 @@ import { RaffleGameService, UserInGame } from '@game';
 export class WaitingComponent {
   public gameID: string;
   public ticketID: string;
+  public ticketTextClass: string;
   public ticketData$: Observable<UserInGame[]> | undefined;
 
   constructor(private route: ActivatedRoute, public raffleGameService: RaffleGameService) {
     this.gameID = this.route.snapshot.paramMap.get('gameID') || '';
     this.ticketID = this.route.snapshot.paramMap.get('ticketID') || '';
+    this.ticketTextClass = 'text-gray-700 dark:text-gray-900';
 
     this.ticketData$ = raffleGameService.getUserTicketDetail(this.gameID, this.ticketID);
 
     this.ticketData$.pipe(take(1)).subscribe(ticket => {
       if (ticket[0].win) {
+        this.ticketTextClass = 'text-black dark:text-gray-100';
         navigator.vibrate([100, 200, 100, 200]);
       }
     });
