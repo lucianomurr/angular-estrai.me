@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 
         <div class="flex flex-col items-center mt-6 xl:items-start xl:w-1/2 xl:mt-0">
           <h2 class="text-3xl font-semibold tracking-tight text-gray-800 xl:text-4xl dark:text-white">
-            Want to improve estrai.me?
+            Do you want to contribute to the project?
           </h2>
 
           <p class="block max-w-2xl mt-4 text-gray-500 dark:text-gray-300">

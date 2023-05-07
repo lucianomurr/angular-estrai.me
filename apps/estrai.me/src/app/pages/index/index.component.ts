@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardsComponent } from './cards/cards.component';
 import { NotifyMeComponent } from './notify-me/notify-me.component';
@@ -8,7 +8,7 @@ import { AuthService } from '@auth';
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardsComponent, NotifyMeComponent],
+  imports: [CommonModule, RouterModule, CardsComponent, NotifyMeComponent, NgOptimizedImage],
   template: `
     <div class="relative z-10 flex items-center overflow-hidden bg-white dark:bg-gray-800">
       <div class="container relative flex px-6 py-16 mx-auto">
@@ -16,14 +16,14 @@ import { AuthService } from '@auth';
           <span class="w-20 h-2 mb-12 bg-gray-800 dark:bg-white"> </span>
           <h1
             class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
-            Play
-            <span class="text-5xl sm:text-7xl"> together with fun </span>
+            Raffle Game
+            <span class="text-5xl sm:text-7xl"> for your live event! </span>
           </h1>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
-            Want to organize a simple raffle game in your meeting or meetup?
+            Do you want to organize a Raffle game in your meeting or meetup?
           </p>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
-            Is simple and give you the ability to give away gift randomly.
+            Estrai.me is simple to use and allows to assign price randomly.
           </p>
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">Play for free!</p>
           <div class="flex mt-8" *ngIf="authService.auth.user | async as user; else showLoginHome">
@@ -55,7 +55,12 @@ import { AuthService } from '@auth';
           </ng-template>
         </div>
         <div class="relative hidden sm:block sm:w-1/3 lg:w-3/5">
-          <img src="./assets/undraw_winners.svg" class="max-w-xs m-auto md:max-w-sm" />
+          <img
+            ngSrc="./assets/undraw_winners.svg"
+            class="max-w-xs m-auto md:max-w-sm"
+            width="384"
+            height="387"
+            priority />
         </div>
       </div>
     </div>
