@@ -57,7 +57,7 @@ import { ActivatedRoute } from '@angular/router';
           The game ID is not valid!
         </div>
         <div class="lg:mt-0 lg:flex-shrink-0">
-          <div class="mt-12 md:inline-flex md:gap-2 rounded-md shadow">
+          <div class="mt-12 md:inline-flex md:gap-2 rounded-md">
             <div class=" relative mt-6">
               <input
                 type="number"
@@ -67,7 +67,7 @@ import { ActivatedRoute } from '@angular/router';
                 minlength="6"
                 maxlength="6"
                 autocomplete="off"
-                class=" rounded-lg border-transparent flex-1 appearance-none text-center border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                class=" rounded-lg border-transparent flex-1 appearance-none text-center border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 placeholder="game id eg: 001122"
                 [autofocus]="true" />
             </div>

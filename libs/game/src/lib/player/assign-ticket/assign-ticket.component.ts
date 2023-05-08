@@ -17,16 +17,16 @@ import { of, take } from 'rxjs';
           <span class="block text-red-600"> {{ ticketNumber }} </span>
         </h2>
         <div class="lg:mt-0 lg:flex-shrink-0">
-          <div class="mt-12 inline-flex rounded-md shadow">
-            <div class=" relative ">
+          <div class="mt-12 inline-flex rounded-md md:gap-2">
+            <div class="relative">
               <input
                 type="text"
                 id="user-ticket-name"
                 [formControl]="userTicketName"
                 required
                 minlength="2"
-                maxlength="7"
-                class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                maxlength="25"
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 placeholder="Your Name" />
             </div>
             <div class="relative">
@@ -48,8 +48,7 @@ import { of, take } from 'rxjs';
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6">
+            class="w-6 h-6 stroke-black dark:stroke-white">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
