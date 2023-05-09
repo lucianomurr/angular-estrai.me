@@ -7,17 +7,25 @@ jobs:
   build_and_preview:
     # if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-      - run: yarn
-      - run: git fetch --no-tags --prune --depth=5 origin main
-      - run: |
+          node-version-file: .node-version
+          cache: yarn
+      - name: Install
+        run: yarn install --frozen-lockfile --non-interactive
+      - name: Debug
+        run: |
           echo "BASE: ${{ env.NX_BASE }}"
           echo "HEAD: ${{ env.NX_HEAD }}"
-      - run: npx nx affected --target=build --parallel=3 --base=origin/main
+      - name: Build
+        run: npx nx build estrai.me
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
