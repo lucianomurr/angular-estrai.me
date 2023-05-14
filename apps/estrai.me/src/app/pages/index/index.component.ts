@@ -65,5 +65,8 @@ import { AuthService } from '@auth';
   styles: [],
 })
 export class IndexComponent {
-  constructor(public authService: AuthService) {}
+
+  constructor(public authService: AuthService) {
+  }
+
 }

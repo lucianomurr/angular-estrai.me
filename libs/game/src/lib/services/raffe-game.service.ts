@@ -150,14 +150,15 @@ export class RaffleGameService {
     return from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
   }
 
-  updateTicketName(gameCollectionID: string, ticketID: string, name: string) {
+  updateTicketName(gameCollectionID: string, ticketID: string, name: string, tokenNotification: string) {
     this.getTicketCollectionID(gameCollectionID, ticketID)
       .pipe(take(1))
       .subscribe(ticket => {
         console.log(ticket[0].collectionID);
         const ticketCollection = doc(this.firestore, `players/${gameCollectionID}/users/${ticket[0].collectionID}`);
         const ticketData = {
-          name: name,
+          name,
+          tokenNotification
         };
         return updateDoc(ticketCollection, ticketData);
       });

@@ -1,4 +1,4 @@
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
@@ -12,6 +12,8 @@ import { PreloadAllModules, provideRouter, withPreloading } from '@angular/route
 import { APP_ROUTES } from './app/app.routes';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { AuthService } from '@auth';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -27,5 +29,10 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideAnalytics(() => getAnalytics())),
     importProvidersFrom(AuthService),
+    importProvidersFrom(ServiceWorkerModule.register('combined-sw.js', { enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000' })),
+    importProvidersFrom(AngularFireMessagingModule)
   ],
 });

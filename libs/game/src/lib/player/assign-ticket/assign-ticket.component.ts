@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RaffleGameService } from '../../services';
-import { of, take } from 'rxjs';
+import { catchError, of, take, tap } from "rxjs";
+import { AngularFireMessaging } from "@angular/fire/compat/messaging";
 @Component({
   selector: 'app-assign-ticket',
   standalone: true,
@@ -81,22 +82,36 @@ import { of, take } from 'rxjs';
 })
 export class AssignTicketComponent {
   userTicketName = new FormControl('');
+  tokenNotification: string = '';
   public ticketNumber: string;
   public gameDocID: string;
-  constructor(private route: ActivatedRoute, private router: Router, private raffleGameService: RaffleGameService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private raffleGameService: RaffleGameService,
+    private afMessaging: AngularFireMessaging) {
     this.ticketNumber = this.route.snapshot.paramMap.get('ticketNumber') as string;
     this.gameDocID = this.route.snapshot.paramMap.get('gameID') as string;
+    this.requestPermission();
   }
   clickOnAssignTicket() {
     //todo: set the user email to the ticket (only for unauthenticated user)
     console.log(this.userTicketName.value);
 
     if (this.userTicketName.value && this.userTicketName.valid) {
-      of(this.raffleGameService.updateTicketName(this.gameDocID, this.ticketNumber, this.userTicketName.value))
+      of(this.raffleGameService.updateTicketName(this.gameDocID, this.ticketNumber, this.userTicketName.value, this.tokenNotification))
         .pipe(take(1))
         .subscribe(() => {
           this.router.navigate([`game/waiting/${this.gameDocID}/ticket/${this.ticketNumber}`]);
         });
     }
+  }
+
+  requestPermission() {
+    this.afMessaging.requestToken.subscribe(token => {
+      if(token){
+        this.tokenNotification = token
+      }
+    });
   }
 }

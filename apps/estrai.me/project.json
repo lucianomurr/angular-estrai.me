@@ -18,7 +18,13 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/estrai.me/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],
+        "assets": [
+          "apps/estrai.me/src/favicon.ico",
+          "apps/estrai.me/src/assets",
+          "apps/estrai.me/src/manifest.webmanifest",
+          "apps/estrai.me/src/combined-sw.js",
+          "apps/estrai.me/src/firebase-messaging-sw.js"
+        ],
         "styles": ["apps/estrai.me/src/styles.scss"],
         "scripts": []
       },
@@ -36,7 +42,9 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "serviceWorker": true,
+          "ngswConfigPath": "apps/estrai.me/ngsw-config.json"
         },
         "development": {
           "buildOptimizer": false,
