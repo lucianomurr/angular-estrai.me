@@ -10,7 +10,7 @@ import { UserInGame } from '../../../interface/player-user.interface';
   template: `
     <section class="fixed z-10 inset-0 overflow-y-auto" (click)="close()">
       <div
-        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0 bg-gray-900 bg-opacity-40">
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0 bg-gray-900 bg-opacity-80">
         <div
           (click)="$event.stopPropagation()"
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -26,6 +26,14 @@ import { UserInGame } from '../../../interface/player-user.interface';
                 <b>{{ user?.name | uppercase }}</b> you win round: {{ user?.round }}
               </p>
             </div>
+          </div>
+          <!--footer-->
+          <div class="p-3  mt-2 text-center space-x-4 md:block">
+            <button
+              (click)="close()"
+              class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">
+              Continue
+            </button>
           </div>
         </div>
       </div>
