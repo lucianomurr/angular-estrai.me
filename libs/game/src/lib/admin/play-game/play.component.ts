@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { isObservable, Observable, take } from 'rxjs';
+import { isObservable, Observable, Subscription, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
-import { AdminService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
+import { AdminService, ModalService, RaffleDocument, RaffleGameService, UserInGame } from '@game';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ConfettiService } from '../../services/confetti.service';
 
 @Component({
   selector: 'app-play-game',
@@ -101,7 +102,7 @@ import { QRCodeModule } from 'angularx-qrcode';
         <div
           class="relative p-4"
           *ngFor="let item of players; let first = first"
-          [ngClass]="{ 'new-box': first && gameDetails[0].status === 'ready', 'animate-bounce': item.win }">
+          [ngClass]="{ 'new-box': first && gameDetails[0].status === 'ready' }">
           <div
             class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-green-600 text-white p-2 opacity-80 text-center rotate-12"
             *ngIf="item.win">
@@ -126,7 +127,7 @@ import { QRCodeModule } from 'angularx-qrcode';
         </div>
       </div>
     </div>
-    <app-winner-modal />
+    <div #modal></div>
   `,
   styles: [
     `
@@ -146,6 +147,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     `,
   ],
   imports: [CommonModule, WinnerModalComponent, CtaGameComponent, QRCodeModule],
+  providers: [ModalService, ConfettiService],
 })
 export class PlayGameComponent implements OnInit {
   // game ID coming from the url
@@ -165,11 +167,17 @@ export class PlayGameComponent implements OnInit {
   //numbers of round of the raffle
   round = 0;
 
+  @ViewChild('modal', { read: ViewContainerRef })
+  entry!: ViewContainerRef;
+  sub!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private raffleGameService: RaffleGameService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private modalService: ModalService,
+    private confettiService: ConfettiService
   ) {
     //set game id from router
     const gameID = this.route.snapshot.paramMap.get('gameID');
@@ -215,6 +223,8 @@ export class PlayGameComponent implements OnInit {
 
       this.adminService.defineNewWinner(this.players$, this.round).then(result => {
         if (result && this.collectionID && this.gameID) {
+          this.createModal(result as UserInGame);
+          this.confettiService.fireworks();
           this.raffleGameService.updateUserTicket(this.collectionID, result as UserInGame, this.round, this.gameID);
         } else {
           throw new Error('Something went wrong...');
@@ -232,5 +242,11 @@ export class PlayGameComponent implements OnInit {
 
   getDate(time: Date) {
     console.log(time);
+  }
+
+  createModal(user: UserInGame) {
+    this.sub = this.modalService.openModal(this.entry, user).subscribe(v => {
+      //your logic
+    });
   }
 }
