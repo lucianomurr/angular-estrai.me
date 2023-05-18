@@ -321,13 +321,14 @@ export class RaffleGameService {
    * @returns
    */
   getNewGameID(size: number) {
-    const result = [];
-    const hexRef = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-    for (let n = 0; n < size; n++) {
-      result.push(hexRef[Math.floor(Math.random() * 10)]);
+    let numberLength = '9';
+    for (let chars = 0; chars < size - 1; chars++) {
+      numberLength += '0';
     }
-    return result.join('');
+
+    let newGameID = Math.floor(100000 + Math.random() * parseInt(numberLength));
+
+    return newGameID.toString();
   }
 
   getDocID(path: string) {
