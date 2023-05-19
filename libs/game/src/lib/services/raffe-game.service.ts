@@ -86,6 +86,23 @@ export class RaffleGameService {
    */
   async AddNewUserToGame(collectionID: string) {
     if (collectionID) {
+      //check if user has a ticke
+      const userHasTicket = this.getLocalStorageGame(collectionID);
+      console.log('AddNewUserToGame:', userHasTicket);
+
+      /**
+       *
+       * This is the check to identify if the user already has a ticket!
+       *
+       */
+      if (userHasTicket) {
+        this.router.navigate([`game/assign/${collectionID}/ticket/${userHasTicket}`]);
+        return;
+      }
+
+      /**
+       * Define the new ticket
+       */
       const ticketNumber = this.getNewTicketID(6);
       const userTicketName = this.authService.userData?.displayName || '';
       const raffleCollection = collection(this.firestore, `players/${collectionID}/users`);
@@ -94,9 +111,14 @@ export class RaffleGameService {
         name: userTicketName,
         ticketID: ticketNumber,
       };
+
+      /**
+       * Add the ticket to Firebase collection
+       */
       await addDoc(raffleCollection, collectionData).then(res => {
         const gameDocID = this.getDocID(res.path);
         if (!userTicketName) {
+          this.setLocalStorageGame(gameDocID, ticketNumber);
           this.router.navigate([`game/assign/${gameDocID}/ticket/${ticketNumber}`]);
         } else {
           this.router.navigate([`game/waiting/${gameDocID}/ticket/${ticketNumber}`]);
@@ -105,6 +127,26 @@ export class RaffleGameService {
     } else {
       throw new Error('Incorrect game id or ticket number .');
     }
+  }
+
+  /**
+   * This function set the game value in the localStorage
+   *  - use a keypair with docID and ticketNumber
+   * @param gameDocID
+   * @param ticketNumber
+   */
+  setLocalStorageGame(gameDocID: string, ticketNumber: string) {
+    console.log('setLocalStorageGame', gameDocID, ticketNumber);
+    localStorage.setItem(gameDocID, ticketNumber);
+  }
+
+  /**
+   * Get from localStorage the ticket already registered
+   * @param gameDocID
+   * @returns
+   */
+  getLocalStorageGame(gameDocID: string) {
+    return localStorage.getItem(gameDocID);
   }
 
   /**
@@ -279,13 +321,14 @@ export class RaffleGameService {
    * @returns
    */
   getNewGameID(size: number) {
-    const result = [];
-    const hexRef = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-    for (let n = 0; n < size; n++) {
-      result.push(hexRef[Math.floor(Math.random() * 10)]);
+    let numberLength = '9';
+    for (let chars = 0; chars < size - 1; chars++) {
+      numberLength += '0';
     }
-    return result.join('');
+
+    let newGameID = Math.floor(100000 + Math.random() * parseInt(numberLength));
+
+    return newGameID.toString();
   }
 
   getDocID(path: string) {
