@@ -8,7 +8,7 @@
   "editor.inlineSuggest.enabled": true,
   "files.autoSave": "onFocusChange",
   "[json]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }, // optional but recommended
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
