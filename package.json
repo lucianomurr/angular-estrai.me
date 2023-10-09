@@ -57,7 +57,7 @@
     "jest-preset-angular": "^12.2.3",
     "nx": "16.1.0",
     "nx-cloud": "16.0.5",
-    "postcss": "^8.4.20",
+    "postcss": "^8.4.31",
     "prettier": "^2.8.1",
     "prettier-eslint": "^15.0.1",
     "tailwindcss": "^3.2.4",
