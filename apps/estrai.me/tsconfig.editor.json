@@ -2,8 +2,8 @@
   "extends": "./tsconfig.json",
   "include": [
     "**/*.ts",
-    "../../libs/auth/src/lib/auth.service.ts",
-    "../../libs/profile/src/lib/profile.service.ts",
+    "../../libs/data-access/src/lib/data-access/auth.service.ts",
+    "../../libs/data-access/src/lib/data-access/profile.service.ts",
     "../../libs/game/src/lib/autofocus.directive.ts",
     "../../libs/game/src/lib/raffe-game.service.ts",
     "../../libs/game/src/lib/modal.service.ts"

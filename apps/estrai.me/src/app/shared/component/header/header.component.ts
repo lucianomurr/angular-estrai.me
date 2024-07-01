@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
-import { AuthService } from '@auth';
+import { AuthService } from '@data-access';
 
 @Component({
   selector: 'app-header',

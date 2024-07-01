@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
-import { AuthService } from '@auth';
+import { AuthService } from '@data-access';
 import { RaffleDocument, UserInGame } from '@game';
 import { from, map, Observable } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class AdminService {
   getGameCollectionID(gameID: string) {
     console.log('getGameCollectionID: gameID:', gameID);
     const gameRef = collection(this.firestore, `players/`);
-    let q = query(gameRef, where('gameID', '==', `${gameID}`));
+    const q = query(gameRef, where('gameID', '==', `${gameID}`));
     return from(collectionData(q, { idField: 'collectionID' })) as Observable<RaffleDocument[]>;
   }
 

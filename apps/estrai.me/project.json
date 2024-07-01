@@ -69,10 +69,8 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
-        "eslintConfig": "apps/estrai.me/.eslintrc.json",
-        "lintFilePatterns": ["apps/estrai.me/**/*.spec.ts", "apps/estrai.me/**/*.ts"],
         "hasTypeAwareRules": true
       }
     },
@@ -80,8 +78,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/estrai.me/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/estrai.me/jest.config.ts"
       }
     }
   }

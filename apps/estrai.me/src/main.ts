@@ -11,7 +11,7 @@ import { environment } from './environments/environment';
 import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { APP_ROUTES } from './app/app.routes';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { AuthService } from '@auth';
+import { AuthService } from '@data-access';
 
 bootstrapApplication(AppComponent, {
   providers: [

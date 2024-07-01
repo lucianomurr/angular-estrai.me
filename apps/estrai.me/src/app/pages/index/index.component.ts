@@ -3,7 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardsComponent } from './cards/cards.component';
 import { NotifyMeComponent } from './notify-me/notify-me.component';
-import { AuthService } from '@auth';
+import { AuthService } from '@data-access';
 
 @Component({
   selector: 'app-index',

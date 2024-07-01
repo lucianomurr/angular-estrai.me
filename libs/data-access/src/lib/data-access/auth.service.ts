@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
-import { ProfileService } from '@profile';
+import { ProfileService } from '@data-access';
 import { FirebaseError } from 'firebase/app';
 
 @Injectable({
@@ -13,7 +13,11 @@ import { FirebaseError } from 'firebase/app';
 export class AuthService {
   userData: firebase.User | undefined | null;
 
-  constructor(public auth: AngularFireAuth, private router: Router, private profileService: ProfileService) {
+  constructor(
+    public auth: AngularFireAuth,
+    private router: Router,
+    @Inject(ProfileService) private profileService: ProfileService
+  ) {
     this.getUserData();
   }
 

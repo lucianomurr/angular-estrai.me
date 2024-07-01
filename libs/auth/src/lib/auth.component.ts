@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../../data-access/src/lib/data-access/auth.service';
 
 @Component({
   selector: 'app-auth',

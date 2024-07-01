@@ -13,7 +13,7 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@auth';
+import { AuthService } from '@data-access';
 import { from, Observable, switchMap, take } from 'rxjs';
 import { AdminService, RaffleDocument, UserInGame } from '@game';
 
@@ -163,7 +163,7 @@ export class RaffleGameService {
       actualRound: round,
       status: 'started',
     };
-    let promises = [updateDoc(raffleCollection, gameCollectionData)];
+    const promises = [updateDoc(raffleCollection, gameCollectionData)];
 
     this.adminService
       .getGameCollectionID(gameID)
@@ -188,7 +188,7 @@ export class RaffleGameService {
 
   getTicketCollectionID(gameCollectionID: string, ticketID: string) {
     const gameRef = collection(this.firestore, `players/${gameCollectionID}/users`);
-    let q = query(gameRef, where('ticketID', '==', `${ticketID}`));
+    const q = query(gameRef, where('ticketID', '==', `${ticketID}`));
     return from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
   }
 
@@ -214,7 +214,7 @@ export class RaffleGameService {
     const collectionData = {
       status: 'closed',
     };
-    let promises = [updateDoc(raffleCollection, collectionData)];
+    const promises = [updateDoc(raffleCollection, collectionData)];
 
     this.adminService
       .getGameCollectionID(gameID)
@@ -242,7 +242,7 @@ export class RaffleGameService {
     return this.adminService.getGameCollectionID(gameID).pipe(
       switchMap(game => {
         const gameRef = collection(this.firestore, `players/${game[0].collectionID}/users`);
-        let q = query(gameRef, orderBy('joinDate', 'desc'));
+        const q = query(gameRef, orderBy('joinDate', 'desc'));
         const observable$ = from(collectionData(q, { idField: 'collectionID' })) as Observable<UserInGame[]>;
 
         observable$.subscribe(users => {
@@ -326,7 +326,7 @@ export class RaffleGameService {
       numberLength += '0';
     }
 
-    let newGameID = Math.floor(100000 + Math.random() * parseInt(numberLength));
+    const newGameID = Math.floor(100000 + Math.random() * parseInt(numberLength));
 
     return newGameID.toString();
   }
