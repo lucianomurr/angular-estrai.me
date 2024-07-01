@@ -1,6 +1,5 @@
 import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -20,7 +19,6 @@ bootstrapApplication(AppComponent, {
       withPreloading(PreloadAllModules)
       // withDebugTracing(),
     ),
-    importProvidersFrom(HttpClientModule),
     importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase))),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     importProvidersFrom(provideFirestore(() => getFirestore())),
