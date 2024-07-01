@@ -5262,12 +5262,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qrcode@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@types/qrcode@npm:1.5.0"
+"@types/qrcode@npm:^1.5.5":
+  version: 1.5.5
+  resolution: "@types/qrcode@npm:1.5.5"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 10c0/d3c7ca7b3fedaada3ad7819bd416ad644dc8a984da4dfea806592ac97e156ff94abf4c41ceec5db9cf7c7cc9ea238cde3c409c7afe6badfedaf647dde8314efc
+  checksum: 10c0/b8e6709905d1edb32dda414408acab18ac4aefcbe7bf96d9e32ba94218f45b99c8938ba7a09863ce82a67b226195099fd0f48881d16ee844899087b7f249955f
   languageName: node
   linkType: hard
 
@@ -6188,16 +6188,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"angularx-qrcode@npm:^15.0.1":
-  version: 15.0.1
-  resolution: "angularx-qrcode@npm:15.0.1"
+"angularx-qrcode@npm:16.0.2":
+  version: 16.0.2
+  resolution: "angularx-qrcode@npm:16.0.2"
   dependencies:
-    "@types/qrcode": "npm:1.5.0"
-    qrcode: "npm:1.5.1"
+    qrcode: "npm:1.5.3"
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/core": ^15.0.0
-  checksum: 10c0/4b67beac5ba06dd6e882172706d9ff215e4e892237a15d0a9f41c63b6be21cce307a57d501762191718973922aaadeba9a9f77e287f2b4f221a2f8ae34e079c8
+    "@angular/core": ^16.0.0
+  checksum: 10c0/3c0ebfac40f27990e06664288eae35897e404c58a9372d42526ede79c32bb5518ef691b288c01fc1153060bd238eed2c66416b6cf61740bc9c438ab766f6eea7
   languageName: node
   linkType: hard
 
@@ -8973,9 +8972,10 @@ __metadata:
     "@types/canvas-confetti": "npm:^1.6.0"
     "@types/jest": "npm:29.4.4"
     "@types/node": "npm:18.19.39"
+    "@types/qrcode": "npm:^1.5.5"
     "@typescript-eslint/eslint-plugin": "npm:7.14.1"
     "@typescript-eslint/parser": "npm:7.14.1"
-    angularx-qrcode: "npm:^15.0.1"
+    angularx-qrcode: "npm:16.0.2"
     autoprefixer: "npm:^10.4.13"
     canvas-confetti: "npm:^1.6.0"
     eslint: "npm:8.57.0"
@@ -14482,9 +14482,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qrcode@npm:1.5.1":
-  version: 1.5.1
-  resolution: "qrcode@npm:1.5.1"
+"qrcode@npm:1.5.3":
+  version: 1.5.3
+  resolution: "qrcode@npm:1.5.3"
   dependencies:
     dijkstrajs: "npm:^1.0.1"
     encode-utf8: "npm:^1.0.3"
@@ -14492,7 +14492,7 @@ __metadata:
     yargs: "npm:^15.3.1"
   bin:
     qrcode: bin/qrcode
-  checksum: 10c0/6a6d4a6c83be46d04c22da823d25b28cb6ba434448a551241c8e478d5ebc0220044458c7c2943a6687e5a819e3cb8b4a75aac059d0deb066578b10bb2ea1b630
+  checksum: 10c0/eb961cd8246e00ae338b6d4a3a28574174456db42cec7070aa2b315fb6576b7f040b0e4347be290032e447359a145c68cb60ef884d55ca3e1076294fed46f719
   languageName: node
   linkType: hard
 
