@@ -14,27 +14,34 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'about',
-    loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),
+    loadComponent: () =>
+      import('./pages/about/about.component').then((m) => m.AboutComponent),
   },
   {
     path: 'privacy',
-    loadComponent: () => import('./pages/privacy/privacy.component').then(m => m.PrivacyComponent),
+    loadComponent: () =>
+      import('./pages/privacy/privacy.component').then(
+        (m) => m.PrivacyComponent,
+      ),
   },
   {
     path: 'unauthorized',
-    loadComponent: () => import('./pages/unauthorized/unauthorized.component').then(m => m.UnauthorizedComponent),
+    loadComponent: () =>
+      import('./pages/unauthorized/unauthorized.component').then(
+        (m) => m.UnauthorizedComponent,
+      ),
   },
   {
     path: 'profile',
-    loadComponent: () => import('@profile').then(m => m.ProfileComponent),
+    loadComponent: () => import('@profile').then((m) => m.ProfileComponent),
     canActivate: [AngularFireAuthGuard],
   },
   {
     path: 'auth',
-    loadChildren: () => import('@auth').then(m => m.AUTH_ROUTES),
+    loadChildren: () => import('@auth').then((m) => m.AUTH_ROUTES),
   },
   {
     path: 'game',
-    loadChildren: () => import('@game').then(m => m.GAME_ROUTES),
+    loadChildren: () => import('@game').then((m) => m.GAME_ROUTES),
   },
 ];

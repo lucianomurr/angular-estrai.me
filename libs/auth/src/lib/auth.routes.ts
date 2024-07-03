@@ -14,7 +14,8 @@ export const AUTH_ROUTES: Routes = [
       },
       {
         path: 'log-in',
-        loadComponent: () => import('./log-in/log-in.component').then(m => m.LogInComponent),
+        loadComponent: () =>
+          import('./log-in/log-in.component').then((m) => m.LogInComponent),
       },
       // {
       //   path: 'sign-up',
