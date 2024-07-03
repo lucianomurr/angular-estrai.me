@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
-import firebase from 'firebase/compat/app';
-import { collection, getCountFromServer, query, where } from 'firebase/firestore';
+
+import { User } from 'firebase/auth';
+import {
+  collection,
+  getCountFromServer,
+  query,
+  where,
+} from 'firebase/firestore';
 
 interface Profile {
   displayName: string | null;
@@ -17,9 +23,12 @@ interface Profile {
 export class ProfileService {
   constructor(private firestore: Firestore) {}
 
-  SaveProfile(userData: firebase.User | null) {
+  SaveProfile(userData: User | null) {
     if (userData) {
-      const profileRef = collection(this.firestore, `admin/${userData.uid}/profile`);
+      const profileRef = collection(
+        this.firestore,
+        `admin/${userData.uid}/profile`,
+      );
 
       const collectionData: Profile = {
         displayName: userData?.displayName,
@@ -35,9 +44,12 @@ export class ProfileService {
     }
   }
 
-  async GetUserCreatedGames(userData: firebase.User): Promise<number> {
+  async GetUserCreatedGames(userData: User): Promise<number> {
+    console.log('GetUserCreatedGames:', userData);
     const coll = collection(this.firestore, 'players');
+    console.log('GetUserCreatedGames:', userData.uid);
     const q = query(coll, where('userUID', '==', userData.uid));
+    console.log('GetUserCreatedGames:', q);
     const res = await getCountFromServer(q);
     return res.data().count;
   }

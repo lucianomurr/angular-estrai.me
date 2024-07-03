@@ -25,7 +25,8 @@
     "paths": {
       "@auth": ["libs/auth/src/"],
       "@game": ["libs/game/src/index.ts"],
-      "@profile": ["libs/profile/src/"]
+      "@profile": ["libs/profile/src/"],
+      "@data-access": ["libs/data-access/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

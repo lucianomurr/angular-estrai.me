@@ -24,5 +24,7 @@ export default {
     'jest-preset-angular/build/serializers/ng-snapshot',
     'jest-preset-angular/build/serializers/html-comment',
   ],
-  transformIgnorePatterns: [`node_modules/(?!@angular|@ngneat/spectator|array-move|lodash-es)`],
+  transformIgnorePatterns: [
+    `node_modules/(?!@angular|@ngneat/spectator|array-move|lodash-es)`,
+  ],
 };

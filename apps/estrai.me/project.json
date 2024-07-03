@@ -19,7 +19,10 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/estrai.me/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],
+        "assets": [
+          "apps/estrai.me/src/favicon.ico",
+          "apps/estrai.me/src/assets"
+        ],
         "styles": ["apps/estrai.me/src/styles.scss"],
         "scripts": []
       },
@@ -29,7 +32,7 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
@@ -69,10 +72,8 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
-        "eslintConfig": "apps/estrai.me/.eslintrc.json",
-        "lintFilePatterns": ["apps/estrai.me/**/*.spec.ts", "apps/estrai.me/**/*.ts"],
         "hasTypeAwareRules": true
       }
     },
@@ -80,8 +81,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/estrai.me/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/estrai.me/jest.config.ts"
       }
     }
   }

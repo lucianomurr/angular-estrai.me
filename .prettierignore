@@ -13,3 +13,6 @@
 /.history
 /.vscode
 /.angular
+
+/.nx/cache
+.angular

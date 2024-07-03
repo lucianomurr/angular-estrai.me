@@ -43,3 +43,13 @@ Thumbs.db
 
 .angular
 firebase-debug.log
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+.nx/cache
