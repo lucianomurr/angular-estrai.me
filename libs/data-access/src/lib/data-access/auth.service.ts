@@ -39,8 +39,8 @@ export class AuthService {
       .then((result) => {
         console.log('You have been successfully logged in!', result);
         this.profileService.SaveProfile(result.user as User);
-      })
-      .catch((error) => {
+      },
+      (error) => {
         this.AuthError(error);
       });
   }

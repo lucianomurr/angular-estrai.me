@@ -1,25 +1,32 @@
 {
   "migrations": [
     {
-      "version": "16.0.0",
-      "factory": "./update-16/remove-default-project-option",
-      "description": "Remove 'defaultProject' option from workspace configuration. The project to use will be determined from the current working directory.",
-      "package": "@angular/cli",
-      "name": "remove-default-project-option"
+      "version": "17.0.0",
+      "description": "Angular v17 introduces a new control flow syntax that uses the @ and } characters. This migration replaces the existing usages with their corresponding HTML entities.",
+      "factory": "./migrations/block-template-entities/bundle",
+      "package": "@angular/core",
+      "name": "block-template-entities"
     },
     {
-      "version": "16.0.0",
-      "factory": "./update-16/replace-default-collection-option",
-      "description": "Replace removed 'defaultCollection' option in workspace configuration with 'schematicCollections'.",
-      "package": "@angular/cli",
-      "name": "replace-default-collection-option"
+      "version": "17.0.0",
+      "description": "CompilerOption.useJit and CompilerOption.missingTranslation are unused under Ivy. This migration removes their usage",
+      "factory": "./migrations/compiler-options/bundle",
+      "package": "@angular/core",
+      "name": "migration-v17-compiler-options"
     },
     {
-      "version": "16.0.0",
-      "factory": "./update-16/update-server-builder-config",
-      "description": "Update the '@angular-devkit/build-angular:server' builder configuration to disable 'buildOptimizer' for non optimized builds.",
-      "package": "@angular/cli",
-      "name": "update-server-builder-config"
+      "version": "17.0.0",
+      "description": "Updates `TransferState`, `makeStateKey`, `StateKey` imports from `@angular/platform-browser` to `@angular/core`.",
+      "factory": "./migrations/transfer-state/bundle",
+      "package": "@angular/core",
+      "name": "migration-transfer-state"
+    },
+    {
+      "version": "17.3.0",
+      "description": "Updates two-way bindings that have an invalid expression to use the longform expression instead.",
+      "factory": "./migrations/invalid-two-way-bindings/bundle",
+      "package": "@angular/core",
+      "name": "invalid-two-way-bindings"
     }
   ]
 }
