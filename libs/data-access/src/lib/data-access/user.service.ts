@@ -19,7 +19,7 @@ export class UserService {
     });
   }
 
-  getCurrentUser(): Observable<User | null> {
+  getCurrentUser(): Observable<User> {
     const auth$ = this.afAuth.authState.pipe(take(1));
     auth$.subscribe(user => {
       this.userData = user as User;
