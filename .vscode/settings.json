@@ -25,5 +25,6 @@
     },
     "editor.formatOnSave": false
   },
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "prettier.configPath": ".prettierrc.json"
 }
