@@ -13,8 +13,7 @@ import { User } from 'firebase/auth';
 export class AuthService {
   private auth: Auth = inject(Auth);
   private profileService = inject(ProfileService);
-
-  constructor(public afAuth: AngularFireAuth) {}
+  public afAuth = inject(AngularFireAuth);
 
   /**
    *
@@ -34,15 +33,15 @@ export class AuthService {
   }
   // Auth logic to run auth providers
   authLogin(provider: GithubAuthProvider | GoogleAuthProvider) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
+    return this.afAuth.signInWithPopup(provider).then(
+      (result) => {
         console.log('You have been successfully logged in!', result);
         this.profileService.SaveProfile(result.user as User);
       },
       (error) => {
         this.AuthError(error);
-      });
+      },
+    );
   }
 
   // Handle login error
