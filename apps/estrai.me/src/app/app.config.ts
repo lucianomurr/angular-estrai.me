@@ -1,10 +1,6 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import {
-  PreloadAllModules,
-  provideRouter,
-  withPreloading,
-} from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { AuthService, ProfileService, UserService } from '@data-access';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -17,16 +13,16 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
       APP_ROUTES,
-      withPreloading(PreloadAllModules),
+      withPreloading(PreloadAllModules)
       // withDebugTracing(),
     ),
-    importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(environment.firebase)),
-    ),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
-    importProvidersFrom(provideFirestore(() => getFirestore())),
-    importProvidersFrom(provideAuth(() => getAuth())),
-    importProvidersFrom(provideAnalytics(() => getAnalytics())),
-    importProvidersFrom(AuthService, ProfileService, UserService),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideAnalytics(() => getAnalytics()),
+    AuthService,
+    ProfileService,
+    UserService,
   ],
 };

@@ -34,13 +34,13 @@ export class AuthService {
   // Auth logic to run auth providers
   authLogin(provider: GithubAuthProvider | GoogleAuthProvider) {
     return this.afAuth.signInWithPopup(provider).then(
-      (result) => {
+      result => {
         console.log('You have been successfully logged in!', result);
         this.profileService.SaveProfile(result.user as User);
       },
-      (error) => {
+      error => {
         this.AuthError(error);
-      },
+      }
     );
   }
 
@@ -48,9 +48,7 @@ export class AuthService {
   AuthError(err: FirebaseError) {
     console.log(err);
     if (err?.code === 'auth/account-exists-with-different-credential') {
-      return alert(
-        'This email is already registered with a different provider!',
-      );
+      return alert('This email is already registered with a different provider!');
     }
 
     return alert('Something went wrong, please again later!');

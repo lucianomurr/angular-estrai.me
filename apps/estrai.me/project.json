@@ -19,10 +19,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/estrai.me/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/estrai.me/src/favicon.ico",
-          "apps/estrai.me/src/assets"
-        ],
+        "assets": ["apps/estrai.me/src/favicon.ico", "apps/estrai.me/src/assets"],
         "styles": ["apps/estrai.me/src/styles.scss"],
         "scripts": []
       },

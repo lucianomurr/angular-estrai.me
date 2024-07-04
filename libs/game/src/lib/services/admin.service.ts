@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  collection,
-  collectionData,
-  Firestore,
-  query,
-  where,
-} from '@angular/fire/firestore';
+import { collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
 import { AuthService } from '@data-access';
 import { from, map, Observable } from 'rxjs';
 import { UserInGame } from '../interface/player-user.interface';
@@ -17,32 +11,24 @@ import { RaffleDocument } from '../interface/game.interface';
 export class AdminService {
   constructor(
     private firestore: Firestore,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   getGameCollectionID(gameID: string) {
     console.log('getGameCollectionID: gameID:', gameID);
     const gameRef = collection(this.firestore, `players/`);
     const q = query(gameRef, where('gameID', '==', `${gameID}`));
-    return from(collectionData(q, { idField: 'collectionID' })) as Observable<
-      RaffleDocument[]
-    >;
+    return from(collectionData(q, { idField: 'collectionID' })) as Observable<RaffleDocument[]>;
   }
 
   defineNewWinner(players$: Observable<UserInGame[]>, round: number) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       players$
-        .pipe(
-          map((players: UserInGame[]) =>
-            players.filter((player: UserInGame) => player.win !== true),
-          ),
-        )
-        .subscribe((data) => {
+        .pipe(map((players: UserInGame[]) => players.filter((player: UserInGame) => player.win !== true)))
+        .subscribe(data => {
           if (data.length > 0) {
             //select randomly the winner user
-            const winner = data[
-              Math.floor(Math.random() * data.length)
-            ] as UserInGame;
+            const winner = data[Math.floor(Math.random() * data.length)] as UserInGame;
             //update the game data
             winner.round = round;
             winner.win = true;

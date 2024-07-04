@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 
 import { User } from 'firebase/auth';
-import {
-  collection,
-  getCountFromServer,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, getCountFromServer, query, where } from 'firebase/firestore';
 
 interface Profile {
   displayName: string | null;
@@ -25,10 +20,7 @@ export class ProfileService {
 
   SaveProfile(userData: User | null) {
     if (userData) {
-      const profileRef = collection(
-        this.firestore,
-        `admin/${userData.uid}/profile`,
-      );
+      const profileRef = collection(this.firestore, `admin/${userData.uid}/profile`);
 
       const collectionData: Profile = {
         displayName: userData?.displayName,

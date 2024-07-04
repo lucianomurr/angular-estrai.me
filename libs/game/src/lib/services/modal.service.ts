@@ -1,9 +1,4 @@
-import {
-  ComponentFactoryResolver,
-  ComponentRef,
-  Injectable,
-  ViewContainerRef,
-} from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
 import { WinnerModalComponent } from '../admin/play-game/winner-modal/winner-modal.component';
 import { Subject } from 'rxjs';
 import { UserInGame } from '../interface/player-user.interface';

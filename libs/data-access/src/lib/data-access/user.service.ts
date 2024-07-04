@@ -12,16 +12,16 @@ export class UserService {
   private profileService = inject(ProfileService);
 
   constructor(public afAuth: AngularFireAuth) {
-    this.afAuth.authState.subscribe((user) => {
+    this.afAuth.authState.subscribe(user => {
       console.log('userService, constructor: ', user);
       this.updateCurrentUser();
       this.userData = user as User;
     });
   }
 
-  getCurrentUser(): Observable<User | null> {
+  getCurrentUser(): Observable<User> {
     const auth$ = this.afAuth.authState.pipe(take(1));
-    auth$.subscribe((user) => {
+    auth$.subscribe(user => {
       this.userData = user as User;
       console.log('getUserData: ', this.userData);
     });
@@ -31,7 +31,7 @@ export class UserService {
   updateCurrentUser() {
     console.log('updateCurrentUser');
     const user$ = this.afAuth.user.pipe(take(1));
-    user$.subscribe((user) => {
+    user$.subscribe(user => {
       console.log('getUserData: ', user);
     });
   }
