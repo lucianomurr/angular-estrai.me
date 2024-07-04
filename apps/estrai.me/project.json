@@ -57,10 +57,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "estrai.me:build:production"
+          "buildTarget": "estrai.me:build:production"
         },
         "development": {
-          "browserTarget": "estrai.me:build:development"
+          "buildTarget": "estrai.me:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "estrai.me:build"
+        "buildTarget": "estrai.me:build"
       }
     },
     "lint": {

@@ -23,9 +23,6 @@
       "cache": true
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  },
   "cli": {
     "analytics": "ea888147-4fa2-4fed-a372-b6123195c09f",
     "schematicCollections": ["@angular-eslint/schematics"]
@@ -52,5 +49,7 @@
     "sharedGlobals": [],
     "production": ["default", "!{projectRoot}/src/test-setup.[jt]s"]
   },
-  "nxCloudAccessToken": "NTgxNDcxOGQtMWM1Ni00YTdiLTlmMTItMjFkZWU2NDVjZjE5fHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NTgxNDcxOGQtMWM1Ni00YTdiLTlmMTItMjFkZWU2NDVjZjE5fHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false,
+  "defaultBase": "main"
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@data-access';
@@ -78,17 +78,27 @@ import { AuthService } from '@data-access';
   `,
   styles: [],
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
 
-  loginWithGoogle() {
-    this.authService.GoogleAuth().then((data) => {
-      console.log(data);
-      this.router.navigateByUrl('/');
+  ngOnInit(): void {
+    this.authService.afAuth.authState.subscribe((user) => {
+      if (user) {
+        console.log('ngOnInit', user);
+        this.router.navigateByUrl('/game/new');
+      }
     });
+  }
+
+  loginWithGoogle() {
+    this.authService.GoogleAuth();
+    // auth.then((data) => {
+    //   console.log('loginWithGoogle',data);
+    //   this.router.navigateByUrl('/');
+    // });
   }
   loginWithGithub() {
     this.authService.GithubAuth();
