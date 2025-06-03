@@ -135,6 +135,27 @@
       "subject": "chore: update small packages"
     },
     "targetVersion": "20",
-    "confirmedPackageUpdates": true
+    "confirmedPackageUpdates": true,
+    "runningMigrations": [
+      "19-2-0-move-graph-cache-directory"
+    ],
+    "completedMigrations": {
+      "19-2-0-move-graph-cache-directory": {
+        "type": "successful",
+        "name": "19-2-0-move-graph-cache-directory",
+        "changedFiles": [
+          {
+            "path": ".gitignore",
+            "type": "UPDATE"
+          },
+          {
+            "path": ".prettierignore",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "9812430952ed5e2596e777bdbc8c32a6b0a6be04",
+        "nextSteps": []
+      }
+    }
   }
 }
