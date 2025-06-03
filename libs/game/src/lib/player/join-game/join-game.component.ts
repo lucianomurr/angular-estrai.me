@@ -7,11 +7,12 @@ import { AutofocusDirective } from '../../directives/autofocus.directive';
 
 import { ActivatedRoute } from '@angular/router';
 import { RaffleGameService } from '../../services/raffe-game.service';
+import { HowItWorksComponent } from './how-it-work';
 
 @Component({
   selector: 'app-join-game',
   standalone: true,
-  imports: [ReactiveFormsModule, AutofocusDirective],
+  imports: [ReactiveFormsModule, AutofocusDirective, HowItWorksComponent],
   template: `
     <div class="bg-white dark:bg-gray-800 ">
       <div
@@ -117,13 +118,8 @@ import { RaffleGameService } from '../../services/raffe-game.service';
             />
           </svg>
         </div>
-        <p
-          class="text-gray-600 dark:text-white w-full md:w-2/3 m-auto text-center text-lg md:text-3xl"
-        >
-          <span class="font-bold text-red-800"> “ </span>
-          Explain how the extraction works...
-          <span class="font-bold text-red-800"> ” </span>
-        </p>
+
+        <app-how-it-work />
       </div>
     </div>
   `,
