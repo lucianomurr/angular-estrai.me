@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
 import { UserService } from '@data-access';
@@ -7,7 +7,7 @@ import { UserService } from '@data-access';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgOptimizedImage],
+  imports: [RouterModule, NgOptimizedImage],
   providers: [ToggleService, UserService],
   template: `
     <header class="z-30 flex items-center w-full h-24 sm:h-32">
@@ -27,15 +27,17 @@ import { UserService } from '@data-access';
           </a>
         </div>
         <div class="flex items-center">
-          <div *ngIf="userService.userData as user">
-            <a routerLink="/profile">
-              <img
-                src="{{ user.photoURL }}"
-                alt="profile image"
-                class="w-12 rounded-full"
-              />
-            </a>
-          </div>
+          @if (userService.userData; as user) {
+            <div>
+              <a routerLink="/profile">
+                <img
+                  src="{{ user.photoURL }}"
+                  alt="profile image"
+                  class="w-12 rounded-full"
+                />
+              </a>
+            </div>
+          }
         </div>
       </div>
     </header>

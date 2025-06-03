@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RaffleGameService } from '../../services';
@@ -7,7 +7,7 @@ import { of, take } from 'rxjs';
 @Component({
   selector: 'app-assign-ticket',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   template: `
     <div class="bg-white dark:bg-gray-800 ">
       <div

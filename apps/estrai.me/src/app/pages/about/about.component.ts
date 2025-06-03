@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="px-4 py-20 bg-lightblue">
       <div class="flex flex-col max-w-6xl mx-auto md:flex-row">

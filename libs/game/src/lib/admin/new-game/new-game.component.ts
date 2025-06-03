@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Observable } from 'rxjs/internal/Observable';
 import { RaffleDocument } from '../../interface/game.interface';
 import { RaffleGameService } from '../../services';
@@ -7,7 +7,7 @@ import { RaffleGameService } from '../../services';
 @Component({
   selector: 'app-new-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div
       class="relative z-10 flex items-center overflow-hidden bg-white dark:bg-gray-800"

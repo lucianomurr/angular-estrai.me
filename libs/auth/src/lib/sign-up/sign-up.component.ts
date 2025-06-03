@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '@data-access';
 
 interface RegisterForm {
   email: string;
@@ -67,11 +67,11 @@ interface RegisterFormGroup extends FormGroup {
             </svg>
           </div>
         </div>
-        <span
-          *ngIf="submitted && form.email.errors"
-          class="inline-flex text-sm text-red-600"
-          >Insert a valid email!</span
-        >
+        @if (submitted && form.email.errors) {
+          <span class="inline-flex text-sm text-red-600"
+            >Insert a valid email!</span
+          >
+        }
         <div class="relative mt-3">
           <input
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
@@ -97,11 +97,11 @@ interface RegisterFormGroup extends FormGroup {
             </svg>
           </div>
         </div>
-        <span
-          *ngIf="submitted && form.confirmEmail.errors"
-          class="inline-flex text-sm text-red-600"
-          >Email and Confirm email should be equal!</span
-        >
+        @if (submitted && form.confirmEmail.errors) {
+          <span class="inline-flex text-sm text-red-600"
+            >Email and Confirm email should be equal!</span
+          >
+        }
         <div class="relative mt-3">
           <input
             class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
@@ -123,11 +123,11 @@ interface RegisterFormGroup extends FormGroup {
             </svg>
           </div>
         </div>
-        <span
-          *ngIf="submitted && form.password.errors"
-          class="inline-flex text-sm text-red-600"
-          >Password length should be at least 6 characters!</span
-        >
+        @if (submitted && form.password.errors) {
+          <span class="inline-flex text-sm text-red-600"
+            >Password length should be at least 6 characters!</span
+          >
+        }
         <p class="mt-4 italic text-gray-500 font-light text-xs">
           Password strength: <span class="font-bold text-yellow-500">weak</span>
         </p>
@@ -198,10 +198,10 @@ export class SignUpComponent {
     if (this.signUpForm.status === 'INVALID') {
       return;
     } else {
-      this.authService.SignUp(
-        this.signUpForm.value.email,
-        this.signUpForm.value.password,
-      );
+      // this.authService.SignUp(
+      //   this.signUpForm.value.email,
+      //   this.signUpForm.value.password,
+      // );
     }
   }
 }

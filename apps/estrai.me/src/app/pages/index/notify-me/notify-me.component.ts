@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-notify-me',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <section class="bg-white dark:bg-gray-900">
       <div

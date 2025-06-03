@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardsComponent } from './cards/cards.component';
 import { NotifyMeComponent } from './notify-me/notify-me.component';
@@ -8,13 +8,7 @@ import { UserService } from '@data-access';
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    CardsComponent,
-    NotifyMeComponent,
-    NgOptimizedImage,
-  ],
+  imports: [RouterModule, CardsComponent, NotifyMeComponent, NgOptimizedImage],
   providers: [UserService],
   template: `
     <div
@@ -38,25 +32,23 @@ import { UserService } from '@data-access';
           <p class="text-sm text-gray-700 sm:text-base dark:text-white">
             Play for free!
           </p>
-          <div
-            class="flex mt-8"
-            *ngIf="userService.userData as user; else showLoginHome"
-          >
-            <a
-              [routerLink]="['/game']"
-              routerLinkActive="router-link-active"
-              class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800"
-            >
-              Get started
-            </a>
-            <a
-              [routerLink]="['/game/join']"
-              class="px-4 py-2 text-red-600 uppercase bg-transparent border-2 border-red-600 rounded-lg dark:text-white hover:bg-red-600 hover:text-white text-md"
-            >
-              Join a game
-            </a>
-          </div>
-          <ng-template #showLoginHome>
+          @if (userService.userData; as user) {
+            <div class="flex mt-8">
+              <a
+                [routerLink]="['/game']"
+                routerLinkActive="router-link-active"
+                class="px-4 py-2 mr-4 text-white uppercase bg-red-600 border-2 border-transparent rounded-lg text-md hover:bg-red-800"
+              >
+                Get started
+              </a>
+              <a
+                [routerLink]="['/game/join']"
+                class="px-4 py-2 text-red-600 uppercase bg-transparent border-2 border-red-600 rounded-lg dark:text-white hover:bg-red-600 hover:text-white text-md"
+              >
+                Join a game
+              </a>
+            </div>
+          } @else {
             <div class="flex mt-8">
               <a
                 routerLink="/auth"
@@ -71,7 +63,7 @@ import { UserService } from '@data-access';
                 Join a game
               </a>
             </div>
-          </ng-template>
+          }
         </div>
         <div class="relative hidden sm:block sm:w-1/3 lg:w-3/5">
           <img
