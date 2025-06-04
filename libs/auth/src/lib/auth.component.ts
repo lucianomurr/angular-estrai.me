@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@data-access';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <div
       class="flex flex-col items-center bg-white dark:bg-gray-900 py-6 mx-auto flex flex-col justify-center"

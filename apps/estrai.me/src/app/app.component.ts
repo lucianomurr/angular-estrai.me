@@ -7,9 +7,11 @@ import { HeaderComponent } from './shared/component/header/header.component';
   standalone: true,
   selector: 'app-root',
   template: `
-    <app-header />
-    <router-outlet />
-    <app-footer />
+    <div class="min-h-screen">
+      <app-header />
+      <router-outlet />
+      <app-footer />
+    </div>
   `,
   styles: [''],
   imports: [RouterOutlet, FooterComponent, HeaderComponent],
