@@ -221,6 +221,23 @@
       "subject": "Merge pull request #88 from lucianomurr/update-angular-18"
     },
     "targetVersion": "latest",
-    "confirmedPackageUpdates": true
+    "confirmedPackageUpdates": true,
+    "runningMigrations": [
+      "use-legacy-cache"
+    ],
+    "completedMigrations": {
+      "use-legacy-cache": {
+        "type": "successful",
+        "name": "use-legacy-cache",
+        "changedFiles": [
+          {
+            "path": "nx.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "5b677a0ca5d87a37bf25dd4aae4bf0eb99eeb2f4",
+        "nextSteps": []
+      }
+    }
   }
 }
