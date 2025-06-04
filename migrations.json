@@ -222,9 +222,6 @@
     },
     "targetVersion": "latest",
     "confirmedPackageUpdates": true,
-    "runningMigrations": [
-      "use-legacy-cache"
-    ],
     "completedMigrations": {
       "use-legacy-cache": {
         "type": "successful",
@@ -235,9 +232,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "5b677a0ca5d87a37bf25dd4aae4bf0eb99eeb2f4",
+        "ref": "ddb66d6f2079030c32491bbb4e94e838b5405eea",
+        "nextSteps": []
+      },
+      "remove-legacy-cache": {
+        "type": "successful",
+        "name": "remove-legacy-cache",
+        "changedFiles": [
+          {
+            "path": "nx.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "e478e579ec91c8d353d95605b9403bb3c44e10ad",
         "nextSteps": []
       }
-    }
+    },
+    "runningMigrations": [
+      "remove-legacy-cache"
+    ]
   }
 }
