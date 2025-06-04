@@ -341,12 +341,58 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "dc83e6c90fb84bd0d705afad273d93c3ea2cb351",
+        "ref": "783d4eb6b1f26e5044357489b291b6d2194372f0",
+        "nextSteps": []
+      },
+      "add-localize-polyfill-to-targets": {
+        "type": "successful",
+        "name": "add-localize-polyfill-to-targets",
+        "changedFiles": [],
+        "ref": "783d4eb6b1f26e5044357489b291b6d2194372f0",
+        "nextSteps": []
+      },
+      "update-angular-ssr-imports-to-use-node-entry-point": {
+        "type": "successful",
+        "name": "update-angular-ssr-imports-to-use-node-entry-point",
+        "changedFiles": [],
+        "ref": "783d4eb6b1f26e5044357489b291b6d2194372f0",
+        "nextSteps": []
+      },
+      "disable-angular-eslint-prefer-standalone": {
+        "type": "skipped"
+      },
+      "remove-angular-eslint-rules": {
+        "type": "skipped"
+      },
+      "remove-tailwind-config-from-ng-packagr-executors": {
+        "type": "successful",
+        "name": "remove-tailwind-config-from-ng-packagr-executors",
+        "changedFiles": [],
+        "ref": "783d4eb6b1f26e5044357489b291b6d2194372f0",
+        "nextSteps": []
+      },
+      "ensure-nx-module-federation-package": {
+        "type": "successful",
+        "name": "ensure-nx-module-federation-package",
+        "changedFiles": [],
+        "ref": "783d4eb6b1f26e5044357489b291b6d2194372f0",
+        "nextSteps": []
+      },
+      "update-angular-cli-version-19-1-0": {
+        "type": "successful",
+        "name": "update-angular-cli-version-19-1-0",
+        "changedFiles": [
+          {
+            "path": "package.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "f8680b08584943ef435c66048a0d10c69f8c0331",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "update-angular-cli-version-19-0-0"
+      "update-angular-cli-version-19-1-0"
     ]
   }
 }
