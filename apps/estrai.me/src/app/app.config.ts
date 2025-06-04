@@ -3,6 +3,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import {
   PreloadAllModules,
   provideRouter,
+  withInMemoryScrolling,
   withPreloading,
 } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
@@ -18,6 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       APP_ROUTES,
       withPreloading(PreloadAllModules),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      }),
       // withDebugTracing(),
     ),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

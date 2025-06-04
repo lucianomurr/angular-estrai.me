@@ -14,34 +14,39 @@ import { UserService } from '@data-access';
       <nav class="absolute top-0 left-0 right-0 z-10 py-6">
         <div class="container flex items-center justify-between">
           <div class="flex items-center min-w-md gap-2">
-            <img src="assets/estrai.me-white.svg" alt="Logo" width="250" />
+            <img
+              ngSrc="assets/estrai.me-white.svg"
+              alt="Logo"
+              width="228"
+              height="41"
+            />
           </div>
 
           <div class="hidden md:flex items-center gap-8">
             <a
-              href="#overview"
+              [routerLink]="'/'"
+              [fragment]="'overview'"
               class="text-white hover:text-accent-200 transition-colors"
               >Overview</a
             >
             <a
-              href="#how-it-works"
+              [routerLink]="'/'"
+              [fragment]="'how-it-works'"
               class="text-white hover:text-accent-200 transition-colors"
               >How It Works</a
             >
+
             <a
-              href="#event-management"
-              class="text-white hover:text-accent-200 transition-colors"
-              >Event Management</a
-            >
-            <a
-              href="#admin-panel"
+              [routerLink]="'/'"
+              [fragment]="'admin-panel'"
               class="text-white hover:text-accent-200 transition-colors"
               >Admin Panel</a
             >
             <a
-              href="#faq"
+              [routerLink]="'/'"
+              [fragment]="'support'"
               class="text-white hover:text-accent-200 transition-colors"
-              >FAQ</a
+              >Support</a
             >
           </div>
 
