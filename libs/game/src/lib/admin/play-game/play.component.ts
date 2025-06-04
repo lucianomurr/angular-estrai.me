@@ -6,11 +6,11 @@ import { isObservable, Observable, Subscription, take } from 'rxjs';
 import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
 
-import { QRCodeModule } from 'angularx-qrcode';
 import { ConfettiService } from '../../services/confetti.service';
 import { AdminService, ModalService, RaffleGameService } from '../../services';
 import { RaffleDocument } from '../../interface/game.interface';
 import { UserInGame } from '../../interface/player-user.interface';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-play-game',
@@ -187,7 +187,12 @@ import { UserInGame } from '../../interface/player-user.interface';
       }
     `,
   ],
-  imports: [CommonModule, WinnerModalComponent, CtaGameComponent, QRCodeModule],
+  imports: [
+    CommonModule,
+    WinnerModalComponent,
+    CtaGameComponent,
+    QRCodeComponent,
+  ],
   providers: [ModalService, ConfettiService],
 })
 export class PlayGameComponent implements OnInit {
