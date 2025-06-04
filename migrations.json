@@ -244,12 +244,45 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "e478e579ec91c8d353d95605b9403bb3c44e10ad",
+        "ref": "b247d8e662724455339ba4acc4a55c165d0e4a23",
+        "nextSteps": []
+      },
+      "remove-custom-tasks-runner": {
+        "type": "successful",
+        "name": "remove-custom-tasks-runner",
+        "changedFiles": [],
+        "ref": "b247d8e662724455339ba4acc4a55c165d0e4a23",
+        "nextSteps": []
+      },
+      "release-version-config-changes": {
+        "type": "successful",
+        "name": "release-version-config-changes",
+        "changedFiles": [],
+        "ref": "b247d8e662724455339ba4acc4a55c165d0e4a23",
+        "nextSteps": []
+      },
+      "release-changelog-config-changes": {
+        "type": "successful",
+        "name": "release-changelog-config-changes",
+        "changedFiles": [],
+        "ref": "b247d8e662724455339ba4acc4a55c165d0e4a23",
+        "nextSteps": []
+      },
+      "21-1-0-add-ignore-entries-for-nx-rule-files": {
+        "type": "successful",
+        "name": "21-1-0-add-ignore-entries-for-nx-rule-files",
+        "changedFiles": [
+          {
+            "path": ".gitignore",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "87f6fd236b9a5db189decd3be8a6e4e8ef238565",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "remove-legacy-cache"
+      "21-1-0-add-ignore-entries-for-nx-rule-files"
     ]
   }
 }
