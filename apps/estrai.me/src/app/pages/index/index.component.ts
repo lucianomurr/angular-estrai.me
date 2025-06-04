@@ -43,7 +43,13 @@ import { UserService } from '@data-access';
           <div
             class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
           >
-            <a href="#signup" class="btn-accent"> Get Started Free </a>
+            <a
+              [routerLink]="['/game']"
+              routerLinkActive="router-link-active"
+              class="btn-accent"
+            >
+              Get Started Free
+            </a>
             <a
               href="#how-it-works"
               class="btn-outline text-white border-white hover:bg-white/10"
