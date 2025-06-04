@@ -301,12 +301,52 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "62cd3d6957be4f2f5c8e4a7f1ad16abb8ba5d5be",
+        "ref": "2a4b4e21f344400b47cf8735a3ab0972557f4e6d",
+        "nextSteps": []
+      },
+      "update-typescript-eslint-v8.13.0": {
+        "type": "successful",
+        "name": "update-typescript-eslint-v8.13.0",
+        "changedFiles": [],
+        "ref": "2a4b4e21f344400b47cf8735a3ab0972557f4e6d",
+        "nextSteps": []
+      },
+      "add-file-extensions-to-overrides": {
+        "type": "successful",
+        "name": "add-file-extensions-to-overrides",
+        "changedFiles": [],
+        "ref": "2a4b4e21f344400b47cf8735a3ab0972557f4e6d",
+        "nextSteps": []
+      },
+      "update-20-2-0-update-module-federation-config-import": {
+        "type": "successful",
+        "name": "update-20-2-0-update-module-federation-config-import",
+        "changedFiles": [],
+        "ref": "2a4b4e21f344400b47cf8735a3ab0972557f4e6d",
+        "nextSteps": []
+      },
+      "update-20-2-0-update-with-module-federation-import": {
+        "type": "successful",
+        "name": "update-20-2-0-update-with-module-federation-import",
+        "changedFiles": [],
+        "ref": "2a4b4e21f344400b47cf8735a3ab0972557f4e6d",
+        "nextSteps": []
+      },
+      "update-angular-cli-version-19-0-0": {
+        "type": "successful",
+        "name": "update-angular-cli-version-19-0-0",
+        "changedFiles": [
+          {
+            "path": "package.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "dc83e6c90fb84bd0d705afad273d93c3ea2cb351",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "remove-tsconfig-option-from-jest-executor"
+      "update-angular-cli-version-19-0-0"
     ]
   }
 }
