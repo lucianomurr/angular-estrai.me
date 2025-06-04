@@ -399,12 +399,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "460c4c10c051322b54e7cf4b34cc212af9337bbc",
+        "ref": "ec7cbf7472ea5ef0db68081cf548194d759a4e56",
+        "nextSteps": []
+      },
+      "set-continuous-option": {
+        "type": "successful",
+        "name": "set-continuous-option",
+        "changedFiles": [
+          {
+            "path": "apps/estrai.me/project.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "c9e0a6f6b0f1bd91c75b3a8ba33780b8c43ab516",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "update-angular-cli-version-19-2-0"
+      "set-continuous-option"
     ]
   }
 }
