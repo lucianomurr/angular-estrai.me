@@ -289,12 +289,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "9f1096430cc84e4678512376bedd71ea23096ff4",
+        "ref": "6693b74ad5b700c3ccab79a637486e7a3ff5858c",
+        "nextSteps": []
+      },
+      "remove-tsconfig-option-from-jest-executor": {
+        "type": "successful",
+        "name": "remove-tsconfig-option-from-jest-executor",
+        "changedFiles": [
+          {
+            "path": "tsconfig.base.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "62cd3d6957be4f2f5c8e4a7f1ad16abb8ba5d5be",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "replace-getJestProjects-with-getJestProjectsAsync-v21"
+      "remove-tsconfig-option-from-jest-executor"
     ]
   }
 }

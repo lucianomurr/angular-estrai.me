@@ -24,9 +24,9 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@auth": ["libs/auth/src/"],
+      "@data-access": ["libs/data-access/src/index.ts"],
       "@game": ["libs/game/src/index.ts"],
-      "@profile": ["libs/profile/src/"],
-      "@data-access": ["libs/data-access/src/index.ts"]
+      "@profile": ["libs/profile/src/"]
     }
   },
   "angularCompilerOptions": {
