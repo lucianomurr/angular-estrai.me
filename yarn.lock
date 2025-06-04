@@ -29,13 +29,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-devkit/architect@npm:0.1901.9":
-  version: 0.1901.9
-  resolution: "@angular-devkit/architect@npm:0.1901.9"
+"@angular-devkit/architect@npm:0.1902.14":
+  version: 0.1902.14
+  resolution: "@angular-devkit/architect@npm:0.1902.14"
   dependencies:
-    "@angular-devkit/core": "npm:19.1.9"
+    "@angular-devkit/core": "npm:19.2.14"
     rxjs: "npm:7.8.1"
-  checksum: 10c0/ce613e00f7777bcfc8e7df4623b449d6a81a989c8ae01c30ef72fa30bbbae36a656ca09fd654c2df34c915cbe1e850e1b829edbc9b0a3816eb5ea0fdbaf0bd36
+  checksum: 10c0/c510298f8f65ae5768bb883a5703c1be11af147f26c23e8c40ed3571185880a6d5d8e3384157753acf20e76ae2a99de3adcc3d9468fab29adf4b06712ecf8f0a
   languageName: node
   linkType: hard
 
@@ -193,9 +193,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-devkit/core@npm:19.1.9":
-  version: 19.1.9
-  resolution: "@angular-devkit/core@npm:19.1.9"
+"@angular-devkit/core@npm:19.2.14":
+  version: 19.2.14
+  resolution: "@angular-devkit/core@npm:19.2.14"
   dependencies:
     ajv: "npm:8.17.1"
     ajv-formats: "npm:3.0.1"
@@ -208,7 +208,7 @@ __metadata:
   peerDependenciesMeta:
     chokidar:
       optional: true
-  checksum: 10c0/a9a5fadddd58bb0a4b40463bd99c7648e4b67ed3fbbe00c5ddd1eee29fc89dcc78376558c97193bbff76111699a5c73b820cdcf6c9f8bc9fcae182c276f4870b
+  checksum: 10c0/aafd31e1339a506c8293d0c8b6d3310610e4a1f3ffd7b635e149988e06647693d8da01204bab2fa12a28b55189a59e2f57d079d7a2bcf0677e0f1e60dd1232ac
   languageName: node
   linkType: hard
 
@@ -249,16 +249,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-devkit/schematics@npm:19.1.9":
-  version: 19.1.9
-  resolution: "@angular-devkit/schematics@npm:19.1.9"
+"@angular-devkit/schematics@npm:19.2.14":
+  version: 19.2.14
+  resolution: "@angular-devkit/schematics@npm:19.2.14"
   dependencies:
-    "@angular-devkit/core": "npm:19.1.9"
+    "@angular-devkit/core": "npm:19.2.14"
     jsonc-parser: "npm:3.3.1"
     magic-string: "npm:0.30.17"
     ora: "npm:5.4.1"
     rxjs: "npm:7.8.1"
-  checksum: 10c0/24e4bbeaad497e4c95ec2b2c12945f4270e0e43f5cf10111cb62445b57f973f498f229eca04d1c0a4d58234f2c03ab76bf0359e685955c081985d2b7306a57e0
+  checksum: 10c0/fb4c0b4d892025a024835790763a2abc522e55bcf5f259e7de1f97dbb5d3a79962afec98be40b5b3217dffa443b5ecb4bda76db8a07f7ece45583c7eea63b86f
   languageName: node
   linkType: hard
 
@@ -422,30 +422,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/cli@npm:~19.1.0":
-  version: 19.1.9
-  resolution: "@angular/cli@npm:19.1.9"
+"@angular/cli@npm:~19.2.0":
+  version: 19.2.14
+  resolution: "@angular/cli@npm:19.2.14"
   dependencies:
-    "@angular-devkit/architect": "npm:0.1901.9"
-    "@angular-devkit/core": "npm:19.1.9"
-    "@angular-devkit/schematics": "npm:19.1.9"
-    "@inquirer/prompts": "npm:7.2.1"
+    "@angular-devkit/architect": "npm:0.1902.14"
+    "@angular-devkit/core": "npm:19.2.14"
+    "@angular-devkit/schematics": "npm:19.2.14"
+    "@inquirer/prompts": "npm:7.3.2"
     "@listr2/prompt-adapter-inquirer": "npm:2.0.18"
-    "@schematics/angular": "npm:19.1.9"
+    "@schematics/angular": "npm:19.2.14"
     "@yarnpkg/lockfile": "npm:1.1.0"
     ini: "npm:5.0.0"
     jsonc-parser: "npm:3.3.1"
     listr2: "npm:8.2.5"
-    npm-package-arg: "npm:12.0.1"
+    npm-package-arg: "npm:12.0.2"
     npm-pick-manifest: "npm:10.0.0"
     pacote: "npm:20.0.0"
     resolve: "npm:1.22.10"
-    semver: "npm:7.6.3"
+    semver: "npm:7.7.1"
     symbol-observable: "npm:4.0.0"
     yargs: "npm:17.7.2"
   bin:
     ng: bin/ng.js
-  checksum: 10c0/0fcf4135f821ed441730b18b9851552cab0eb8f66f250c31ebd70ef4cd922d8dad1876a39acd8b98d50fb042e4dff4d02992151f750c38d1f52de4fae0266d9d
+  checksum: 10c0/dd340749475afa0d511eb9b9ba51a7fecc96aecb525a9d36ffd9076d757e19c80ac1068f91b69ec1320cd046c7e5d4a97e49c868585d0f0998d78126addd14b4
   languageName: node
   linkType: hard
 
@@ -3975,7 +3975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/checkbox@npm:^4.0.4":
+"@inquirer/checkbox@npm:^4.1.2":
   version: 4.1.8
   resolution: "@inquirer/checkbox@npm:4.1.8"
   dependencies:
@@ -4008,7 +4008,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/confirm@npm:^5.1.1":
+"@inquirer/confirm@npm:^5.1.6":
   version: 5.1.12
   resolution: "@inquirer/confirm@npm:5.1.12"
   dependencies:
@@ -4044,7 +4044,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/editor@npm:^4.2.1":
+"@inquirer/editor@npm:^4.2.7":
   version: 4.2.13
   resolution: "@inquirer/editor@npm:4.2.13"
   dependencies:
@@ -4060,7 +4060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/expand@npm:^4.0.4":
+"@inquirer/expand@npm:^4.0.9":
   version: 4.0.15
   resolution: "@inquirer/expand@npm:4.0.15"
   dependencies:
@@ -4083,7 +4083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/input@npm:^4.1.1":
+"@inquirer/input@npm:^4.1.6":
   version: 4.1.12
   resolution: "@inquirer/input@npm:4.1.12"
   dependencies:
@@ -4098,7 +4098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/number@npm:^3.0.4":
+"@inquirer/number@npm:^3.0.9":
   version: 3.0.15
   resolution: "@inquirer/number@npm:3.0.15"
   dependencies:
@@ -4113,7 +4113,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/password@npm:^4.0.4":
+"@inquirer/password@npm:^4.0.9":
   version: 4.0.15
   resolution: "@inquirer/password@npm:4.0.15"
   dependencies:
@@ -4129,27 +4129,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/prompts@npm:7.2.1":
-  version: 7.2.1
-  resolution: "@inquirer/prompts@npm:7.2.1"
+"@inquirer/prompts@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@inquirer/prompts@npm:7.3.2"
   dependencies:
-    "@inquirer/checkbox": "npm:^4.0.4"
-    "@inquirer/confirm": "npm:^5.1.1"
-    "@inquirer/editor": "npm:^4.2.1"
-    "@inquirer/expand": "npm:^4.0.4"
-    "@inquirer/input": "npm:^4.1.1"
-    "@inquirer/number": "npm:^3.0.4"
-    "@inquirer/password": "npm:^4.0.4"
-    "@inquirer/rawlist": "npm:^4.0.4"
-    "@inquirer/search": "npm:^3.0.4"
-    "@inquirer/select": "npm:^4.0.4"
+    "@inquirer/checkbox": "npm:^4.1.2"
+    "@inquirer/confirm": "npm:^5.1.6"
+    "@inquirer/editor": "npm:^4.2.7"
+    "@inquirer/expand": "npm:^4.0.9"
+    "@inquirer/input": "npm:^4.1.6"
+    "@inquirer/number": "npm:^3.0.9"
+    "@inquirer/password": "npm:^4.0.9"
+    "@inquirer/rawlist": "npm:^4.0.9"
+    "@inquirer/search": "npm:^3.0.9"
+    "@inquirer/select": "npm:^4.0.9"
   peerDependencies:
     "@types/node": ">=18"
-  checksum: 10c0/a548f560f0c5edf941ecf536ad405b73935f6892699e41b221ffdab9dcaf2396be57d74cbd5d833edaeae31aa787f6fe5144b18468f2bbe8d19e591c0dd06743
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10c0/a318d7c2a963f753f4868151f2ce5673e214f3a6597430e712bc59ef9605c831b71a6b52a9c5ea2f312b23063d2ee9fd633e127cdc9e4999e95ef15a5e90c7e1
   languageName: node
   linkType: hard
 
-"@inquirer/rawlist@npm:^4.0.4":
+"@inquirer/rawlist@npm:^4.0.9":
   version: 4.1.3
   resolution: "@inquirer/rawlist@npm:4.1.3"
   dependencies:
@@ -4165,7 +4168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/search@npm:^3.0.4":
+"@inquirer/search@npm:^3.0.9":
   version: 3.0.15
   resolution: "@inquirer/search@npm:3.0.15"
   dependencies:
@@ -4182,7 +4185,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/select@npm:^4.0.4":
+"@inquirer/select@npm:^4.0.9":
   version: 4.2.3
   resolution: "@inquirer/select@npm:4.2.3"
   dependencies:
@@ -6530,14 +6533,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@schematics/angular@npm:19.1.9":
-  version: 19.1.9
-  resolution: "@schematics/angular@npm:19.1.9"
+"@schematics/angular@npm:19.2.14":
+  version: 19.2.14
+  resolution: "@schematics/angular@npm:19.2.14"
   dependencies:
-    "@angular-devkit/core": "npm:19.1.9"
-    "@angular-devkit/schematics": "npm:19.1.9"
+    "@angular-devkit/core": "npm:19.2.14"
+    "@angular-devkit/schematics": "npm:19.2.14"
     jsonc-parser: "npm:3.3.1"
-  checksum: 10c0/de8d893a23de55099d55587840366e7bf97f50138da6e4af0a7222a4f088ff9d951e4579075bac3fc020bc2190e4c0063a28e2929341a6d98d9f677af58f4a9f
+  checksum: 10c0/8fb6b36ef5936813d7ce20bf4ad1a9126ad071b1329c7273518d69e90ed934fce29790f0e2d94b588a6dec3b1efb28463f0a47ef217b3af0b6109f9f4e739185
   languageName: node
   linkType: hard
 
@@ -10748,7 +10751,7 @@ __metadata:
     "@angular-eslint/eslint-plugin-template": "npm:19.7.1"
     "@angular-eslint/template-parser": "npm:19.7.1"
     "@angular/animations": "npm:19.2.9"
-    "@angular/cli": "npm:~19.1.0"
+    "@angular/cli": "npm:~19.2.0"
     "@angular/common": "npm:19.2.9"
     "@angular/compiler": "npm:19.2.9"
     "@angular/compiler-cli": "npm:19.2.9"
@@ -14826,19 +14829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-package-arg@npm:12.0.1":
-  version: 12.0.1
-  resolution: "npm-package-arg@npm:12.0.1"
-  dependencies:
-    hosted-git-info: "npm:^8.0.0"
-    proc-log: "npm:^5.0.0"
-    semver: "npm:^7.3.5"
-    validate-npm-package-name: "npm:^6.0.0"
-  checksum: 10c0/e7cafb0952541858abe63dfa2fd7b45f1626e310c0b60d6266fafe20c1b5b76388913c3f39390820bee9eac035705639dc62adbcf14748536f867c4d06bbf209
-  languageName: node
-  linkType: hard
-
-"npm-package-arg@npm:^12.0.0":
+"npm-package-arg@npm:12.0.2, npm-package-arg@npm:^12.0.0":
   version: 12.0.2
   resolution: "npm-package-arg@npm:12.0.2"
   dependencies:
