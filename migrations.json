@@ -277,12 +277,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "87f6fd236b9a5db189decd3be8a6e4e8ef238565",
+        "ref": "4a61c6912a04c5edcdab564414bfcf76226a1869",
+        "nextSteps": []
+      },
+      "replace-getJestProjects-with-getJestProjectsAsync-v21": {
+        "type": "successful",
+        "name": "replace-getJestProjects-with-getJestProjectsAsync-v21",
+        "changedFiles": [
+          {
+            "path": "jest.config.ts",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "9f1096430cc84e4678512376bedd71ea23096ff4",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "21-1-0-add-ignore-entries-for-nx-rule-files"
+      "replace-getJestProjects-with-getJestProjectsAsync-v21"
     ]
   }
 }
