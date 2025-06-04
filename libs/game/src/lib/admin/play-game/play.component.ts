@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { isObservable, Observable, Subscription, take } from 'rxjs';
-import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { CtaGameComponent } from './cta-game/cta-game.component';
 
 import { ConfettiService } from '../../services/confetti.service';
@@ -187,12 +186,7 @@ import { QRCodeComponent } from 'angularx-qrcode';
       }
     `,
   ],
-  imports: [
-    CommonModule,
-    WinnerModalComponent,
-    CtaGameComponent,
-    QRCodeComponent,
-  ],
+  imports: [CommonModule, CtaGameComponent, QRCodeComponent],
   providers: [ModalService, ConfettiService],
 })
 export class PlayGameComponent implements OnInit {
