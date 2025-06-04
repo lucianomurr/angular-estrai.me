@@ -130,6 +130,10 @@ import { RouterModule } from '@angular/router';
                 Add your logo, colors, and messaging to create a branded
                 experience
               </p>
+              <span
+                class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset"
+                >Coming Soon</span
+              >
               <div
                 class="absolute inset-0 bg-white opacity-10 rounded-xl animate-pulse-slow"
               ></div>
@@ -145,6 +149,10 @@ import { RouterModule } from '@angular/router';
                 Add, remove, or modify participant information and ticket
                 assignments
               </p>
+              <span
+                class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset"
+                >Coming Soon</span
+              >
               <div
                 class="absolute inset-0 bg-white opacity-10 rounded-xl animate-pulse-slow"
               ></div>
@@ -183,6 +191,10 @@ import { RouterModule } from '@angular/router';
                 Access comprehensive event statistics and participant engagement
                 data
               </p>
+              <span
+                class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset"
+                >Coming Soon</span
+              >
               <div
                 class="absolute inset-0 bg-white opacity-10 rounded-xl animate-pulse-slow"
               ></div>
