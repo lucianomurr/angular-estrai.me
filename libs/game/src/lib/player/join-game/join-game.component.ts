@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { take } from 'rxjs';
-import { AutofocusDirective } from '../../directives/autofocus.directive';
 
 import { ActivatedRoute } from '@angular/router';
 import { RaffleGameService } from '../../services/raffe-game.service';
@@ -12,7 +11,7 @@ import { HowItWorksComponent } from './how-it-work';
 @Component({
   selector: 'app-join-game',
   standalone: true,
-  imports: [ReactiveFormsModule, AutofocusDirective, HowItWorksComponent],
+  imports: [ReactiveFormsModule, HowItWorksComponent],
   template: `
     <div class="bg-white dark:bg-gray-800 ">
       <div
