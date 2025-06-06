@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/component/footer/footer.component';
 import { HeaderComponent } from './shared/component/header/header.component';
 
@@ -8,14 +8,19 @@ import { HeaderComponent } from './shared/component/header/header.component';
   selector: 'app-root',
   template: `
     <div class="min-h-screen">
-      <app-header />
+      @if (router.url !== '/auth/log-in') {
+        <app-header />
+      }
+
       <router-outlet />
-      <app-footer />
+      @if (router.url !== '/auth/log-in') {
+        <app-footer />
+      }
     </div>
   `,
   styles: [''],
   imports: [RouterOutlet, FooterComponent, HeaderComponent],
 })
 export class AppComponent {
-  title = 'estrai.me';
+  router = inject(Router);
 }

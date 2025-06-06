@@ -1,53 +1,54 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
 import { UserService } from '@data-access';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, NgOptimizedImage],
+  imports: [RouterModule, NgOptimizedImage, CommonModule],
   providers: [ToggleService, UserService],
   template: `
-    <header class="relative bg-primary-800 text-white">
+    <header
+      class="relative text-white"
+      [ngClass]="{ 'bg-primary-800': isHome(), 'bg-white': !isHome() }"
+    >
       <nav class="absolute top-0 left-0 right-0 z-10 py-6">
         <div class="container flex items-center justify-between">
           <div class="flex items-center min-w-md gap-2">
-            <img
-              ngSrc="assets/estrai.me-white.svg"
-              alt="Logo"
-              width="228"
-              height="41"
-            />
+            <a [routerLink]="'/'">
+              @if (isHome()) {
+                <img
+                  ngSrc="assets/estrai.me-white.svg"
+                  alt="Logo"
+                  width="228"
+                  height="41"
+                />
+              } @else {
+                <img
+                  ngSrc="assets/estrai.me-v2.svg"
+                  alt="Logo"
+                  width="228"
+                  height="41"
+                />
+              }
+            </a>
           </div>
 
           <div class="hidden md:flex items-center gap-8">
-            <a
-              [routerLink]="'/'"
-              [fragment]="'overview'"
-              class="text-white hover:text-accent-200 transition-colors"
-              >Overview</a
-            >
-            <a
-              [routerLink]="'/'"
-              [fragment]="'how-it-works'"
-              class="text-white hover:text-accent-200 transition-colors"
-              >How It Works</a
-            >
-
-            <a
-              [routerLink]="'/'"
-              [fragment]="'admin-panel'"
-              class="text-white hover:text-accent-200 transition-colors"
-              >Admin Panel</a
-            >
-            <a
-              [routerLink]="'/'"
-              [fragment]="'support'"
-              class="text-white hover:text-accent-200 transition-colors"
-              >Support</a
-            >
+            @for (item of menuItems; track item.label) {
+              <a
+                [routerLink]="item.RouterLink"
+                [fragment]="item.fragment"
+                class=" transition-colors"
+                [ngClass]="{
+                  'text-white hover:text-accent-200': isHome(),
+                  'text-black hover:text-accent-800': !isHome(),
+                }"
+                >{{ item.label }}</a
+              >
+            }
           </div>
 
           <div class="flex items-center gap-4">
@@ -62,28 +63,7 @@ import { UserService } from '@data-access';
                 </a>
               </div>
             } @else {
-              <a
-                href="#login"
-                class="hidden md:flex items-center gap-2 text-white hover:text-accent-200 transition-colors"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
-
-                <span>Log In</span>
-              </a>
-              <a href="#signup" class="btn-accent">Sign Up Free</a>
+              <a routerLink="/auth" class="btn-accent">Sign Up Free</a>
             }
             <button class="md:hidden text-white">
               <svg
@@ -109,9 +89,40 @@ import { UserService } from '@data-access';
   styles: [],
 })
 export class HeaderComponent {
+  public menuItems = [
+    {
+      label: 'Overview',
+      RouterLink: '/',
+      fragment: '#overview',
+    },
+    {
+      label: 'How It Works',
+      RouterLink: '/',
+      fragment: '#how-it-works',
+    },
+    {
+      label: 'Admin Panel',
+      RouterLink: '/',
+      fragment: '#admin-panel',
+    },
+    {
+      label: 'Support',
+      RouterLink: '/',
+      fragment: '#support',
+    },
+  ];
+
   constructor(
     public toggleService: ToggleService,
-    public router: Router,
+    private router: Router,
     public userService: UserService,
   ) {}
+
+  isHome() {
+    console.log(this.router.url);
+    console.log(this.router.url === '/');
+    return this.router.url === '/' || this.router.url.includes('/home')
+      ? true
+      : false;
+  }
 }

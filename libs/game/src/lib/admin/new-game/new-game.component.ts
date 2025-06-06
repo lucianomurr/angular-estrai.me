@@ -9,53 +9,155 @@ import { RaffleGameService } from '../../services';
   standalone: true,
   imports: [],
   template: `
-    <div
-      class="relative min-h-screen flex items-center bg-gradient-to-br from-primary-800 via-primary-700 to-secondary-700 overflow-hidden"
-    >
-      <div
-        class="relative flex items-center overflow-hidden bg-white dark:bg-gray-800"
-      >
-        <div class="container relative flex px-6 py-16 mx-auto">
-          <div class="relative z-10 flex flex-col sm:w-2/3 lg:w-4/5">
-            <h1
-              class="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white"
-            >
-              Start HERE
-            </h1>
-            <p class="text-sm text-gray-700 sm:text-base dark:text-white">
-              Here you can create your new online raffle game to give away your
-              prizes. To get started, choose a name for your new online game and
-              proceed! Good luck!
-            </p>
+    <div class="relative flex items-center min-h-screen bg-gray-50 ">
+      <main class="container mx-auto px-4 py-8 mt-20">
+        <h1 class="text-3xl font-bold mb-8">Welcome back, User!</h1>
 
-            <div class="bg-white dark:bg-gray-800 ">
-              <div
-                class="lg:flex lg:items-center lg:justify-between w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20"
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <a
+            (click)="createNew()"
+            class="card hover:shadow-xl group p-6 flex flex-col items-center justify-center text-center"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-4 group-hover:bg-primary-600 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
               >
-                <h2
-                  class="text-3xl font-extrabold text-black dark:text-white sm:text-4xl"
-                >
-                  <span class="block">
-                    Your raffle game is about to start...
-                  </span>
-                  <span class="block text-red-500"> Ready? </span>
-                </h2>
-                <div class=" lg:mt-0 lg:flex-shrink-0">
-                  <div class=" md:inline-flex rounded-md pt-6">
-                    <button
-                      type="button"
-                      (click)="createNew()"
-                      class="py-4 px-6 sm:mt-3 sm:pt-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-                    >
-                      Start Now
-                    </button>
-                  </div>
-                </div>
-              </div>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
             </div>
+            <h2 class="text-xl font-semibold mb-2">Create New Game</h2>
+            <p class="text-gray-600">
+              Start a new lucky spin event from scratch
+            </p>
+          </a>
+
+          <a
+            to="/my-games"
+            class="card hover:shadow-xl group p-6 flex flex-col items-center justify-center text-center"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-secondary-100 flex items-center justify-center mb-4 group-hover:bg-secondary-500 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="6" x2="10" y1="11" y2="11"></line>
+                <line x1="8" x2="8" y1="9" y2="13"></line>
+                <line x1="15" x2="15.01" y1="12" y2="12"></line>
+                <line x1="18" x2="18.01" y1="10" y2="10"></line>
+                <path
+                  d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-semibold mb-2">My Games</h2>
+            <p class="text-gray-600">View and manage your created games</p>
+          </a>
+
+          <a
+            to="/active-game"
+            class="card hover:shadow-xl group p-6 flex flex-col items-center justify-center text-center"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-accent-100 flex items-center justify-center mb-4 group-hover:bg-accent-400 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+                />
+              </svg>
+            </div>
+            <h2 class="text-xl font-semibold mb-2">Active Game</h2>
+            <p class="text-gray-600">Resume your currently active game</p>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <h2 class="text-2xl font-semibold mb-6">Recent Games</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-gray-200">
+                  <th class="text-left py-3 px-4">Game Name</th>
+                  <th class="text-left py-3 px-4">Created</th>
+                  <th class="text-left py-3 px-4">Status</th>
+                  <th class="text-left py-3 px-4">Participants</th>
+                  <th class="text-right py-3 px-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="py-3 px-4">Summer Giveaway</td>
+                  <td class="py-3 px-4">2024-03-15</td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                    >
+                      Active
+                    </span>
+                  </td>
+                  <td class="py-3 px-4">156</td>
+                  <td class="py-3 px-4 text-right">
+                    <button class="text-primary-600 hover:text-primary-800">
+                      Manage
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4">Spring Event</td>
+                  <td class="py-3 px-4">2024-03-10</td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                    >
+                      Completed
+                    </span>
+                  </td>
+                  <td class="py-3 px-4">89</td>
+                  <td class="py-3 px-4 text-right">
+                    <button class="text-primary-600 hover:text-primary-800">
+                      View
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   `,
   styles: [],
