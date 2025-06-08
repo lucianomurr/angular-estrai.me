@@ -93,22 +93,22 @@ export class HeaderComponent {
     {
       label: 'Overview',
       RouterLink: '/',
-      fragment: '#overview',
+      fragment: 'overview',
     },
     {
       label: 'How It Works',
       RouterLink: '/',
-      fragment: '#how-it-works',
+      fragment: 'how-it-works',
     },
     {
       label: 'Admin Panel',
       RouterLink: '/',
-      fragment: '#admin-panel',
+      fragment: 'admin-panel',
     },
     {
       label: 'Support',
       RouterLink: '/',
-      fragment: '#support',
+      fragment: 'support',
     },
   ];
 
@@ -119,8 +119,6 @@ export class HeaderComponent {
   ) {}
 
   isHome() {
-    console.log(this.router.url);
-    console.log(this.router.url === '/');
     return this.router.url === '/' || this.router.url.includes('/home')
       ? true
       : false;

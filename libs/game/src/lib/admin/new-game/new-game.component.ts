@@ -3,11 +3,18 @@ import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { RaffleDocument } from '../../interface/game.interface';
 import { RaffleGameService } from '../../services';
+import { CommonModule } from '@angular/common';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-game',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   template: `
     <div class="relative flex items-center min-h-screen bg-gray-50 ">
       <main class="container mx-auto px-4 py-8 mt-20">
@@ -119,40 +126,46 @@ import { RaffleGameService } from '../../services';
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="py-3 px-4">Summer Giveaway</td>
-                  <td class="py-3 px-4">2024-03-15</td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
-                    >
-                      Active
-                    </span>
-                  </td>
-                  <td class="py-3 px-4">156</td>
-                  <td class="py-3 px-4 text-right">
-                    <button class="text-primary-600 hover:text-primary-800">
-                      Manage
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4">Spring Event</td>
-                  <td class="py-3 px-4">2024-03-10</td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-                    >
-                      Completed
-                    </span>
-                  </td>
-                  <td class="py-3 px-4">89</td>
-                  <td class="py-3 px-4 text-right">
-                    <button class="text-primary-600 hover:text-primary-800">
-                      View
-                    </button>
-                  </td>
-                </tr>
+                @if (currentGame$ | async; as userGames) {
+                  @for (game of userGames; track game.collectionID) {
+                    <tr>
+                      <td class="py-3 px-4">{{ game.gameID }}</td>
+                      <td class="py-3 px-4">
+                        {{ game.creationDate.toDate() | date: 'dd/MM-yyyy' }}
+                      </td>
+                      <td class="py-3 px-4">
+                        <span
+                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium "
+                          [ngClass]="{
+                            'bg-green-100 text-green-800':
+                              game.status === 'ready',
+                            'bg-blue-100 text-blue-800':
+                              game.status === 'started',
+                            'bg-yellow-100 text-yellow-800':
+                              game.status === 'closed',
+                          }"
+                        >
+                          {{ game.status }}
+                        </span>
+                      </td>
+                      <td class="py-3 px-4">156</td>
+                      <td class="py-3 px-4 text-right">
+                        <button
+                          class="text-primary-600 hover:text-primary-800"
+                          (click)="goToGame(game.gameID)"
+                        >
+                          @if (game.status === 'ready') {
+                            Manage
+                          } @else if (game.status === 'started') {
+                            View
+                          } @else if (game.status === 'closed') {
+                            View Results
+                          }
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                }
               </tbody>
             </table>
           </div>
@@ -163,10 +176,22 @@ import { RaffleGameService } from '../../services';
   styles: [],
 })
 export class NewGameComponent {
-  currentGame$!: Observable<RaffleDocument[]> | undefined;
-  _playerService = inject(RaffleGameService);
+  currentGame$!: Observable<RaffleDocument[]>;
 
   createNew() {
     this._playerService.createNewRaffle();
+  }
+
+  constructor(
+    private asf: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    private _playerService: RaffleGameService,
+    private router: Router,
+  ) {
+    this.currentGame$ = this._playerService.getUserGames();
+  }
+
+  goToGame(gameID: string) {
+    this.router.navigate([`game/manage/${gameID}`]);
   }
 }
