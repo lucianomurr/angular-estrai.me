@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   addDoc,
   collectionData,
@@ -10,7 +10,11 @@ import {
   updateDoc,
   setDoc,
   where,
+  limit,
 } from '@angular/fire/firestore';
+
+import { User } from 'firebase/auth'; // Or whatever your User type is
+
 import { Router } from '@angular/router';
 
 import { UserService } from '@data-access';
@@ -25,12 +29,12 @@ import { AdminService } from './admin.service';
 export class RaffleGameService {
   private _userEmail = '';
   private _userUID: string | undefined;
-  private userService = inject(UserService);
 
   constructor(
     private firestore: Firestore,
     private router: Router,
     private adminService: AdminService,
+    private userService: UserService,
   ) {
     this.userService.getCurrentUser();
   }
@@ -304,6 +308,38 @@ export class RaffleGameService {
     );
   }
 
+  getUserGames(): Observable<RaffleDocument[]> {
+    return this.userService.getCurrentUser().pipe(
+      // switchMap waits for userService.getCurrentUser to emit, then switches to a new observable
+      switchMap((user: User | null) => {
+        if (user) {
+          const gameRef = collection(
+            this.firestore,
+            `admin/${user?.uid}/games`,
+          );
+          const docRef = query(
+            gameRef,
+            orderBy('creationDate', 'desc'),
+            limit(20),
+          );
+
+          const observable$ = from(collectionData(docRef)) as Observable<
+            RaffleDocument[]
+          >;
+
+          observable$.subscribe((games) => {
+            console.log('getUserGames: ', games);
+          });
+
+          return observable$;
+        } else {
+          // If no user is logged in, return an observable of an empty array
+          return from([]) as Observable<RaffleDocument[]>;
+        }
+      }),
+    );
+  }
+
   /**
    * Use by players page to get ticket details
    * @param gameDocID
@@ -329,22 +365,31 @@ export class RaffleGameService {
    * @returns
    */
   getAdminGameByID(gameID: string) {
-    const user = this.userService.userData;
-    this._userEmail = user?.email || '';
-    this._userUID = user?.uid;
-    console.log(
-      'getAdminGameByID: path: ',
-      `admin/${user?.uid}/games/${gameID}`,
+    return this.userService.getCurrentUser().pipe(
+      // switchMap waits for userService.getCurrentUser to emit, then switches to a new observable
+      switchMap((user: User | null) => {
+        if (user) {
+          console.log(
+            'getAdminGameByID: path: ',
+            `admin/${user?.uid}/games/${gameID}`,
+          );
+          const gameRef = collection(
+            this.firestore,
+            `admin/${user?.uid}/games`,
+          );
+          const docRef = query(
+            gameRef,
+            where('gameID', '==', `${gameID}`),
+            orderBy('creationDate', 'desc'),
+          );
+          return from(
+            collectionData(docRef, { idField: 'collectionID' }),
+          ) as unknown as Observable<RaffleDocument[]>;
+        } else {
+          throw new Error('User not authenticated');
+        }
+      }),
     );
-    const gameRef = collection(this.firestore, `admin/${user?.uid}/games`);
-    const docRef = query(
-      gameRef,
-      where('gameID', '==', `${gameID}`),
-      orderBy('creationDate', 'desc'),
-    );
-    return from(
-      collectionData(docRef, { idField: 'collectionID' }),
-    ) as unknown as Observable<RaffleDocument[]>;
   }
 
   getGameByID(gameID: number) {

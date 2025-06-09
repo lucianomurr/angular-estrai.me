@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe((user) => {
-      console.log('userService, constructor: ', user);
+      //console.log('userService, constructor: ', user);
       this.updateCurrentUser();
       this.userData = user as User;
     });
@@ -23,7 +23,7 @@ export class UserService {
     const auth$ = this.afAuth.authState.pipe(take(1));
     auth$.subscribe((user) => {
       this.userData = user as User;
-      console.log('getUserData: ', this.userData);
+      //console.log('getUserData: ', this.userData);
     });
     return auth$ as Observable<User>;
   }
@@ -32,7 +32,7 @@ export class UserService {
     console.log('updateCurrentUser');
     const user$ = this.afAuth.user.pipe(take(1));
     user$.subscribe((user) => {
-      console.log('getUserData: ', user);
+      //console.log('getUserData: ', user);
     });
   }
 }

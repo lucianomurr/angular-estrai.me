@@ -40,13 +40,23 @@ import { UserService } from '@data-access';
           <div
             class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
           >
-            <a
-              [routerLink]="['/game']"
-              routerLinkActive="router-link-active"
-              class="btn-accent"
-            >
-              Get Started Free
-            </a>
+            @if (userService.userData; as user) {
+              <a
+                [routerLink]="['/game']"
+                routerLinkActive="router-link-active"
+                class="btn-accent"
+              >
+                Get Started Free
+              </a>
+            } @else {
+              <a
+                [routerLink]="['/auth']"
+                routerLinkActive="router-link-active"
+                class="btn-accent"
+              >
+                Get Started Free
+              </a>
+            }
             <a
               routerLink="/"
               [fragment]="'how-it-works'"
