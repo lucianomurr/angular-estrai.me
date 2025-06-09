@@ -35,7 +35,7 @@ import { AuthService } from '@data-access';
         <div class="text-center mb-8">
           <a routerLink="/" class="inline-flex items-center gap-2">
             <img
-              src="assets/estrai.me-white.svg"
+              src="assets/estrai.me-logo-white.svg"
               alt="Logo"
               width="250"
               class="h-10"

@@ -15,7 +15,10 @@ import { RouterModule } from '@angular/router';
           <div>
             <div class="flex items-center gap-2 mb-6">
               <span class="text-2xl font-bold"
-                ><img src="assets/estrai.me-white.svg" alt="Logo" width="250"
+                ><img
+                  src="assets/estrai.me-logo-white.svg"
+                  alt="Logo"
+                  width="250"
               /></span>
             </div>
             <p class="text-gray-400 mb-6">
