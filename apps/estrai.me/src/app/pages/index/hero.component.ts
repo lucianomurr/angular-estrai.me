@@ -24,7 +24,7 @@ import { UserService } from '@data-access';
       </div>
 
       <div
-        class="container relative z-10 flex flex-col md:flex-row items-center pt-20"
+        class="container relative z-1 flex flex-col md:flex-row items-center pt-20"
       >
         <div class="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
           <h1 class="text-white mb-6">
