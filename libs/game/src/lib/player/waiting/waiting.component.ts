@@ -6,6 +6,7 @@ import { Observable, take } from 'rxjs';
 import { Timestamp } from '@angular/fire/firestore';
 import { RaffleGameService } from '../../services/raffe-game.service';
 import { UserInGame } from '../../interface/player-user.interface';
+import { ConfettiService } from '../../services/confetti.service';
 
 @Component({
   selector: 'app-waiting',
@@ -14,14 +15,14 @@ import { UserInGame } from '../../interface/player-user.interface';
   template: `
     <div class="min-h-screen flex pt-20 items-center bg-white overflow-hidden">
       <main class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <h2 class="text-xxl font-semibold mb-4">Your ticket details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           @if (ticketData$ | async; as ticketData) {
-            <h2 class="text-xl font-semibold mb-4">Your ticket details</h2>
             <div
               class="card"
               [ngClass]="
                 ticketData[0].win
-                  ? 'bg-green-100 dark:bg-green-700'
+                  ? 'bg-accent-500 dark:bg-accent-500'
                   : 'bg-white dark:bg-white'
               "
             >
@@ -29,7 +30,7 @@ import { UserInGame } from '../../interface/player-user.interface';
                 class="text-sm font-semibold border-b border-gray-600 dark:border-gray-200 w-max"
                 [ngClass]="
                   ticketData[0].win
-                    ? 'text-black dark:text-gray-100'
+                    ? 'text-gray-700 dark:text-gray-700'
                     : 'text-gray-700 dark:text-gray-900'
                 "
               >
@@ -80,7 +81,8 @@ import { UserInGame } from '../../interface/player-user.interface';
                   <div class="flex my-6 space-x-2 justify-center">
                     <span
                       class="text-xl font-bold text-green-600 dark:text-white "
-                      >You win round {{ ticketData[0].round }}</span
+                    >
+                      🎉 YOU WIN ROUND {{ ticketData[0].round }} 🎉</span
                     >
                   </div>
                 }
@@ -101,6 +103,7 @@ export class WaitingComponent {
   constructor(
     private route: ActivatedRoute,
     public raffleGameService: RaffleGameService,
+    private confettiService: ConfettiService,
   ) {
     this.gameID = this.route.snapshot.paramMap.get('gameID') || '';
     this.ticketID = this.route.snapshot.paramMap.get('ticketID') || '';
@@ -113,6 +116,7 @@ export class WaitingComponent {
     this.ticketData$.pipe(take(1)).subscribe((ticket) => {
       if (ticket[0].win) {
         navigator.vibrate([100, 200, 100, 200]);
+        this.confettiService.fireworks();
       }
     });
   }
