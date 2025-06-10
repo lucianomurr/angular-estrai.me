@@ -12,27 +12,13 @@ import { UserInGame } from '../../interface/player-user.interface';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="bg-white dark:bg-gray-800">
-      @if (ticketData$ | async; as ticketData) {
-        <div
-          class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20"
-        >
-          <h2
-            class="text-3xl font-extrabold text-black dark:text-white sm:text-4xl"
-          >
-            <span class="block"> Welcome! </span>
-            <span class="block">This is your ticket details</span>
-          </h2>
-          <div
-            class="m-auto mt-3 overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 sm:w-80 md:w-6/12 xl:3/12 pt-6 pb-6"
-            [ngClass]="
-              ticketData[0].win
-                ? 'bg-green-100 dark:bg-green-700'
-                : 'bg-white dark:bg-white'
-            "
-          >
+    <div class="min-h-screen flex pt-20 items-center bg-white overflow-hidden">
+      <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          @if (ticketData$ | async; as ticketData) {
+            <h2 class="text-xl font-semibold mb-4">Your ticket details</h2>
             <div
-              class="relative w-full px-4 py-6 rounded"
+              class="card"
               [ngClass]="
                 ticketData[0].win
                   ? 'bg-green-100 dark:bg-green-700'
@@ -49,6 +35,7 @@ import { UserInGame } from '../../interface/player-user.interface';
               >
                 Ticket number
               </p>
+
               <div class="flex my-6 space-x-2 justify-center">
                 <p
                   class="text-8xl font-bold"
@@ -58,9 +45,11 @@ import { UserInGame } from '../../interface/player-user.interface';
                       : 'text-gray-700 dark:text-gray-900'
                   "
                 >
-                  {{ ticketData[0].ticketID }}
+                  #{{ ticketData[0].ticketID }}
                 </p>
               </div>
+            </div>
+            <div class="card">
               <div
                 [ngClass]="
                   ticketData[0].win
@@ -75,7 +64,7 @@ import { UserInGame } from '../../interface/player-user.interface';
                   <div class="flex items-end text-xs">
                     {{
                       timestampToDate(ticketData[0].joinDate)
-                        | date: 'mediumTime'
+                        | date: 'dd/MM/yyyy hh:mm:ss'
                     }}
                   </div>
                 </div>
@@ -97,9 +86,9 @@ import { UserInGame } from '../../interface/player-user.interface';
                 }
               </div>
             </div>
-          </div>
+          }
         </div>
-      }
+      </main>
     </div>
   `,
   styles: [],

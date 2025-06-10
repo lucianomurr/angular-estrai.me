@@ -12,7 +12,10 @@ import { HeaderComponent } from './shared/component/header/header.component';
         <app-header />
       }
 
+      <!-- Main content area -->
+
       <router-outlet />
+
       @if (router.url !== '/auth/log-in') {
         <app-footer />
       }

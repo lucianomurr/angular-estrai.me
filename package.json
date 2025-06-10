@@ -21,6 +21,8 @@
     "@angular/platform-browser": "19.2.9",
     "@angular/platform-browser-dynamic": "19.2.9",
     "@angular/router": "19.2.9",
+    "@ng-icons/core": "^32.0.0",
+    "@ng-icons/heroicons": "^32.0.0",
     "@nx/angular": "21.1.2",
     "@nx/devkit": "21.1.2",
     "angularx-qrcode": "19",

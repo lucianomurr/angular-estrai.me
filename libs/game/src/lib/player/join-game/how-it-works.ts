@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="mb-6">How It <span class="gradient-text">Works</span></h2>
           <p class="text-gray-600 text-lg">
-            Estrai.me makes participating in lucky spin events simple and
+            Estrai.me makes participating in lucky extraction events simple and
             exciting with our streamlined process
           </p>
         </div>
@@ -171,121 +171,14 @@ import { Component } from '@angular/core';
                 </div>
                 <h3 class="text-xl font-semibold mb-3">Claim Prizes</h3>
                 <p class="text-gray-600">
-                  Winners are notified immediately with clear instructions on
-                  how to claim prizes
+                  Winners are notified immediately! Contact the game admin for
+                  the instruction on how to claim your prize!
                 </p>
                 <div class="mt-6 p-4 bg-primary-50 rounded-lg">
                   <p class="text-sm text-primary-700">
                     Verification process ensures fair and transparent results
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-20">
-          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-              <div class="p-8 lg:p-12">
-                <h3 class="text-2xl font-bold mb-4">
-                  Interactive Demonstration
-                </h3>
-                <p class="text-gray-600 mb-6">
-                  See how the spinning wheel works in this interactive
-                  demonstration. The wheel uses advanced algorithms to ensure
-                  completely random and fair results every time.
-                </p>
-                <ul class="space-y-4">
-                  <li class="flex items-start">
-                    <div class="mr-3 mt-1 text-primary-600">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M16.6666 5L7.49992 14.1667L3.33325 10"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <p>Fair and transparent random selection</p>
-                  </li>
-                  <li class="flex items-start">
-                    <div class="mr-3 mt-1 text-primary-600">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M16.6666 5L7.49992 14.1667L3.33325 10"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <p>Customizable spinning speed and duration</p>
-                  </li>
-                  <li class="flex items-start">
-                    <div class="mr-3 mt-1 text-primary-600">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M16.6666 5L7.49992 14.1667L3.33325 10"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <p>Visual and audio cues for maximum excitement</p>
-                  </li>
-                  <li class="flex items-start">
-                    <div class="mr-3 mt-1 text-primary-600">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M16.6666 5L7.49992 14.1667L3.33325 10"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <p>Works seamlessly for both online and in-person events</p>
-                  </li>
-                </ul>
-                <div class="mt-8">
-                  <a href="#signup" class="btn-primary">Try It Yourself</a>
-                </div>
-              </div>
-              <div
-                class="bg-gradient-to-br from-primary-100 to-secondary-100 p-8 lg:p-12 flex items-center justify-center"
-              >
-                <div class="relative spin-container w-64 h-64"></div>
               </div>
             </div>
           </div>
