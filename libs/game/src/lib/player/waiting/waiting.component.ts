@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, take } from 'rxjs';
+import { distinctUntilChanged, Observable, take, takeUntil } from 'rxjs';
 
 import { Timestamp } from '@angular/fire/firestore';
 import { RaffleGameService } from '../../services/raffe-game.service';
@@ -113,10 +113,13 @@ export class WaitingComponent {
       this.ticketID,
     );
 
-    this.ticketData$.pipe(take(1)).subscribe((ticket) => {
+    this.ticketData$.pipe(distinctUntilChanged()).subscribe((ticket) => {
       if (ticket[0].win) {
-        navigator.vibrate([100, 200, 100, 200]);
+        console.log('You won the game!');
         this.confettiService.fireworks();
+        if ('vibrate' in navigator) {
+          navigator.vibrate([100, 200, 100, 200]);
+        }
       }
     });
   }
