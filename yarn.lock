@@ -5287,6 +5287,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ng-icons/core@npm:^32.0.0":
+  version: 32.0.0
+  resolution: "@ng-icons/core@npm:32.0.0"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/common": ">=20.0.0"
+    "@angular/core": ">=20.0.0"
+    rxjs: ^6.5.3 || ^7.4.0
+  checksum: 10c0/74954d4631564481af81259769258cada52d3bee8e8c9278b9911f14982ef99e238a93ad92e46ab7fccb6abb610360a63765831c671e1cd7dc931e73ba5453cf
+  languageName: node
+  linkType: hard
+
+"@ng-icons/heroicons@npm:^32.0.0":
+  version: 32.0.0
+  resolution: "@ng-icons/heroicons@npm:32.0.0"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  checksum: 10c0/eb904b252d039e7510b42ea491a8886b4865cc7a4cd99720fce9de08a542aaa958bd290e10c091d1fd822ca2ecea37e7670e0985f715c2f4ddfe288fcd95d09f
+  languageName: node
+  linkType: hard
+
 "@ngtools/webpack@npm:19.2.9":
   version: 19.2.9
   resolution: "@ngtools/webpack@npm:19.2.9"
@@ -10593,6 +10615,8 @@ __metadata:
     "@angular/platform-browser": "npm:19.2.9"
     "@angular/platform-browser-dynamic": "npm:19.2.9"
     "@angular/router": "npm:19.2.9"
+    "@ng-icons/core": "npm:^32.0.0"
+    "@ng-icons/heroicons": "npm:^32.0.0"
     "@nx/angular": "npm:21.1.2"
     "@nx/devkit": "npm:21.1.2"
     "@nx/eslint": "npm:21.1.2"

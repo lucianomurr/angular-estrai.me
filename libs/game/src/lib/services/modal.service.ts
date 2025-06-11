@@ -17,8 +17,7 @@ export class ModalService {
   constructor(private resolver: ComponentFactoryResolver) {}
 
   openModal(entry: ViewContainerRef, user: UserInGame) {
-    let factory = this.resolver.resolveComponentFactory(WinnerModalComponent);
-    this.componentRef = entry.createComponent(factory);
+    this.componentRef = entry.createComponent(WinnerModalComponent);
     this.componentRef.instance.user = user;
     this.componentRef.instance.closeMeEvent.subscribe(() => this.closeModal());
     this.componentRef.instance.confirmEvent.subscribe(() => this.confirm());

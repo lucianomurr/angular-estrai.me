@@ -8,7 +8,7 @@ import { User } from 'firebase/auth';
   providedIn: 'root',
 })
 export class UserService {
-  userData: User | undefined | null;
+  public userData: User | undefined | null;
   private profileService = inject(ProfileService);
 
   constructor(public afAuth: AngularFireAuth) {
@@ -16,10 +16,12 @@ export class UserService {
       //console.log('userService, constructor: ', user);
       this.updateCurrentUser();
       this.userData = user as User;
+      // console.log('userService, constructor: userData', this.userData);
     });
   }
 
   getCurrentUser(): Observable<User | null> {
+    // console.log('getCurrentUser');
     const auth$ = this.afAuth.authState.pipe(take(1));
     auth$.subscribe((user) => {
       this.userData = user as User;
@@ -29,7 +31,7 @@ export class UserService {
   }
 
   updateCurrentUser() {
-    console.log('updateCurrentUser');
+    // console.log('updateCurrentUser');
     const user$ = this.afAuth.user.pipe(take(1));
     user$.subscribe((user) => {
       //console.log('getUserData: ', user);

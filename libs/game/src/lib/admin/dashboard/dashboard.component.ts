@@ -1,15 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs/internal/Observable';
 import { RaffleDocument } from '../../interface/game.interface';
 import { RaffleGameService } from '../../services';
 import { CommonModule } from '@angular/common';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { UserService } from '@data-access';
 
 @Component({
   selector: 'app-new-game',
@@ -18,8 +14,11 @@ import { Router } from '@angular/router';
   template: `
     <div class="relative flex items-center min-h-screen bg-gray-50 ">
       <main class="container mx-auto px-4 py-8 mt-20">
-        <h1 class="text-3xl font-bold mb-8">Welcome back, User!</h1>
-
+        @if (userService.userData; as user) {
+          <h1 class="text-3xl font-bold mb-8">
+            Welcome back, {{ user.displayName }}!
+          </h1>
+        }
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <a
             (click)="createNew()"
@@ -126,7 +125,7 @@ import { Router } from '@angular/router';
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                @if (currentGame$ | async; as userGames) {
+                @if (currentGames$ | async; as userGames) {
                   @for (game of userGames; track game.collectionID) {
                     <tr>
                       <td class="py-3 px-4">{{ game.gameID }}</td>
@@ -148,7 +147,7 @@ import { Router } from '@angular/router';
                           {{ game.status }}
                         </span>
                       </td>
-                      <td class="py-3 px-4">156</td>
+                      <td class="py-3 px-4">{{ game.totalUsers }}</td>
                       <td class="py-3 px-4 text-right">
                         <button
                           class="text-primary-600 hover:text-primary-800"
@@ -175,20 +174,19 @@ import { Router } from '@angular/router';
   `,
   styles: [],
 })
-export class NewGameComponent {
-  currentGame$!: Observable<RaffleDocument[]>;
+export class DashboardComponent {
+  currentGames$!: Observable<RaffleDocument[]>;
 
   createNew() {
     this._playerService.createNewRaffle();
   }
 
   constructor(
-    private asf: AngularFirestore,
-    private afAuth: AngularFireAuth,
     private _playerService: RaffleGameService,
     private router: Router,
+    public userService: UserService,
   ) {
-    this.currentGame$ = this._playerService.getUserGames();
+    this.currentGames$ = this._playerService.getAdminUserGames();
   }
 
   goToGame(gameID: string) {

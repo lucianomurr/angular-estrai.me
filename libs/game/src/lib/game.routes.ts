@@ -17,8 +17,8 @@ export const GAME_ROUTES: Routes = [
       {
         path: 'new',
         loadComponent: () =>
-          import('./admin/new-game/new-game.component').then(
-            (m) => m.NewGameComponent,
+          import('./admin/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent,
           ),
         canActivate: [AngularFireAuthGuard],
       },

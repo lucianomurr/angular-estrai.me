@@ -2,7 +2,7 @@ import { Timestamp } from '@angular/fire/firestore/firebase';
 
 export interface UserInGame {
   collectionID?: string;
-  joinDate: Timestamp | Date;
+  joinDate: any;
   name: string;
   ticketID: string;
   win?: boolean;
