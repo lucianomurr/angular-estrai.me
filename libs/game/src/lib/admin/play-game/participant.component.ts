@@ -54,7 +54,7 @@ import { CommonModule } from '@angular/common';
       <!-- Participant List ----  no users in the game -->
       @if (participants?.length === 0) {
         <div class="text-center py-12">
-          <ng-icon name="heroUsers" class="text-gray-400" size="20"></ng-icon>
+          <ng-icon name="heroUsers" class="text-gray-400" size="30"></ng-icon>
 
           <h3 class="text-lg font-medium text-gray-900 mb-2">
             No participants yet
@@ -62,7 +62,6 @@ import { CommonModule } from '@angular/common';
           <p class="text-gray-600 mb-6">
             Share the game ID or QR code to let people join
           </p>
-          <button class="btn-primary">Share Game Link</button>
         </div>
       } @else {
         <!-- Participant List in the game DESKTOP -->

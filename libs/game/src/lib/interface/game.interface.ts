@@ -1,4 +1,3 @@
-import { Timestamp } from '@angular/fire/firestore/firebase';
 import { UserInGame } from './player-user.interface';
 
 export interface RaffleDocument {
@@ -10,4 +9,5 @@ export interface RaffleDocument {
   email: string;
   users?: UserInGame[];
   actualRound: number;
+  totalUsers?: number;
 }

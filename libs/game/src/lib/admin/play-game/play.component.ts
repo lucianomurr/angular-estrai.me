@@ -40,6 +40,7 @@ import { GameParticipantListComponent } from './participant.component';
                 (closeGameEvent)="OnClickCloseGame()"
                 [round]="gameDetails[0].actualRound"
                 [status]="gameDetails[0].status"
+                [participants$]="players$"
               />
             </div>
             <app-participant-list
@@ -179,11 +180,16 @@ export class PlayGameComponent implements OnInit {
   UpdateGameRound() {
     //update the game round
     if (this.gameID && this.collectionID) {
-      this.raffleGameService.updateGameRound(
-        this.collectionID,
-        this.gameID,
-        this.round,
-      );
+      //update the total number of users in the game
+
+      this.players$.pipe(take(1)).subscribe((users) => {
+        this.raffleGameService.updateGameRound(
+          this.collectionID!,
+          this.gameID!,
+          this.round,
+          users.length,
+        );
+      });
     }
   }
 

@@ -44,17 +44,19 @@ import { MENU_ITEMS } from './header-menu-const';
           </div>
 
           <div class="hidden md:flex items-center gap-8">
-            @for (item of menuItems; track item.label) {
-              <a
-                [routerLink]="item.RouterLink"
-                [fragment]="item.fragment"
-                class=" transition-colors"
-                [ngClass]="{
-                  'text-white hover:text-accent-200': isHome(),
-                  'text-black hover:text-accent-800': !isHome(),
-                }"
-                >{{ item.label }}</a
-              >
+            @if (isHome()) {
+              @for (item of menuItems; track item.label) {
+                <a
+                  [routerLink]="item.RouterLink"
+                  [fragment]="item.fragment"
+                  class=" transition-colors"
+                  [ngClass]="{
+                    'text-white hover:text-accent-200': isHome(),
+                    'text-black hover:text-accent-800': !isHome(),
+                  }"
+                  >{{ item.label }}</a
+                >
+              }
             }
           </div>
 

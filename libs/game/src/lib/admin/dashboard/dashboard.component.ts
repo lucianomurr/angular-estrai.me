@@ -125,7 +125,7 @@ import { UserService } from '@data-access';
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                @if (currentGame$ | async; as userGames) {
+                @if (currentGames$ | async; as userGames) {
                   @for (game of userGames; track game.collectionID) {
                     <tr>
                       <td class="py-3 px-4">{{ game.gameID }}</td>
@@ -147,7 +147,7 @@ import { UserService } from '@data-access';
                           {{ game.status }}
                         </span>
                       </td>
-                      <td class="py-3 px-4">156</td>
+                      <td class="py-3 px-4">{{ game.totalUsers }}</td>
                       <td class="py-3 px-4 text-right">
                         <button
                           class="text-primary-600 hover:text-primary-800"
@@ -175,7 +175,7 @@ import { UserService } from '@data-access';
   styles: [],
 })
 export class DashboardComponent {
-  currentGame$!: Observable<RaffleDocument[]>;
+  currentGames$!: Observable<RaffleDocument[]>;
 
   createNew() {
     this._playerService.createNewRaffle();
@@ -186,7 +186,7 @@ export class DashboardComponent {
     private router: Router,
     public userService: UserService,
   ) {
-    this.currentGame$ = this._playerService.getAdminUserGames();
+    this.currentGames$ = this._playerService.getAdminUserGames();
   }
 
   goToGame(gameID: string) {

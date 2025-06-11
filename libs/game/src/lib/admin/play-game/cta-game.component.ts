@@ -5,10 +5,13 @@ import {
   heroArrowPath,
   heroLockClosed,
 } from '@ng-icons/heroicons/outline';
+import { UserInGame } from '../../interface/player-user.interface';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-cta-game',
   standalone: true,
-  imports: [NgIcon],
+  imports: [NgIcon, CommonModule],
   providers: [
     provideIcons({
       heroPlay,
@@ -21,28 +24,30 @@ import {
       <h2 class="text-xl font-semibold mb-4">Game Controls</h2>
       @if (status !== 'closed') {
         <div class="space-y-3">
-          @if (spinning === false) {
-            <button class="w-full btn-primary" (click)="clickOnStartGame()">
-              <ng-icon name="heroPlay" size="20" class="mr-2" />
-              @if (round === 0) {
-                Start Spin
-              } @else {
-                New round
-              }
-            </button>
-          }
-          @if (spinning) {
-            <button
-              disabled
-              class="w-full btn bg-purple-600 text-white opacity-75 cursor-not-allowed"
-            >
-              <ng-icon
-                name="heroArrowPath"
-                size="20"
-                class="mr-2 animate-spin"
-              />
-              Spinning...
-            </button>
+          @if (participants$ | async; as participants) {
+            @if (spinning === false && participants.length > 0) {
+              <button class="w-full btn-primary" (click)="clickOnStartGame()">
+                <ng-icon name="heroPlay" size="20" class="mr-2" />
+                @if (round === 0) {
+                  Start Spin
+                } @else {
+                  New round
+                }
+              </button>
+            }
+            @if (spinning) {
+              <button
+                disabled
+                class="w-full btn bg-purple-600 text-white opacity-75 cursor-not-allowed"
+              >
+                <ng-icon
+                  name="heroArrowPath"
+                  size="20"
+                  class="mr-2 animate-spin"
+                />
+                Spinning...
+              </button>
+            }
           }
 
           <button
@@ -73,6 +78,7 @@ import {
 export class CtaGameComponent {
   @Input() round: number;
   @Input() status: string;
+  @Input() participants$: Observable<UserInGame[]>;
   @Output() startGameEvent = new EventEmitter();
   @Output() closeGameEvent = new EventEmitter();
 
