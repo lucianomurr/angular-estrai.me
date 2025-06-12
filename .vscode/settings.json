@@ -26,5 +26,6 @@
     "editor.formatOnSave": false
   },
   "editor.fontLigatures": true,
-  "notebook.formatOnSave.enabled": true
+  "notebook.formatOnSave.enabled": true,
+  "nxConsole.generateAiAgentRules": true
 }
