@@ -8,12 +8,14 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { RaffleGameService } from '../../services/raffe-game.service';
-import { HowItWorksComponent } from './how-it-works';
+
 import {
   heroArrowRightEndOnRectangle,
   heroExclamationTriangle,
   heroXCircle,
 } from '@ng-icons/heroicons/outline';
+
+import { HowItWorksComponent } from './how-it-works.component';
 
 @Component({
   selector: 'app-join-game',
@@ -96,7 +98,7 @@ import {
           </div>
         </div>
       </div>
-      <app-how-it-work />
+      <app-how-it-works />
     </main>
   `,
   styles: [],

@@ -95,6 +95,7 @@ import { UserService } from '@data-access';
       </div>
 
       <div class="absolute bottom-0 left-0 right-0">
+        <!-- Decorative SVG Wave -->
         <svg
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"

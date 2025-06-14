@@ -25,6 +25,11 @@ export const APP_ROUTES: Routes = [
       ),
   },
   {
+    path: 'terms',
+    loadComponent: () =>
+      import('./pages/terms/terms.component').then((m) => m.TermsComponent),
+  },
+  {
     path: 'unauthorized',
     loadComponent: () =>
       import('./pages/unauthorized/unauthorized.component').then(

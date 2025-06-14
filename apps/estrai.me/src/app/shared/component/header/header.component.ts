@@ -5,6 +5,8 @@ import { ToggleService } from '../../services/open-nav.service';
 import { UserService } from '@data-access';
 import { MobileSidenavComponent } from './mobile-sidenav.component';
 import { MENU_ITEMS } from './header-menu-const';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { matMenu, matClose } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +16,9 @@ import { MENU_ITEMS } from './header-menu-const';
     NgOptimizedImage,
     CommonModule,
     MobileSidenavComponent,
+    NgIcon,
   ],
-  providers: [ToggleService, UserService],
+  providers: [ToggleService, UserService, provideIcons({ matMenu, matClose })],
   template: `
     <header
       class="relative text-white"
@@ -26,19 +29,9 @@ import { MENU_ITEMS } from './header-menu-const';
           <div class="flex items-center min-w-xs md:min-w-md gap-2">
             <a [routerLink]="'/'">
               @if (isHome()) {
-                <img
-                  ngSrc="assets/estrai.me-logo-white.svg"
-                  alt="Logo"
-                  width="228"
-                  height="41"
-                />
+                <h1 class="text-3xl font-bold text-white">ESTRAI.ME</h1>
               } @else {
-                <img
-                  ngSrc="assets/estrai.me-logo-color.svg"
-                  alt="Logo"
-                  width="228"
-                  height="41"
-                />
+                <h1 class="text-3xl font-bold gradient-text">ESTRAI.ME</h1>
               }
             </a>
           </div>
@@ -87,20 +80,7 @@ import { MENU_ITEMS } from './header-menu-const';
                   'text-black': !isHome(),
                 }"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
+                <ng-icon name="matMenu" size="24" />
               </button>
             } @else {
               <button
@@ -112,20 +92,7 @@ import { MENU_ITEMS } from './header-menu-const';
                   'text-black': !isHome(),
                 }"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                </svg>
+                <ng-icon name="matClose" size="24" />
               </button>
             }
           </div>
@@ -135,6 +102,7 @@ import { MENU_ITEMS } from './header-menu-const';
     @if (isMobileMenuOpen) {
       <app-mobile-sidenav
         class="absolute top-20 left-0 right-0 bg-white shadow-lg border-t z-50"
+        (CloseSidenavEvent)="toggleService.updateData(!isMobileMenuOpen)"
       />
     }
     @if (isMobileMenuOpen) {
@@ -160,6 +128,11 @@ export class HeaderComponent {
     this.toggleService.sidenav$.subscribe((isOpen) => {
       this.isMobileMenuOpen = isOpen;
     });
+  }
+
+  onCloseSidenav() {
+    console.log('onCloseSidenav');
+    this.toggleService.updateData(!this.isMobileMenuOpen);
   }
 
   isHome() {
