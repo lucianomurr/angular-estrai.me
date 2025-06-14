@@ -5309,6 +5309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ng-icons/material-icons@npm:^32.0.0":
+  version: 32.0.0
+  resolution: "@ng-icons/material-icons@npm:32.0.0"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  checksum: 10c0/b2c71790c68dc2f22e2731e84d558ccea0d37721e36b96933eee7687b919fd98cd7cabda21d44a9c61e29de335adbe7b5366bffaf1e1cca4bed722f34ff0737a
+  languageName: node
+  linkType: hard
+
 "@ngtools/webpack@npm:19.2.9":
   version: 19.2.9
   resolution: "@ngtools/webpack@npm:19.2.9"
@@ -10617,6 +10626,7 @@ __metadata:
     "@angular/router": "npm:19.2.9"
     "@ng-icons/core": "npm:^32.0.0"
     "@ng-icons/heroicons": "npm:^32.0.0"
+    "@ng-icons/material-icons": "npm:^32.0.0"
     "@nx/angular": "npm:21.1.2"
     "@nx/devkit": "npm:21.1.2"
     "@nx/eslint": "npm:21.1.2"

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RaffleGameService } from '../../services';
 import { of, take } from 'rxjs';
-import { HowItWorksComponent } from '../join-game/how-it-works';
+import { HowItWorksComponent } from '../join-game/how-it-works.component';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowRightEndOnRectangle } from '@ng-icons/heroicons/outline';
 @Component({
@@ -64,7 +64,7 @@ import { heroArrowRightEndOnRectangle } from '@ng-icons/heroicons/outline';
           </div>
         </div>
       </div>
-      <app-how-it-work />
+      <app-how-it-works />
     </main>
   `,
   styles: [],

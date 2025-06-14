@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export default {
   content: ['./apps/**/*.{html,ts}', './libs/**/*.{html,ts}'],
   theme: {
@@ -60,7 +63,10 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        // Example: Define a new font family
+        inter: ['"Inter"', ...defaultTheme.fontFamily.sans],
+        // OR update the default sans font family
+        sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite',

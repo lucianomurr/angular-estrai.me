@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
             Admin <span class="gradient-text">Control Panel</span>
           </h2>
           <p class="text-gray-600 text-lg">
-            Take full control of your lucky spin events with our comprehensive
+            Take full control of your extraction events with our comprehensive
             admin dashboard
           </p>
         </div>

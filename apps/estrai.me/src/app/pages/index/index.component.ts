@@ -22,7 +22,6 @@ import { AdminPreviewComponent } from './admin-preview.components';
   providers: [UserService],
   template: `
     <app-hero />
-
     <app-overview />
     <app-how-it-works />
     <app-admin-preview />

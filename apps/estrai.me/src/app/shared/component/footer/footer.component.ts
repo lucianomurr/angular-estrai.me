@@ -14,12 +14,7 @@ import { RouterModule } from '@angular/router';
         >
           <div>
             <div class="flex items-center gap-2 mb-6">
-              <span class="text-2xl font-bold"
-                ><img
-                  src="assets/estrai.me-logo-white.svg"
-                  alt="Logo"
-                  width="250"
-              /></span>
+              <h2 class="text-3xl font-bold text-white">ESTRAI.ME</h2>
             </div>
             <p class="text-gray-400 mb-6">
               The ultimate platform for creating exciting lucky spin experiences
@@ -123,7 +118,7 @@ import { RouterModule } from '@angular/router';
           </p>
           <div class="flex gap-6">
             <a
-              href="#terms"
+              routerLink="/terms"
               class="text-gray-500 text-sm hover:text-white transition-colors"
               >Terms of Service</a
             >
