@@ -5,7 +5,6 @@ import {
   heroBellAlert,
   heroClock,
   heroGift,
-  heroUserPlus,
 } from '@ng-icons/heroicons/outline';
 
 interface HowItWorksStep {

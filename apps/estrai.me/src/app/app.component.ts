@@ -8,7 +8,9 @@ import { HeaderComponent } from './shared/component/header/header.component';
   selector: 'app-root',
   template: `
     <div class="min-h-screen">
-      @if (router.url !== '/auth/log-in') {
+      @if (
+        router.url !== '/auth/log-in' && !router.url.includes('/game/manage/')
+      ) {
         <app-header />
       }
 

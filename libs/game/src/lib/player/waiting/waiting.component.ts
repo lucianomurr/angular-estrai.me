@@ -7,11 +7,12 @@ import { Timestamp } from '@angular/fire/firestore';
 import { RaffleGameService } from '../../services/raffe-game.service';
 import { UserInGame } from '../../interface/player-user.interface';
 import { ConfettiService } from '../../services/confetti.service';
+import { HowItWorksComponent } from '../join-game/how-it-works.component';
 
 @Component({
   selector: 'app-waiting',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HowItWorksComponent],
   template: `
     <div class="min-h-screen flex pt-20 items-center bg-white overflow-hidden">
       <main class="container mx-auto px-4 py-8">
@@ -52,14 +53,10 @@ import { ConfettiService } from '../../services/confetti.service';
             </div>
             <div class="card">
               <div
-                [ngClass]="
-                  ticketData[0].win
-                    ? 'text-black dark:text-gray-100'
-                    : 'text-gray-700 dark:text-gray-900'
-                "
+                [ngClass]="ticketData[0].win ? 'text-black' : 'text-green-700'"
               >
                 <div
-                  class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-600 dark:border-gray-200 md:space-x-24"
+                  class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-600  md:space-x-24"
                 >
                   <p>Created at</p>
                   <div class="flex items-end text-xs">
@@ -70,7 +67,7 @@ import { ConfettiService } from '../../services/confetti.service';
                   </div>
                 </div>
                 <div
-                  class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-600 dark:border-gray-200 md:space-x-24"
+                  class="flex items-center justify-between pb-2 mb-2 space-x-12 text-sm border-b border-gray-600  md:space-x-24"
                 >
                   <p>Assigned to:</p>
                   <div class="flex items-end text-xs">
@@ -79,9 +76,7 @@ import { ConfettiService } from '../../services/confetti.service';
                 </div>
                 @if (ticketData[0].win) {
                   <div class="flex my-6 space-x-2 justify-center">
-                    <span
-                      class="text-xl font-bold text-green-600 dark:text-white "
-                    >
+                    <span class="text-xl font-bold text-green-600 ">
                       🎉 YOU WIN ROUND {{ ticketData[0].round }} 🎉</span
                     >
                   </div>
@@ -92,6 +87,7 @@ import { ConfettiService } from '../../services/confetti.service';
         </div>
       </main>
     </div>
+    <app-how-it-works />
   `,
   styles: [],
 })

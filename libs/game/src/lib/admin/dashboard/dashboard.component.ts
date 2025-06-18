@@ -92,9 +92,12 @@ import {
                 @if (currentGames$ | async; as userGames) {
                   @for (game of userGames; track game.collectionID) {
                     <tr>
-                      <td class="py-3 px-4">{{ game.gameID }}</td>
+                      <td
+                        class="py-3 px-4"
+                        [innerText]="game.gameName || game.gameID"
+                      ></td>
                       <td class="py-3 px-4">
-                        {{ game.creationDate.toDate() | date: 'dd/MM-yyyy' }}
+                        {{ game.creationDate.toDate() | date: 'short' }}
                       </td>
                       <td class="py-3 px-4">
                         <span

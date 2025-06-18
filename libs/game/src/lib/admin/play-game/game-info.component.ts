@@ -1,22 +1,62 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   heroCheckCircle,
   heroClipboardDocument,
 } from '@ng-icons/heroicons/outline';
+import { matSave } from '@ng-icons/material-icons/baseline';
+
 import { QRCodeComponent } from 'angularx-qrcode';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game-info',
-  standalone: true,
-  imports: [NgIcon, QRCodeComponent],
-  providers: [provideIcons({ heroCheckCircle, heroClipboardDocument })],
+  imports: [NgIcon, QRCodeComponent, ReactiveFormsModule],
+  providers: [
+    provideIcons({ heroCheckCircle, heroClipboardDocument, matSave }),
+  ],
   template: `
     <div class="card">
       <h2 class="text-xl font-semibold mb-4">Game Information</h2>
 
       <div class="space-y-4">
         <div>
+          <form [formGroup]="gameInfoForm" (ngSubmit)="onSaveGameName()">
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Game Name</label
+            >
+            <div class="flex items-center gap-2">
+              <input
+                type="text"
+                formControlName="gameName"
+                [value]="gameName"
+                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 font-mono"
+              />
+              <button
+                class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                (onSubmit)="copyToClipboardGameID()"
+                type="submit"
+                [attr.aria-label]="'Copy Game ID'"
+                [attr.title]="'Copy Game ID'"
+                [disabled]="!saveName"
+              >
+                @if (!saveName) {
+                  <ng-icon
+                    name="matSave"
+                    class="text-gray-200"
+                    size="20"
+                  ></ng-icon>
+                } @else {
+                  <ng-icon
+                    name="matSave"
+                    class="text-green-500"
+                    size="20"
+                  ></ng-icon>
+                }
+              </button>
+            </div>
+          </form>
           <label class="block text-sm font-medium text-gray-700 mb-2"
             >Game ID</label
           >
@@ -109,13 +149,43 @@ import { QRCodeComponent } from 'angularx-qrcode';
 })
 export class GameInfoComponent {
   @Input() public gameID: string = '';
+  @Input() public gameName: string | undefined = '';
   @Input() public gameStatus: string = '';
+
+  @Output() private gameNameChange = new EventEmitter<string>();
+
+  public gameInfoForm: FormGroup;
+  public saveName = false;
+  public copyToClipboardGameIDSuccess = false;
+  public copyToClipboardJoinURLSuccess = false;
 
   public get gameQRUrl(): string {
     return `${window.location.origin}/game/join?game=`;
   }
-  public copyToClipboardGameIDSuccess = false;
-  public copyToClipboardJoinURLSuccess = false;
+
+  constructor(private fb: FormBuilder) {
+    this.gameInfoForm = this.fb.group({
+      gameName: [this.gameName],
+    });
+    this.gameInfoForm.valueChanges.subscribe(() => {
+      console.log(this.gameInfoForm);
+      this.saveName = this.gameInfoForm.dirty;
+    });
+  }
+
+  ngOnChanges() {
+    if (
+      this.gameInfoForm &&
+      this.gameName !== this.gameInfoForm.get('gameName')?.value
+    ) {
+      this.gameInfoForm.patchValue(
+        { gameName: this.gameName },
+        { emitEvent: false },
+      );
+      this.gameInfoForm.markAsPristine();
+      this.saveName = false;
+    }
+  }
 
   public copyToClipboardGameID() {
     // copy the game ID to clipboard
@@ -132,6 +202,7 @@ export class GameInfoComponent {
       this.copyToClipboardGameIDSuccess = false;
     }, 2000);
   }
+
   public copyToClipboardJoinURL() {
     navigator.clipboard.writeText(this.gameQRUrl + this.gameID).then(
       () => {
@@ -145,5 +216,14 @@ export class GameInfoComponent {
     setTimeout(() => {
       this.copyToClipboardJoinURLSuccess = false;
     }, 2000);
+  }
+
+  public onSaveGameName() {
+    if (this.gameInfoForm.valid && this.gameInfoForm.dirty) {
+      console.log('Game name saved:', this.gameInfoForm.value.gameName);
+      this.gameNameChange.emit(this.gameInfoForm.value.gameName);
+      this.gameInfoForm.markAsPristine();
+      this.saveName = false;
+    }
   }
 }
