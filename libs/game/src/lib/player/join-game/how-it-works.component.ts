@@ -19,22 +19,16 @@ const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
     icon: 'heroArrowRightOnRectangle',
     title: 'Sign In',
     description:
-      'Create an account or log in with your existing credentials to get started',
-    highlight: 'Your tickets are automatically assigned to your account',
+      'No login, or any personal data needed for playing, just add the game code and your name to get started',
+    highlight: 'Your tickets are automatically assigned to you',
   },
   {
     icon: 'heroClock',
     title: 'Join Waiting Room',
     description:
       "Enter the event waiting room where you'll see your assigned ticket numbers",
-    highlight: 'Watch the participant count grow as others join',
-  },
-  {
-    icon: 'heroBellAlert',
-    title: 'Game Start',
-    description:
-      'Receive notification when the event begins and watch the spinning wheel in real-time',
-    highlight: 'Experience the excitement as the wheel slows down',
+    highlight:
+      'Wait until the game starts and remember to not close the window',
   },
   {
     icon: 'heroGift',
@@ -63,7 +57,7 @@ const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="mb-6">How It <span class="gradient-text">Works</span></h2>
           <p class="text-gray-600 text-lg">
-            Estrai.me makes participating in lucky spin events simple and
+            Estrai.me makes participating in lucky extraction events simple and
             exciting with our streamlined process
           </p>
         </div>
@@ -74,7 +68,7 @@ const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
           ></div>
 
           <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10"
           >
             @for (step of steps; track step.icon; let i = $index) {
               <div class="card hover:shadow-xl relative">

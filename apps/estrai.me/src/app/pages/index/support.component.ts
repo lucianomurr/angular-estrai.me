@@ -28,7 +28,7 @@ const SUPPORT_CARDS: SupportCard[] = [
       'Support our daily development efforts with a coffee. Every cup helps us stay focused and motivated!',
     btnClass: 'btn-primary w-full justify-center',
     btnLabel: 'Buy a Coffee',
-    link: 'https://www.buymeacoffee.com/estraime',
+    link: 'https://coff.ee/lucianomure',
   },
   {
     icon: 'matFavorite',
@@ -39,7 +39,7 @@ const SUPPORT_CARDS: SupportCard[] = [
       'Support long-term development and get exclusive benefits as an official sponsor',
     btnClass: 'btn-secondary w-full justify-center',
     btnLabel: 'Sponsor Us',
-    link: 'https://github.com/sponsors/estraime',
+    link: 'https://github.com/lucianomurr/angular-estrai.me',
   },
   {
     icon: 'matCardGiftcard',
@@ -50,7 +50,7 @@ const SUPPORT_CARDS: SupportCard[] = [
       'Make a one-time contribution to help us reach our development goals',
     btnClass: 'btn-accent w-full justify-center',
     btnLabel: 'Make a Donation',
-    link: 'https://ko-fi.com/estraime',
+    link: 'https://coff.ee/lucianomure',
   },
 ];
 

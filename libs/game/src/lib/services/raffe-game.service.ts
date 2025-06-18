@@ -66,6 +66,8 @@ export class RaffleGameService {
         email: this._userEmail,
         userUID: this._userUID,
         actualRound: 0,
+        gameName: '',
+        totalUsers: 0,
       };
 
       const gameRef = collection(
@@ -279,6 +281,34 @@ export class RaffleGameService {
         const collectionData = {
           status: 'closed',
         };
+        promises.push(updateDoc(raffleCollection, collectionData));
+      });
+
+    return Promise.all(promises);
+  }
+
+  updateGameName(collectionID: string, gameID: string, gameName: string) {
+    const userId = this.userService.userData?.uid;
+    if (!userId) {
+      throw new Error('User is not authenticated');
+    }
+    const raffleCollection = doc(
+      this.firestore,
+      `admin/${userId}/games/${collectionID}`,
+    );
+    const collectionData = {
+      gameName: gameName,
+    };
+    const promises = [updateDoc(raffleCollection, collectionData)];
+
+    this.adminService
+      .getGameCollectionID(gameID)
+      .pipe(take(1))
+      .subscribe((game) => {
+        const raffleCollection = doc(
+          this.firestore,
+          `players/${game[0].collectionID}`,
+        );
         promises.push(updateDoc(raffleCollection, collectionData));
       });
 
