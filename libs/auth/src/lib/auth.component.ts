@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@data-access';
@@ -229,10 +229,8 @@ import { AuthService } from '@data-access';
   styles: [],
 })
 export class AuthComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.authService.afAuth.authState.subscribe((user) => {

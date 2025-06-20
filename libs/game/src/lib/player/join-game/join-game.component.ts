@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -103,16 +103,16 @@ import { HowItWorksComponent } from './how-it-works.component';
   `,
   styles: [],
 })
-export class JoinGameComponent {
+export class JoinGameComponent implements OnInit {
+  private raffleGameService = inject(RaffleGameService);
+  private route = inject(ActivatedRoute);
+
   mygameid = new FormControl();
   gameStatus = 'ready';
   showError = false;
   showWarning = false;
 
-  constructor(
-    private raffleGameService: RaffleGameService,
-    private route: ActivatedRoute,
-  ) {
+  ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.mygameid.setValue(params['game']);
     });

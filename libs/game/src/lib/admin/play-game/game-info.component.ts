@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -147,7 +155,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   `,
   styles: [``],
 })
-export class GameInfoComponent {
+export class GameInfoComponent implements OnInit {
+  private fb = inject(FormBuilder);
+
   @Input() public gameID: string = '';
   @Input() public gameName: string | undefined = '';
   @Input() public gameStatus: string = '';
@@ -163,7 +173,7 @@ export class GameInfoComponent {
     return `${window.location.origin}/game/join?game=`;
   }
 
-  constructor(private fb: FormBuilder) {
+  ngOnInit() {
     this.gameInfoForm = this.fb.group({
       gameName: [this.gameName],
     });

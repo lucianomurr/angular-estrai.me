@@ -8,10 +8,12 @@ import { User } from 'firebase/auth';
   providedIn: 'root',
 })
 export class UserService {
+  afAuth = inject(AngularFireAuth);
+
   public userData: User | undefined | null;
   private profileService = inject(ProfileService);
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor() {
     this.afAuth.authState.subscribe((user) => {
       //console.log('userService, constructor: ', user);
       this.updateCurrentUser();

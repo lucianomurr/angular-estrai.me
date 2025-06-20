@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
@@ -97,6 +103,13 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
   ],
 })
 export class PlayGameComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private raffleGameService = inject(RaffleGameService);
+  private adminService = inject(AdminService);
+  private modalService = inject(ModalService);
+  private confettiService = inject(ConfettiService);
+
   // game ID coming from the url
   gameID: string | null;
   //qr url
@@ -118,14 +131,10 @@ export class PlayGameComponent implements OnInit {
   entry!: ViewContainerRef;
   sub!: Subscription;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private raffleGameService: RaffleGameService,
-    private adminService: AdminService,
-    private modalService: ModalService,
-    private confettiService: ConfettiService,
-  ) {
+  constructor() {
+    const router = this.router;
+    const raffleGameService = this.raffleGameService;
+
     //set game id from router
     const gameID = this.route.snapshot.paramMap.get('gameID');
 

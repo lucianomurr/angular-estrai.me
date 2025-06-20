@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 
 import { User } from 'firebase/auth';
@@ -21,7 +21,7 @@ interface Profile {
   providedIn: 'root',
 })
 export class ProfileService {
-  constructor(private firestore: Firestore) {}
+  private firestore = inject(Firestore);
 
   SaveProfile(userData: User | null) {
     if (userData) {

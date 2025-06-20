@@ -83,14 +83,14 @@ import { take } from 'rxjs';
   styles: [],
 })
 export class ProfileComponent implements OnInit {
+  private router = inject(Router);
+
   private profileService = inject(ProfileService);
   private authService = inject(AuthService);
   public userService = inject(UserService);
 
   games: number = 0;
   disabledLogoutBtn: boolean;
-
-  constructor(private router: Router) {}
 
   ngOnInit() {
     this.disabledLogoutBtn = false;

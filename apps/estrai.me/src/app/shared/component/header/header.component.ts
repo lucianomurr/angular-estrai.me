@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleService } from '../../services/open-nav.service';
 import { UserService } from '@data-access';
@@ -11,13 +11,7 @@ import { matMenu, matClose } from '@ng-icons/material-icons/baseline';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    RouterModule,
-    NgOptimizedImage,
-    CommonModule,
-    MobileSidenavComponent,
-    NgIcon,
-  ],
+  imports: [RouterModule, CommonModule, MobileSidenavComponent, NgIcon],
   providers: [ToggleService, UserService, provideIcons({ matMenu, matClose })],
   template: `
     <header
@@ -114,16 +108,16 @@ import { matMenu, matClose } from '@ng-icons/material-icons/baseline';
   `,
   styles: [],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  toggleService = inject(ToggleService);
+  private router = inject(Router);
+  userService = inject(UserService);
+
   public menuItems = MENU_ITEMS;
 
   public isMobileMenuOpen = false;
 
-  constructor(
-    public toggleService: ToggleService,
-    private router: Router,
-    public userService: UserService,
-  ) {
+  ngOnInit() {
     // subscribe to toggleService to get the current state of the sidenav
     this.toggleService.sidenav$.subscribe((isOpen) => {
       this.isMobileMenuOpen = isOpen;
