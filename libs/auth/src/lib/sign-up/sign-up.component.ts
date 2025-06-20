@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
@@ -170,10 +170,15 @@ interface RegisterFormGroup extends FormGroup {
   styles: [],
 })
 export class SignUpComponent {
+  private authService = inject(AuthService);
+
   signUpForm: RegisterFormGroup;
   submitted = false;
 
-  constructor(private authService: AuthService) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.signUpForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       confirmEmail: new FormControl('', [

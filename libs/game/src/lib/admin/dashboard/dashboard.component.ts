@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { Observable } from 'rxjs/internal/Observable';
 import { RaffleDocument } from '../../interface/game.interface';
@@ -142,17 +142,20 @@ import {
   styles: [],
 })
 export class DashboardComponent {
+  private _playerService = inject(RaffleGameService);
+  private router = inject(Router);
+  userService = inject(UserService);
+
   currentGames$!: Observable<RaffleDocument[]>;
 
   createNew() {
     this._playerService.createNewRaffle();
   }
 
-  constructor(
-    private _playerService: RaffleGameService,
-    private router: Router,
-    public userService: UserService,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.currentGames$ = this._playerService.getAdminUserGames();
   }
 

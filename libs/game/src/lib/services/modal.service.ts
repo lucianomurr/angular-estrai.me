@@ -1,8 +1,8 @@
 import {
-  ComponentFactoryResolver,
   ComponentRef,
   Injectable,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { WinnerModalComponent } from '../admin/play-game/winner-modal/winner-modal.component';
 import { Subject } from 'rxjs';
@@ -14,7 +14,6 @@ import { UserInGame } from '../interface/player-user.interface';
 export class ModalService {
   private componentRef!: ComponentRef<WinnerModalComponent>;
   private componentSubscriber!: Subject<string>;
-  constructor(private resolver: ComponentFactoryResolver) {}
 
   openModal(entry: ViewContainerRef, user: UserInGame) {
     this.componentRef = entry.createComponent(WinnerModalComponent);

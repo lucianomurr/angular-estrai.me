@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router, RouterModule } from '@angular/router';
@@ -175,16 +175,14 @@ import {
   styles: [],
 })
 export class MobileSidenavComponent {
+  auth = inject(AngularFireAuth);
+  private authService = inject(AuthService);
+  userService = inject(UserService);
+  private router = inject(Router);
+
   public menuItems = MENU_ITEMS;
 
   @Output() CloseSidenavEvent = new EventEmitter();
-
-  constructor(
-    public auth: AngularFireAuth,
-    private authService: AuthService,
-    public userService: UserService,
-    private router: Router,
-  ) {}
 
   onClickCloseSidenav() {
     console.log('onClickCloseSidenav');

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -104,15 +104,18 @@ import { HowItWorksComponent } from './how-it-works.component';
   styles: [],
 })
 export class JoinGameComponent {
+  private raffleGameService = inject(RaffleGameService);
+  private route = inject(ActivatedRoute);
+
   mygameid = new FormControl();
   gameStatus = 'ready';
   showError = false;
   showWarning = false;
 
-  constructor(
-    private raffleGameService: RaffleGameService,
-    private route: ActivatedRoute,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.route.queryParams.subscribe((params) => {
       this.mygameid.setValue(params['game']);
     });

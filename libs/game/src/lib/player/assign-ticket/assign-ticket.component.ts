@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -70,14 +70,17 @@ import { heroArrowRightEndOnRectangle } from '@ng-icons/heroicons/outline';
   styles: [],
 })
 export class AssignTicketComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private raffleGameService = inject(RaffleGameService);
+
   userTicketName = new FormControl('');
   public ticketNumber: string;
   public gameDocID: string;
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private raffleGameService: RaffleGameService,
-  ) {
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+  constructor() {
     this.ticketNumber = this.route.snapshot.paramMap.get(
       'ticketNumber',
     ) as string;

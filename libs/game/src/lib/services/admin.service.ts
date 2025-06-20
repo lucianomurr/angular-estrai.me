@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   collection,
   collectionData,
@@ -15,10 +15,13 @@ import { RaffleDocument } from '../interface/game.interface';
   providedIn: 'root',
 })
 export class AdminService {
-  constructor(
-    private firestore: Firestore,
-    private authService: AuthService,
-  ) {}
+  private firestore = inject(Firestore);
+  private authService = inject(AuthService);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   getGameCollectionID(gameID: string) {
     console.log('getGameCollectionID: gameID:', gameID);

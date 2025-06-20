@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   addDoc,
   collectionData,
@@ -27,15 +27,18 @@ import { AdminService } from './admin.service';
   providedIn: 'any',
 })
 export class RaffleGameService {
+  private firestore = inject(Firestore);
+  private router = inject(Router);
+  private adminService = inject(AdminService);
+  private userService = inject(UserService);
+
   private _userEmail = '';
   private _userUID: string | undefined;
 
-  constructor(
-    private firestore: Firestore,
-    private router: Router,
-    private adminService: AdminService,
-    private userService: UserService,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.userService.getCurrentUser();
   }
 
