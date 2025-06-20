@@ -568,6 +568,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular/ssr@npm:^20.0.3":
+  version: 20.0.3
+  resolution: "@angular/ssr@npm:20.0.3"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/common": ^20.0.0
+    "@angular/core": ^20.0.0
+    "@angular/platform-server": ^20.0.0
+    "@angular/router": ^20.0.0
+  peerDependenciesMeta:
+    "@angular/platform-server":
+      optional: true
+  checksum: 10c0/285abfdfb6cbc428b934b794a710ef9576e2c6db49935b8a906d624b29bc180552603bafa4c6e5398f74dbc1cfe69e1b51ed02fcf72c95fb01e0209d59cffcaf
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.16.7, @babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -10273,6 +10290,7 @@ __metadata:
     "@angular/platform-browser": "npm:20.0.4"
     "@angular/platform-browser-dynamic": "npm:20.0.4"
     "@angular/router": "npm:20.0.4"
+    "@angular/ssr": "npm:^20.0.3"
     "@ng-icons/core": "npm:^32.0.0"
     "@ng-icons/heroicons": "npm:^32.0.0"
     "@ng-icons/material-icons": "npm:^32.0.0"
