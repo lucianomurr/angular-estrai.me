@@ -92,11 +92,6 @@ export class ProfileComponent implements OnInit {
   games: number = 0;
   disabledLogoutBtn: boolean;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit() {
     this.disabledLogoutBtn = false;
     const user = this.userService.getCurrentUser();

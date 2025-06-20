@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { distinctUntilChanged, Observable, take, takeUntil } from 'rxjs';
@@ -91,7 +91,7 @@ import { HowItWorksComponent } from '../join-game/how-it-works.component';
   `,
   styles: [],
 })
-export class WaitingComponent {
+export class WaitingComponent implements OnInit {
   private route = inject(ActivatedRoute);
   raffleGameService = inject(RaffleGameService);
   private confettiService = inject(ConfettiService);
@@ -100,10 +100,7 @@ export class WaitingComponent {
   public ticketID: string;
   public ticketData$: Observable<UserInGame[]> | undefined;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {
+  ngOnInit() {
     const raffleGameService = this.raffleGameService;
 
     this.gameID = this.route.snapshot.paramMap.get('gameID') || '';

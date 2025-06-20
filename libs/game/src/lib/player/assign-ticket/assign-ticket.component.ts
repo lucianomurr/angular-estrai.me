@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -69,7 +69,7 @@ import { heroArrowRightEndOnRectangle } from '@ng-icons/heroicons/outline';
   `,
   styles: [],
 })
-export class AssignTicketComponent {
+export class AssignTicketComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private raffleGameService = inject(RaffleGameService);
@@ -78,14 +78,13 @@ export class AssignTicketComponent {
   public ticketNumber: string;
   public gameDocID: string;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-  constructor() {
+  ngOnInit() {
     this.ticketNumber = this.route.snapshot.paramMap.get(
       'ticketNumber',
     ) as string;
     this.gameDocID = this.route.snapshot.paramMap.get('gameID') as string;
   }
+
   clickOnAssignTicket() {
     //todo: set the user email to the ticket (only for unauthenticated user)
     console.log(this.userTicketName.value);

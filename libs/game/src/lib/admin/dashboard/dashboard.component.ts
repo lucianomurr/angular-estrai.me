@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/internal/Observable';
 import { RaffleDocument } from '../../interface/game.interface';
@@ -141,7 +141,7 @@ import {
   `,
   styles: [],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   private _playerService = inject(RaffleGameService);
   private router = inject(Router);
   userService = inject(UserService);
@@ -152,10 +152,7 @@ export class DashboardComponent {
     this._playerService.createNewRaffle();
   }
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {
+  ngOnInit() {
     this.currentGames$ = this._playerService.getAdminUserGames();
   }
 

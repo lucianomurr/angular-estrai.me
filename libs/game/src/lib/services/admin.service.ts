@@ -18,11 +18,6 @@ export class AdminService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   getGameCollectionID(gameID: string) {
     console.log('getGameCollectionID: gameID:', gameID);
     const gameRef = collection(this.firestore, `players/`);

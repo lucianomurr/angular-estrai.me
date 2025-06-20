@@ -35,9 +35,6 @@ export class RaffleGameService {
   private _userEmail = '';
   private _userUID: string | undefined;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.userService.getCurrentUser();
   }

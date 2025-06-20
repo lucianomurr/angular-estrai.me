@@ -232,11 +232,6 @@ export class AuthComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.authService.afAuth.authState.subscribe((user) => {
       if (user) {

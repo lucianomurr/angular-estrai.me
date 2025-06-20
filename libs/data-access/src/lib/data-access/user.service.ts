@@ -13,9 +13,6 @@ export class UserService {
   public userData: User | undefined | null;
   private profileService = inject(ProfileService);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.afAuth.authState.subscribe((user) => {
       //console.log('userService, constructor: ', user);

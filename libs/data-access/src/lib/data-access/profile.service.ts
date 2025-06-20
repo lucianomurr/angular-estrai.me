@@ -23,11 +23,6 @@ interface Profile {
 export class ProfileService {
   private firestore = inject(Firestore);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   SaveProfile(userData: User | null) {
     if (userData) {
       const profileRef = collection(

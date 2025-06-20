@@ -9,11 +9,6 @@ export class AutofocusDirective implements OnInit {
 
   private focus = true;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit() {
     if (this.focus) {
       //Otherwise Angular throws error: Expression has changed after it was checked.
