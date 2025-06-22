@@ -8,15 +8,8 @@
     "@nx/jest:jest": {
       "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
       "cache": true,
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
+      "options": { "passWithNoTests": true },
+      "configurations": { "ci": { "ci": true, "codeCoverage": true } }
     },
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
@@ -35,65 +28,25 @@
       "unitTestRunner": "jest",
       "e2eTestRunner": "none"
     },
-    "@nx/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nx/angular:component": {
-      "style": "css",
-      "type": "component"
-    },
-    "@schematics/angular:component": {
-      "type": "component"
-    },
-    "@nx/angular:directive": {
-      "type": "directive"
-    },
-    "@schematics/angular:directive": {
-      "type": "directive"
-    },
-    "@nx/angular:service": {
-      "type": "service"
-    },
-    "@schematics/angular:service": {
-      "type": "service"
-    },
-    "@nx/angular:scam": {
-      "type": "component"
-    },
-    "@nx/angular:scam-directive": {
-      "type": "directive"
-    },
-    "@nx/angular:guard": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:guard": {
-      "typeSeparator": "."
-    },
-    "@nx/angular:interceptor": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:interceptor": {
-      "typeSeparator": "."
-    },
-    "@nx/angular:module": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:module": {
-      "typeSeparator": "."
-    },
-    "@nx/angular:pipe": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:pipe": {
-      "typeSeparator": "."
-    },
-    "@nx/angular:resolver": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:resolver": {
-      "typeSeparator": "."
-    }
+    "@nx/angular:library": { "linter": "eslint", "unitTestRunner": "jest" },
+    "@nx/angular:component": { "style": "css", "type": "component" },
+    "@schematics/angular:component": { "type": "component" },
+    "@nx/angular:directive": { "type": "directive" },
+    "@schematics/angular:directive": { "type": "directive" },
+    "@nx/angular:service": { "type": "service" },
+    "@schematics/angular:service": { "type": "service" },
+    "@nx/angular:scam": { "type": "component" },
+    "@nx/angular:scam-directive": { "type": "directive" },
+    "@nx/angular:guard": { "typeSeparator": "." },
+    "@schematics/angular:guard": { "typeSeparator": "." },
+    "@nx/angular:interceptor": { "typeSeparator": "." },
+    "@schematics/angular:interceptor": { "typeSeparator": "." },
+    "@nx/angular:module": { "typeSeparator": "." },
+    "@schematics/angular:module": { "typeSeparator": "." },
+    "@nx/angular:pipe": { "typeSeparator": "." },
+    "@schematics/angular:pipe": { "typeSeparator": "." },
+    "@nx/angular:resolver": { "typeSeparator": "." },
+    "@schematics/angular:resolver": { "typeSeparator": "." }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
@@ -103,5 +56,6 @@
   },
   "nxCloudAccessToken": "NTgxNDcxOGQtMWM1Ni00YTdiLTlmMTItMjFkZWU2NDVjZjE5fHJlYWQtd3JpdGU=",
   "useInferencePlugins": false,
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "nxCloudId": "68578fe2c80bbe0e9a9fdf0d"
 }
