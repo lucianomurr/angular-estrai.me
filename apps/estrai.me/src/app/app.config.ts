@@ -13,9 +13,14 @@ import { FirestoreModule } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideClientHydration(withEventReplay()),
     provideRouter(
       APP_ROUTES,
       withPreloading(PreloadAllModules),

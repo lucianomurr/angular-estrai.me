@@ -11,9 +11,9 @@
   },
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:browser-esbuild",
       "options": {
-        "outputPath": "dist/apps/estrai.me",
+        "outputPath": "dist/apps/estrai.me/browser",
         "index": "apps/estrai.me/src/index.html",
         "main": "apps/estrai.me/src/main.ts",
         "polyfills": ["zone.js"],
@@ -21,8 +21,11 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/estrai.me/src/favicon.ico",
+          "apps/estrai.me/src/robots.txt",
+          "apps/estrai.me/src/sitemap.xml",
           "apps/estrai.me/src/assets"
         ],
+        "allowedCommonJsDependencies": ["canvas-confetti", "qrcode"],
         "styles": ["apps/estrai.me/src/styles.scss"],
         "scripts": []
       },
@@ -31,7 +34,7 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
+              "maximumWarning": "1500kb",
               "maximumError": "2mb"
             },
             {
@@ -84,6 +87,61 @@
       "options": {
         "jestConfig": "apps/estrai.me/jest.config.ts"
       }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/apps/estrai.me/server",
+        "main": "apps/estrai.me/src/server.ts",
+        "tsConfig": "apps/estrai.me/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "continuous": true,
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "estrai.me:build:development",
+          "serverTarget": "estrai.me:server:development"
+        },
+        "production": {
+          "browserTarget": "estrai.me:build:production",
+          "serverTarget": "estrai.me:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "estrai.me:build:development",
+          "serverTarget": "estrai.me:server:development"
+        },
+        "production": {
+          "browserTarget": "estrai.me:build:production",
+          "serverTarget": "estrai.me:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   }
 }

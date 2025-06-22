@@ -6,5 +6,10 @@
     "moduleResolution": "bundler"
   },
   "files": ["src/main.ts"],
-  "include": ["src/**/*.d.ts"]
+  "include": ["src/**/*.d.ts"],
+  "exclude": [
+    "src/main.server.ts",
+    "src/server.ts",
+    "src/app/app.config.server.ts"
+  ]
 }
