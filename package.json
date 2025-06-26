@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "nx",
     "start": "nx serve",
-    "build": "nx build",
+    "build": "nx build estrai.me",
     "lint": "nx lint",
     "watch": "nx build --watch --configuration development",
     "prepare": "husky install",
