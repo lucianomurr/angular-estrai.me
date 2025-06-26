@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "nx build estrai.me",
-  "outputDirectory": "dist/app/estrai.me/analog/public"
+  "outputDirectory": "dist/apps/estrai.me/analog/public"
 }
