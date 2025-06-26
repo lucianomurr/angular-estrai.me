@@ -106,7 +106,7 @@ const SUPPORT_CARDS: SupportCard[] = [
         </div>
 
         <div
-          class="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl p-8 md:p-12"
+          class="bg-linear-to-br from-primary-50 to-secondary-50 rounded-2xl p-8 md:p-12"
         >
           <div class="max-w-3xl mx-auto text-center">
             <h3 class="text-2xl font-semibold mb-6">Why Support Us?</h3>
