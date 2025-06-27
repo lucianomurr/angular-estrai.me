@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
       <form class="mt-6">
         <div class="relative">
           <input
-            class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+            class="appearance-none border pl-12 border-gray-100 shadow-xs focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-hidden focus:ring-gray-600 focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Email"
@@ -37,7 +37,7 @@ import { RouterModule } from '@angular/router';
         </div>
         <div class="relative mt-3">
           <input
-            class="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+            class="appearance-none border pl-12 border-gray-100 shadow-xs focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-hidden focus:ring-gray-600 focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Password"
@@ -61,7 +61,7 @@ import { RouterModule } from '@angular/router';
         </div>
         <div class="flex items-center justify-center mt-8">
           <button
-            class="text-white py-2 px-4 uppercase rounded bg-green-500 hover:bg-green-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+            class="text-white py-2 px-4 uppercase rounded-sm bg-green-500 hover:bg-green-600 shadow-sm hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
           >
             Sign in
           </button>

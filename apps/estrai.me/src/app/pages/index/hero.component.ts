@@ -9,7 +9,7 @@ import { UserService } from '@data-access';
   imports: [CommonModule, RouterModule],
   template: `
     <div
-      class="relative min-h-screen flex items-center bg-gradient-to-br from-primary-800 via-primary-700 to-secondary-700 overflow-hidden"
+      class="relative min-h-screen flex items-center bg-linear-to-br from-primary-800 via-primary-700 to-secondary-700 overflow-hidden"
     >
       <div class="absolute inset-0 overflow-hidden opacity-10">
         <div
@@ -70,7 +70,7 @@ import { UserService } from '@data-access';
         <div class="md:w-1/2 flex justify-center">
           <div class="relative spin-container w-72 h-72 md:w-96 md:h-96">
             <div
-              class="spinning-wheel absolute inset-0 rounded-full bg-gradient-to-r from-accent-400 to-secondary-500 animate-spin-slow shadow-xl"
+              class="spinning-wheel absolute inset-0 rounded-full bg-linear-to-r from-accent-400 to-secondary-500 animate-spin-slow shadow-xl"
             >
               <div
                 class="absolute inset-4 rounded-full bg-primary-700 flex items-center justify-center"

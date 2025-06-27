@@ -25,7 +25,7 @@ import { take } from 'rxjs';
             My Profile
           </h1>
           <div class="p-5">
-            <div class="p-16 bg-white shadow  rounded-xl">
+            <div class="p-16 bg-white shadow-sm  rounded-xl">
               <div class="relative mb-10">
                 <div
                   class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2x flex items-center justify-center text-indigo-500"

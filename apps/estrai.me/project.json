@@ -6,65 +6,46 @@
   "prefix": "app",
   "generators": {
     "@schematics/angular:component": {
-      "style": "scss"
+      "style": "css"
     }
   },
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@analogjs/platform:vite",
       "options": {
-        "outputPath": "dist/apps/estrai.me",
-        "index": "apps/estrai.me/src/index.html",
+        "configFile": "apps/estrai.me/vite.config.ts",
         "main": "apps/estrai.me/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/estrai.me/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/estrai.me/src/favicon.ico",
-          "apps/estrai.me/src/assets"
-        ],
-        "styles": ["apps/estrai.me/src/styles.scss"],
-        "scripts": []
+        "outputPath": "dist/apps/estrai.me/client",
+        "tsConfig": "apps/estrai.me/tsconfig.app.json"
       },
+      "defaultConfiguration": "production",
       "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "2mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
-          "outputHashing": "all"
-        },
         "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
         }
       },
-      "defaultConfiguration": "production"
+      "outputs": ["{workspaceRoot}/dist/apps/estrai.me"]
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@analogjs/platform:vite-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "estrai.me:build",
+        "port": 4200
+      },
       "configurations": {
+        "development": {
+          "buildTarget": "estrai.me:build:development",
+          "hmr": true
+        },
         "production": {
           "buildTarget": "estrai.me:build:production"
-        },
-        "development": {
-          "buildTarget": "estrai.me:build:development"
         }
-      },
-      "defaultConfiguration": "development",
-      "continuous": true
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -79,10 +60,9 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@analogjs/vitest-angular:test",
       "options": {
-        "jestConfig": "apps/estrai.me/jest.config.ts"
+        "config": "vite.config.ts"
       }
     }
   }

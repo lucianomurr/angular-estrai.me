@@ -35,7 +35,7 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
   ],
   providers: [ModalService, ConfettiService, provideIcons({ matArrowBack })],
   template: `
-    <header class="bg-white shadow-sm">
+    <header class="bg-white shadow-xs">
       <div class="container mx-auto px-4 py-4">
         <div class="flex items-center gap-4">
           <a

@@ -5,6 +5,10 @@
     "types": [],
     "moduleResolution": "bundler"
   },
-  "files": ["src/main.ts"],
-  "include": ["src/**/*.d.ts"]
+  "files": ["src/main.ts", "src/main.server.ts"],
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/pages/**/*.page.ts",
+    "src/server/middleware/**/*.ts"
+  ]
 }

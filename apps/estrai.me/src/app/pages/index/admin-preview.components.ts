@@ -101,7 +101,7 @@ import { RouterModule } from '@angular/router';
         </div>
 
         <div
-          class="bg-gradient-to-br from-primary-600 to-secondary-600 rounded-2xl p-8 md:p-12 text-white"
+          class="bg-linear-to-br from-primary-600 to-secondary-600 rounded-2xl p-8 md:p-12 text-white"
         >
           <h3 class="text-2xl font-semibold text-center mb-8">
             Key Admin Features
@@ -109,7 +109,7 @@ import { RouterModule } from '@angular/router';
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div
-              class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors"
+              class="bg-white/10 backdrop-blur-xs rounded-xl p-6 hover:bg-white/20 transition-colors"
             >
               <h4 class="font-semibold mb-3 text-accent-200">
                 Real-time Monitoring
@@ -121,7 +121,7 @@ import { RouterModule } from '@angular/router';
             </div>
 
             <div
-              class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors relative overflow-hidden"
+              class="bg-white/10 backdrop-blur-xs rounded-xl p-6 hover:bg-white/20 transition-colors relative overflow-hidden"
             >
               <h4 class="font-semibold mb-3 text-accent-200">
                 Custom Branding
@@ -140,7 +140,7 @@ import { RouterModule } from '@angular/router';
             </div>
 
             <div
-              class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors"
+              class="bg-white/10 backdrop-blur-xs rounded-xl p-6 hover:bg-white/20 transition-colors"
             >
               <h4 class="font-semibold mb-3 text-accent-200">
                 Participant Management
@@ -159,7 +159,7 @@ import { RouterModule } from '@angular/router';
             </div>
 
             <div
-              class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors"
+              class="bg-white/10 backdrop-blur-xs rounded-xl p-6 hover:bg-white/20 transition-colors"
             >
               <h4 class="font-semibold mb-3 text-accent-200">
                 Multiple Spin Rounds
@@ -171,7 +171,7 @@ import { RouterModule } from '@angular/router';
             </div>
 
             <div
-              class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors"
+              class="bg-white/10 backdrop-blur-xs rounded-xl p-6 hover:bg-white/20 transition-colors"
             >
               <h4 class="font-semibold mb-3 text-accent-200">
                 Results Verification
@@ -182,7 +182,7 @@ import { RouterModule } from '@angular/router';
             </div>
 
             <div
-              class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors"
+              class="bg-white/10 backdrop-blur-xs rounded-xl p-6 hover:bg-white/20 transition-colors"
             >
               <h4 class="font-semibold mb-3 text-accent-200">
                 Detailed Analytics
