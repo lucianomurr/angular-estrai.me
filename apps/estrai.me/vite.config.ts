@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
   return {
     root: __dirname,
     cacheDir: '../../node_modules/.vite',
+    publicDir: 'src/assets',
     build: {
       outDir: '../../dist/apps/estrai.me/client',
       reportCompressedSize: true,
@@ -24,7 +25,10 @@ export default defineConfig(({ mode }) => {
         ssr: false,
         static: true,
         prerender: {
-          routes: ['/'],
+          routes: ['/', '/terms'],
+          sitemap: {
+            host: 'https://estrai.me',
+          },
         },
       }),
 
