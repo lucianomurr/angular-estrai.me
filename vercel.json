@@ -1,5 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "nx build estrai.me",
-  "outputDirectory": "dist/apps/estrai.me/analog/public"
+  "buildCommand": "npm run build"
 }
