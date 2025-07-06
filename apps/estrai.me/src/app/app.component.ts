@@ -7,15 +7,12 @@ import { HeaderComponent } from './shared/component/header/header.component';
   standalone: true,
   selector: 'app-root',
   template: `
-    <div class="min-h-screen">
-      @if (
-        router.url !== '/auth/log-in' && !router.url.includes('/game/manage/')
-      ) {
+    <div class="min-h-screen bg-gray-50">
+      @if (router.url === '/' || router.url === '/home') {
         <app-header />
       }
 
       <!-- Main content area -->
-
       <router-outlet />
 
       @if (router.url !== '/auth/log-in') {

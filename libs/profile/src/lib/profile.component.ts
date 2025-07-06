@@ -5,80 +5,109 @@ import { AuthService, UserService } from '@data-access';
 import { ProfileService } from '../../../data-access/src/lib/data-access/profile.service';
 import { User } from 'firebase/auth';
 import { take } from 'rxjs';
+import { CommonModule } from '@angular/common';
+
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { matArrowBack, matExitToApp } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterModule],
-  providers: [ProfileService, UserService],
+  imports: [RouterModule, CommonModule, RouterModule, NgIcon],
+  providers: [
+    ProfileService,
+    UserService,
+    provideIcons({ matArrowBack, matExitToApp }),
+  ],
   template: `
-    @if (userService.userData; as user) {
-      <div
-        class="w-full relative z-10 flex items-center overflow-hidden bg-white dark:bg-gray-800"
-      >
-        <div
-          class="container relative flex px-2 py-6 mx-auto items-center flex-col"
-        >
-          <h1
-            class="text-6xl font-black leading-none m-10 md:m-6 text-gray-800 font-bebas-neue dark:text-white"
+    <header class="bg-white shadow-sm">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <a
+              routerLink="/"
+              class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ng-icon name="matArrowBack" size="20" />
+              <span>Back to Dashboard</span>
+            </a>
+            <div class="h-6 w-px bg-gray-300"></div>
+            <h1 class="text-2xl font-bold">Profile</h1>
+          </div>
+
+          <button
+            (click)="onClickLogout()"
+            class="flex items-center gap-2 px-4 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors"
           >
-            My Profile
-          </h1>
-          <div class="p-5">
-            <div class="p-16 bg-white shadow-sm  rounded-xl">
-              <div class="relative mb-10">
+            <ng-icon name="matExitToApp" size="20" />
+            <span class="hidden sm:inline">Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        @if (userService.userData; as user) {
+          <div class="card">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-semibold">User Information</h2>
+              <button
+                class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+              ></button>
+            </div>
+
+            <div class="text-center mb-6">
+              <div class="relative inline-block">
+                <img
+                  [src]="user.photoURL"
+                  [alt]="user.displayName"
+                  class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-white shadow-lg"
+                />
+
                 <div
-                  class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2x flex items-center justify-center text-indigo-500"
-                >
-                  <img
-                    src="{{ user.photoURL }}"
-                    alt="user profile image"
-                    class="rounded-full"
-                  />
-                </div>
+                  class="absolute top-0 right-0 w-6 h-6 bg-green-500 border-2 border-white rounded-full"
+                ></div>
               </div>
-              <div class="text-center pb-12">
-                <h1 class="text-4xl font-medium text-gray-700">
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Full Name</label
+                >
+
+                <p class="text-gray-900 font-medium">
                   {{ user.displayName }}
-                </h1>
-                @if (user.email) {
-                  <small class="text-neutral-500">
-                    Registered with <u>{{ user.email }}</u>
-                  </small>
-                }
+                </p>
               </div>
-              <div class="text-center flex flex-row mb-20 gap-4 justify-around">
-                <div>
-                  <p class="font-bold text-gray-700 text-xl">{{ games }}</p>
-                  <p class="text-gray-400">Created Games</p>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Email Address</label
+                >
+                <div class="flex items-center gap-2">
+                  mail icon
+                  <span class="text-gray-900">{{ user.email }}</span>
                 </div>
               </div>
-              <div class="flex flex-col items-center">
-                <button
-                  (click)="onClickLogout()"
-                  [disabled]="disabledLogoutBtn"
-                  class="flex flex-row items-center gap-2 px-4 py-2 text-white uppercase bg-neutral-600 border-2 border-transparent rounded-lg text-md hover:bg-neutral-800 disabled:opacity-30 disabled:bg-neutral-600 disabled:cursor-not-allowed"
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Date Joined</label
                 >
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                      class="w-5 h-5 fill-current text-white"
-                    >
-                      <path
-                        d="M440,424V88H352V13.005L88,58.522V424H16v32h86.9L352,490.358V120h56V456h88V424ZM320,453.642,120,426.056V85.478L320,51Z"
-                      ></path>
-                      <rect width="32" height="64" x="256" y="232"></rect>
-                    </svg>
+                <div class="flex items-center gap-2">
+                  calendar icon
+                  <span class="text-gray-900">
+                    {{ user.metadata.creationTime | date: 'mediumDate' }}
                   </span>
-                  Logout
-                </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        }
       </div>
-    }
+    </main>
   `,
   styles: [],
 })

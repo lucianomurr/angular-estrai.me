@@ -11,6 +11,7 @@ import {
   matAdd,
   matPlayCircle,
   matSportsEsports,
+  matArrowBack,
 } from '@ng-icons/material-icons/baseline';
 
 @Component({
@@ -22,10 +23,31 @@ import {
       matAdd,
       matSportsEsports,
       matPlayCircle,
+      matArrowBack,
     }),
   ],
   template: `
-    <div class="relative flex items-center min-h-screen bg-gray-50 ">
+    <div class="min-h-screen bg-gray-50">
+      <header class="bg-white shadow-sm p-4">
+        <div class="container mx-auto px-4 py-8">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <a
+                to="/welcome"
+                class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ng-icon name="matArrowBack" size="20"></ng-icon>
+                <span>Back to Dashboard</span>
+              </a>
+              <div class="h-6 w-px bg-gray-300"></div>
+              <h1 class="text-2xl font-bold">Game Management</h1>
+            </div>
+
+            <div class="flex items-center gap-3"></div>
+          </div>
+        </div>
+      </header>
+
       <main class="container mx-auto px-4 py-8 mt-20">
         @if (userService.userData; as user) {
           <h1 class="text-3xl font-bold mb-8">
@@ -101,13 +123,13 @@ import {
                       </td>
                       <td class="py-3 px-4">
                         <span
-                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium "
+                          class="inline-flex items-center px-2 py-1 rounded-full font-medium ring-1 ring-gray-500"
                           [ngClass]="{
-                            'bg-green-100 text-green-800':
+                            'bg-success-50 text-success-700':
                               game.status === 'ready',
-                            'bg-blue-100 text-blue-800':
+                            'bg-accent-100 text-accent-500':
                               game.status === 'started',
-                            'bg-yellow-100 text-yellow-800':
+                            'bg-secondary-100 text-secondary-800':
                               game.status === 'closed',
                           }"
                         >

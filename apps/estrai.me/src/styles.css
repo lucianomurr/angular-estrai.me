@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -49,76 +50,12 @@
   --color-error-500: #ef4444;
   --color-error-700: #b91c1c;
 
-  --font-inter:
-    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-sans:
-    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-family-sans: 'Inter', sans-serif;
+  --font-display: 'Inter', 'sans-serif';
 
   --animate-spin-slow: spin 3s linear infinite;
   --animate-bounce-slow: bounce 3s infinite;
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-
-  @keyframes wiggle {
-    0%,
-    100% {
-      transform: rotate(-3deg);
-    }
-    50% {
-      transform: rotate(3deg);
-    }
-  }
-}
-
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
-@utility btn {
-  @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-offset-2;
-}
-
-@utility btn-primary {
-  @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
-}
-
-@utility btn-secondary {
-  @apply btn bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-400;
-}
-
-@utility btn-accent {
-  @apply btn bg-accent-400 text-gray-900 hover:bg-accent-500 focus:ring-accent-300;
-}
-
-@utility btn-outline {
-  @apply btn bg-transparent border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus:ring-primary-500;
-}
-
-@utility card {
-  @apply bg-white rounded-2xl shadow-lg p-6 transition-all duration-300;
-}
-
-@utility section {
-  @apply py-16 md:py-24;
-}
-
-@utility container {
-  @apply px-4 mx-auto max-w-7xl;
 }
 
 @layer base {
@@ -127,7 +64,7 @@
   }
 
   body {
-    @apply font-sans text-gray-800 bg-gray-50;
+    @apply font-display text-gray-800 bg-gray-50;
   }
 
   h1,
@@ -156,19 +93,55 @@
   }
 }
 
-.spin-container {
-  perspective: 1000px;
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-400;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-accent-400 text-gray-900 hover:bg-accent-500 focus:ring-accent-300;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-transparent border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus:ring-primary-500;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-lg p-6 transition-all duration-300;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
 }
 
-.spinning-wheel {
-  transform-style: preserve-3d;
-  transition: transform 0.8s ease-out;
-}
+@layer utilities {
+  .spin-container {
+    perspective: 1000px;
+  }
 
-.spinning-wheel:hover {
-  transform: rotateY(180deg);
-}
+  .spinning-wheel {
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-out;
+  }
 
-.gradient-text {
-  @apply text-transparent bg-clip-text bg-linear-to-r from-primary-600 to-secondary-500;
+  .spinning-wheel:hover {
+    transform: rotateY(180deg);
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-500;
+  }
 }
