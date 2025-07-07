@@ -10,17 +10,29 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
 
-import { isObservable, Observable, Subscription, take } from 'rxjs';
+import {
+  isObservable,
+  map,
+  Observable,
+  Subscription,
+  take,
+  switchMap,
+  EMPTY,
+} from 'rxjs';
+
+import { matArrowBack } from '@ng-icons/material-icons/baseline';
+
+import { GameInfoComponent } from '../../play-game/game-info.component';
+import { GameParticipantListComponent } from '../../play-game/participant.component';
 
 import { ConfettiService } from '../../services/confetti.service';
-import { AdminService, ModalService, RaffleGameService } from '../../services';
-import { RaffleDocument } from '../../interface/game.interface';
-import { UserInGame } from '../../interface/player-user.interface';
+import RaffleGameService from '../../services/raffe-game.service';
+import AdminService from '../../services/admin.service';
+import { RaffleDocument } from 'libs/game/src/interface/game.interface';
 
-import { CtaGameComponent } from './cta-game.component';
-import { GameInfoComponent } from './game-info.component';
-import { GameParticipantListComponent } from './participant.component';
-import { matArrowBack } from '@ng-icons/material-icons/baseline';
+import { CtaGameComponent } from '../../play-game/cta-game.component';
+import ModalService from '../../services/modal.service';
+import { UserInGame } from '../../interface/player-user.interface';
 
 @Component({
   selector: 'app-play-game',
@@ -106,16 +118,19 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
     `,
   ],
 })
-export class PlayGameComponent implements OnInit {
-  private route = inject(ActivatedRoute);
+export default class PlayGameComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+
+  readonly gameID$ = this.route.paramMap.pipe(
+    map((params) => params.get('gameID')),
+  );
+
   private router = inject(Router);
   private raffleGameService = inject(RaffleGameService);
   private adminService = inject(AdminService);
   private modalService = inject(ModalService);
   private confettiService = inject(ConfettiService);
 
-  // game ID coming from the url
-  gameID: string | null;
   //qr url
   gameQRUrl = 'https://estrai.me/game/join?game=';
   //collectionID
@@ -130,6 +145,8 @@ export class PlayGameComponent implements OnInit {
   winnerUser: UserInGame;
   //numbers of round of the raffle
   round = 0;
+  //gameID
+  gameID: string | null = null;
 
   @ViewChild('modal', { read: ViewContainerRef })
   entry!: ViewContainerRef;
@@ -138,31 +155,33 @@ export class PlayGameComponent implements OnInit {
   constructor() {
     const router = this.router;
     const raffleGameService = this.raffleGameService;
-
-    //set game id from router
-    const gameID = this.route.snapshot.paramMap.get('gameID');
-
-    if (gameID) {
-      this.gameID = gameID;
-      //set gameData$ from service
-      this.gameQRUrl += this.gameID;
-      this.gameData$ = raffleGameService.getAdminGameByID(this.gameID);
-    } else {
-      router.navigate(['/']);
-    }
   }
 
   ngOnInit() {
-    //get players for the game
-    this.gameData$.pipe(take(1)).subscribe((game) => {
-      if (!game[0]) {
-        this.router.navigate(['/unauthorized']);
-      }
-      console.log('PlayComponent ngOnInit: game:', game[0]);
-      this.collectionID = game[0].collectionID;
-      this.getPlayers();
-      this.updateGame(game[0]);
-    });
+    this.gameID$
+      .pipe(
+        take(1),
+        switchMap((gameID) => {
+          if (!gameID) {
+            this.router.navigate(['/']);
+            return EMPTY;
+          }
+          this.gameID = gameID;
+          this.gameQRUrl += gameID;
+          this.gameData$ = this.raffleGameService.getAdminGameByID(gameID);
+          return this.gameData$.pipe(take(1));
+        }),
+      )
+      .subscribe((game) => {
+        if (!game[0]) {
+          this.router.navigate(['/unauthorized']);
+          return;
+        }
+        console.log('PlayComponent ngOnInit: game:', game[0]);
+        this.collectionID = game[0].collectionID;
+        this.getPlayers();
+        this.updateGame(game[0]);
+      });
   }
 
   updateGame(game: RaffleDocument) {

@@ -5,7 +5,7 @@ import {
   heroArrowPath,
   heroLockClosed,
 } from '@ng-icons/heroicons/outline';
-import { UserInGame } from '../../interface/player-user.interface';
+import { UserInGame } from '../interface/player-user.interface';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 @Component({

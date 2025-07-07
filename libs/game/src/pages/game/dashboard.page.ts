@@ -156,6 +156,6 @@ export default class DashboardComponent implements OnInit {
   }
 
   goToGame(gameID: string) {
-    this.router.navigate([`game/manage/${gameID}`]);
+    this.router.navigate([`game/${gameID}`]);
   }
 }

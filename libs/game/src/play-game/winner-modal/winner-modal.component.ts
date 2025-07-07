@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { UserInGame } from '../../../interface/player-user.interface';
+import { UserInGame } from '../../interface/player-user.interface';
 
 @Component({
   selector: 'app-winner-modal',

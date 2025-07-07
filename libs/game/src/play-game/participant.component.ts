@@ -7,8 +7,9 @@ import {
   heroArrowDownTray,
   heroTrash,
 } from '@ng-icons/heroicons/outline';
-import { UserInGame } from '../../interface/player-user.interface';
+
 import { CommonModule } from '@angular/common';
+import { UserInGame } from '../interface/player-user.interface';
 
 @Component({
   selector: 'app-participant-list',

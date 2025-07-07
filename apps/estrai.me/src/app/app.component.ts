@@ -11,7 +11,7 @@ import { HeaderComponent } from './shared/component/header/header.component';
       @if (
         router.url !== '/auth/log-in' &&
         router.url !== '/profile' &&
-        !router.url.includes('/game/manage/')
+        !router.url.includes('/game/')
       ) {
         <app-header />
       }

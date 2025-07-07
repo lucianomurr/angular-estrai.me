@@ -4,14 +4,15 @@ import {
   ViewContainerRef,
   inject,
 } from '@angular/core';
-import { WinnerModalComponent } from '../admin/play-game/winner-modal/winner-modal.component';
+
 import { Subject } from 'rxjs';
 import { UserInGame } from '../interface/player-user.interface';
+import { WinnerModalComponent } from '../play-game/winner-modal/winner-modal.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ModalService {
+export default class ModalService {
   private componentRef!: ComponentRef<WinnerModalComponent>;
   private componentSubscriber!: Subject<string>;
 
