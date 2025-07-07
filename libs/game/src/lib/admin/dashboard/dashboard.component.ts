@@ -28,8 +28,8 @@ import {
   ],
   template: `
     <div class="min-h-screen bg-gray-50">
-      <header class="bg-white shadow-sm p-4">
-        <div class="container mx-auto px-4 py-8">
+      <header class="bg-white shadow-sm">
+        <div class="container mx-auto">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <a
@@ -43,7 +43,9 @@ import {
               <h1 class="text-2xl font-bold">Game Management</h1>
             </div>
 
-            <div class="flex items-center gap-3"></div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-3xl font-bold gradient-text">ESTRAI.ME</h1>
+            </div>
           </div>
         </div>
       </header>

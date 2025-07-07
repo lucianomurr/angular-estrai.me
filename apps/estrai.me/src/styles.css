@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
-@import 'tailwindcss';
+@import 'tailwindcss' source('../../../');
 
 @theme {
   --color-primary-50: #f5f3ff;
@@ -91,6 +91,10 @@
   p {
     @apply leading-relaxed;
   }
+
+  header {
+    @apply bg-white shadow-md top-0 left-0 w-full z-50;
+  }
 }
 
 @layer components {
@@ -123,7 +127,7 @@
   }
 
   .container {
-    @apply px-4 mx-auto max-w-7xl;
+    @apply px-4 mx-auto max-w-7xl py-4;
   }
 }
 

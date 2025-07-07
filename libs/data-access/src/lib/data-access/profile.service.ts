@@ -7,7 +7,7 @@ import {
   getCountFromServer,
   query,
   where,
-} from 'firebase/firestore';
+} from '@angular/fire/firestore';
 
 interface Profile {
   displayName: string | null;

@@ -37,7 +37,7 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
   template: `
     <div class="min-h-screen bg-gray-50">
       <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4">
+        <div class="container mx-auto">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <a
@@ -76,11 +76,12 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
                 [participants$]="players$"
               />
             </div>
-            <app-participant-list
-              [participants]="players$ | async"
-              [gameStatus]="gameDetails[0].status"
-              class="col-span-1 lg:col-span-2"
-            />
+            <div class="col-span-2">
+              <app-participant-list
+                [participants]="players$ | async"
+                [gameStatus]="gameDetails[0].status"
+              />
+            </div>
           </div>
         }
       </main>
