@@ -79,4 +79,4 @@ import { Component } from '@angular/core';
   `,
   styles: [],
 })
-export class AboutComponent {}
+export default class AboutComponent {}

@@ -436,4 +436,4 @@ import { matMail, matPhone, matPin } from '@ng-icons/material-icons/baseline';
   `,
   styles: [],
 })
-export class TermsComponent {}
+export default class TermsComponent {}

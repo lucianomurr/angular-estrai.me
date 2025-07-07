@@ -24,8 +24,9 @@ export default defineConfig(({ mode }) => {
       analog({
         ssr: false,
         static: true,
+        additionalPagesDirs: ['/libs/game/', '/libs/auth/'],
         prerender: {
-          routes: ['/', '/terms'],
+          routes: ['/', '/terms', '/about'],
           sitemap: {
             host: 'https://estrai.me',
           },

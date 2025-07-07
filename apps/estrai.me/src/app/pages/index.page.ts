@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
-import { OverviewComponent } from './overview.component';
-import { SupportMeComponent } from './support.component';
 import { UserService } from '@data-access';
-import { HeroComponent } from './hero.component';
-import { HowItWorksComponent } from './how-it-works.component';
-import { AdminPreviewComponent } from './admin-preview.components';
+import { OverviewComponent } from '../components/home/overview.component';
+import { SupportMeComponent } from '../components/home/support.component';
+import { HeroComponent } from '../components/home/hero.component';
+import { HowItWorksComponent } from '../components/home/how-it-works.component';
+import { AdminPreviewComponent } from '../components/home/admin-preview.components';
 
 @Component({
   selector: 'app-index',
@@ -29,6 +29,6 @@ import { AdminPreviewComponent } from './admin-preview.components';
   `,
   styles: [],
 })
-export class IndexComponent {
+export default class IndexComponent {
   public userService = inject(UserService);
 }

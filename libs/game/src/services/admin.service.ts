@@ -14,7 +14,7 @@ import { RaffleDocument } from '../interface/game.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export default class AdminService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
 

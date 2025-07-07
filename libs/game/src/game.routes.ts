@@ -1,12 +1,9 @@
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { Routes } from '@angular/router';
 
-import { GameComponent } from './game.component';
-
 export const GAME_ROUTES: Routes = [
   {
     path: '',
-    component: GameComponent,
     providers: [],
     children: [
       {
@@ -14,20 +11,11 @@ export const GAME_ROUTES: Routes = [
         pathMatch: 'full',
         redirectTo: 'dashboard',
       },
-      {
-        path: 'dashboard',
-        loadComponent: () =>
-          import('./admin/dashboard/dashboard.component').then(
-            (m) => m.DashboardComponent,
-          ),
-        canActivate: [AngularFireAuthGuard],
-      },
+
       {
         path: 'manage/:gameID',
         loadComponent: () =>
-          import('./admin/play-game/play.component').then(
-            (m) => m.PlayGameComponent,
-          ),
+          import('./play-game/play.component').then((m) => m.PlayGameComponent),
         canActivate: [AngularFireAuthGuard],
       },
       {

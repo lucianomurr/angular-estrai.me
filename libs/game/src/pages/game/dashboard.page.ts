@@ -1,8 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/internal/Observable';
-import { RaffleDocument } from '../../interface/game.interface';
-import { RaffleGameService } from '../../services';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from '@data-access';
@@ -13,6 +11,9 @@ import {
   matSportsEsports,
   matArrowBack,
 } from '@ng-icons/material-icons/baseline';
+
+import { RaffleDocument } from '../../interface/game.interface';
+import RaffleGameService from '../../services/raffe-game.service';
 
 @Component({
   selector: 'app-new-game',
@@ -139,7 +140,7 @@ import {
   `,
   styles: [],
 })
-export class DashboardComponent implements OnInit {
+export default class DashboardComponent implements OnInit {
   private _playerService = inject(RaffleGameService);
   private router = inject(Router);
   userService = inject(UserService);

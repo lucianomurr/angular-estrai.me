@@ -21,12 +21,12 @@ import { UserService } from '@data-access';
 import { from, Observable, switchMap, take } from 'rxjs';
 import { RaffleDocument } from '../interface/game.interface';
 import { UserInGame } from '../interface/player-user.interface';
-import { AdminService } from './admin.service';
+import AdminService from './admin.service';
 
 @Injectable({
   providedIn: 'any',
 })
-export class RaffleGameService {
+export default class RaffleGameService {
   private firestore = inject(Firestore);
   private router = inject(Router);
   private adminService = inject(AdminService);
