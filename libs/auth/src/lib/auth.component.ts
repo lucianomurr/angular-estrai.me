@@ -9,7 +9,7 @@ import { AuthService } from '@data-access';
   imports: [RouterModule],
   template: `
     <div
-      class="min-h-screen bg-gradient-to-br from-primary-800 via-primary-700 to-secondary-700 flex items-center justify-center p-4"
+      class="min-h-screen bg-linear-to-br from-primary-800 via-primary-700 to-secondary-700 flex items-center justify-center p-4"
     >
       <div class="absolute top-4 left-4">
         <a routerLink="/" class="inline-flex items-center gap-2 text-white">
@@ -43,7 +43,7 @@ import { AuthService } from '@data-access';
 
           <div class="space-y-4 mb-8">
             <button
-              class="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+              class="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
               (click)="loginWithGoogle()"
             >
               <svg class="w-5 h-5" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@ import { AuthService } from '@data-access';
             </button>
 
             <button
-              class="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+              class="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
               (click)="loginWithGithub()"
             >
               <svg
@@ -178,7 +178,7 @@ import { AuthService } from '@data-access';
                 <input
                   id="remember-me"
                   type="checkbox"
-                  class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded-sm"
                 />
                 <label
                   htmlFor="remember-me"
@@ -236,7 +236,7 @@ export class AuthComponent implements OnInit {
     this.authService.afAuth.authState.subscribe((user) => {
       if (user) {
         console.log('ngOnInit', user);
-        this.router.navigateByUrl('/game/new');
+        this.router.navigateByUrl('/game');
       }
     });
   }

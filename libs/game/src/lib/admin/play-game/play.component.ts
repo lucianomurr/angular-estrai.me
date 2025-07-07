@@ -35,26 +35,29 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
   ],
   providers: [ModalService, ConfettiService, provideIcons({ matArrowBack })],
   template: `
-    <header class="bg-white shadow-sm">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center gap-4">
-          <a
-            [routerLink]="'/game'"
-            class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ng-icon name="matArrowBack" size="24"></ng-icon>
-            <span>Back to dashboard</span>
-          </a>
-          <div class="h-6 w-px bg-gray-300"></div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-3xl font-bold gradient-text">ESTRAI.ME</h1>
+    <div class="min-h-screen bg-gray-50">
+      <header class="bg-white shadow-sm">
+        <div class="container mx-auto py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <a
+                [routerLink]="'/game'"
+                class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ng-icon name="matArrowBack" size="24"></ng-icon>
+                <span>Back to dashboard</span>
+              </a>
+              <div class="h-6 w-px bg-gray-300"></div>
+              <div class="flex items-center gap-2">
+                <h1 class="text-3xl font-bold gradient-text">ESTRAI.ME</h1>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-    <div class="min-h-screen flex pt-20 items-center bg-white overflow-hidden">
-      @if (gameData$ | async; as gameDetails) {
-        <main class="container mx-auto px-4 py-8">
+      </header>
+
+      <main class="container mx-auto px-4 py-8">
+        @if (gameData$ | async; as gameDetails) {
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-1 space-y-6">
               <app-game-info
@@ -73,14 +76,15 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
                 [participants$]="players$"
               />
             </div>
-            <app-participant-list
-              [participants]="players$ | async"
-              [gameStatus]="gameDetails[0].status"
-              class="lg:col-span-2"
-            />
+            <div class="col-span-2">
+              <app-participant-list
+                [participants]="players$ | async"
+                [gameStatus]="gameDetails[0].status"
+              />
+            </div>
           </div>
-        </main>
-      }
+        }
+      </main>
       <div #modal></div>
     </div>
   `,

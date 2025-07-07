@@ -109,7 +109,7 @@ import { CommonModule } from '@angular/common';
                   </td>
                   <td class="py-3 px-4">
                     Ticket:<span
-                      class="font-mono text-sm bg-gray-100 px-2 py-1 rounded"
+                      class="font-mono text-sm bg-gray-100 px-2 py-1 rounded-sm"
                       >#{{ participant.ticketID }}
                     </span>
                   </td>
@@ -162,7 +162,7 @@ import { CommonModule } from '@angular/common';
                 </div>
               </div>
               <div class="flex items-center justify-between text-sm">
-                <span class="font-mono bg-gray-100 px-2 py-1 rounded">
+                <span class="font-mono bg-gray-100 px-2 py-1 rounded-sm">
                   Ticket #{{ participant.ticketID }}
                 </span>
                 <span class="text-gray-600">

@@ -26,7 +26,7 @@ import { heroArrowRightEndOnRectangle } from '@ng-icons/heroicons/outline';
             <span class="gradient-text">{{ ticketNumber }}</span>
           </h2>
 
-          <div class="lg:mt-0 lg:flex-shrink-0">
+          <div class="lg:mt-0 lg:shrink-0">
             <div
               class="flex flex-col gap-8 p-4 mt-12 inline-flex rounded-md md:gap-2"
             >
@@ -44,7 +44,7 @@ import { heroArrowRightEndOnRectangle } from '@ng-icons/heroicons/outline';
                   required
                   minlength="2"
                   maxlength="25"
-                  class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent pb-2"
+                  class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-hidden focus:ring-2 focus:ring-red-600 focus:border-transparent pb-2"
                   placeholder="Your Name"
                 />
 
