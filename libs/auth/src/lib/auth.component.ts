@@ -236,7 +236,7 @@ export class AuthComponent implements OnInit {
     this.authService.afAuth.authState.subscribe((user) => {
       if (user) {
         console.log('ngOnInit', user);
-        this.router.navigateByUrl('/game/new');
+        this.router.navigateByUrl('/game');
       }
     });
   }
