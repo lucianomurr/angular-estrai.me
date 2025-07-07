@@ -12,10 +12,10 @@ export const GAME_ROUTES: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'new',
+        redirectTo: 'dashboard',
       },
       {
-        path: 'new',
+        path: 'dashboard',
         loadComponent: () =>
           import('./admin/dashboard/dashboard.component').then(
             (m) => m.DashboardComponent,

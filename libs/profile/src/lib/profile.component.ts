@@ -8,7 +8,12 @@ import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matArrowBack, matExitToApp } from '@ng-icons/material-icons/baseline';
+import {
+  matArrowBack,
+  matCalendarToday,
+  matExitToApp,
+  matMail,
+} from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +22,7 @@ import { matArrowBack, matExitToApp } from '@ng-icons/material-icons/baseline';
   providers: [
     ProfileService,
     UserService,
-    provideIcons({ matArrowBack, matExitToApp }),
+    provideIcons({ matArrowBack, matExitToApp, matCalendarToday, matMail }),
   ],
   template: `
     <header class="bg-white shadow-sm">
@@ -87,7 +92,7 @@ import { matArrowBack, matExitToApp } from '@ng-icons/material-icons/baseline';
                   >Email Address</label
                 >
                 <div class="flex items-center gap-2">
-                  mail icon
+                  <ng-icon name="matMail" size="20" />
                   <span class="text-gray-900">{{ user.email }}</span>
                 </div>
               </div>
@@ -97,7 +102,7 @@ import { matArrowBack, matExitToApp } from '@ng-icons/material-icons/baseline';
                   >Date Joined</label
                 >
                 <div class="flex items-center gap-2">
-                  calendar icon
+                  <ng-icon name="matCalendarToday" size="20" />
                   <span class="text-gray-900">
                     {{ user.metadata.creationTime | date: 'mediumDate' }}
                   </span>

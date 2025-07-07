@@ -37,7 +37,7 @@ import { matArrowBack } from '@ng-icons/material-icons/baseline';
   template: `
     <div class="min-h-screen bg-gray-50">
       <header class="bg-white shadow-sm">
-        <div class="container mx-auto">
+        <div class="container mx-auto py-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <a
