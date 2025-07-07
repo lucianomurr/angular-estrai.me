@@ -30,7 +30,7 @@ import {
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-4">
             <a
-              routerLink="/"
+              routerLink="/game"
               class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
             >
               <ng-icon name="matArrowBack" size="20" />
