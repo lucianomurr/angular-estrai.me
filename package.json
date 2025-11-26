@@ -17,7 +17,7 @@
     "@analogjs/router": "^1.18.0",
     "@angular/animations": "20.0.4",
     "@angular/build": "^20.0.4",
-    "@angular/common": "20.0.4",
+    "@angular/common": "20.3.14",
     "@angular/compiler": "20.0.4",
     "@angular/core": "20.0.4",
     "@angular/fire": "19.2.0",
